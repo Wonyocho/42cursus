@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonyocho <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 15:43:24 by wonyocho          #+#    #+#             */
-/*   Updated: 2023/10/07 16:11:55 by wonyocho         ###   ########.fr       */
+/*   Updated: 2023/10/11 17:02:17 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
-int	ft_strlen(char *str)
+size_t	ft_strlen(const char *str)
 {
 	int	i;
 
@@ -24,39 +24,43 @@ int	ft_strlen(char *str)
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t n)
 {
-	int		i;
-	int		len_ndl;
+	size_t	i;
+	size_t	j;
 	char	*hst;
 	char	*ndl;
 
 	hst = (char *)haystack;
 	ndl = (char *)needle;
-	len_ndl = ft_strlen(ndl);
 	i = 0;
+	j = 0;
 	while (n > 0)
 	{
-		while (hst[i] == ndl[i] && ndl[i])
+		while (hst[j] == ndl[i] && ndl[i] && n > 0)
 		{
-			if (i + 1 == len_ndl)
-				return (&hst[i]);
+			if (i + 1 == ft_strlen(ndl))
+				return (&hst[j - ft_strlen(ndl) + 1]);
 			i++;
+			j++;
 			n--;
 		}
+		if (n == 0)
+			return (NULL);
+		j++;
 		n--;
 	}
 	return (NULL);
 }
-
-
+/*
 #include <string.h>
 #include <stdio.h>
 
 int main()
 {
 	char haystack[] = "Foo Bar Baz";
-	char needle[] = "Bar";
-	char *ptr1 = strnstr(haystack, needle, 10);
-	char *ptr2 = ft_strnstr(haystack, needle, 10);
+	char needle[] = "F";
+	char *ptr1 = strnstr(haystack, needle, 1);
+	char *ptr2 = ft_strnstr(haystack, needle, 1);
 	
-	printf("strnstr: %s, ft_strnstr: %s\n", ptr1, ptr2);
+	printf("\n   strnstr: %s\nft_strnstr: %s\n\n", ptr1, ptr2);
 }
+*/

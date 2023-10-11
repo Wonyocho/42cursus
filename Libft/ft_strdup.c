@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wonyocho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/06 18:35:02 by wonyocho          #+#    #+#             */
-/*   Updated: 2023/10/11 16:54:15 by wonyocho         ###   ########.fr       */
+/*   Created: 2023/10/11 14:24:42 by wonyocho          #+#    #+#             */
+/*   Updated: 2023/10/11 16:56:38 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,42 +22,39 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+char	*ft_strdup(const char *s1)
 {
-	unsigned char	*str;
-	unsigned char	*dest;
+	char			*dst;
+	unsigned char	*src;
+	size_t			len_src;
 	unsigned int	i;
 
 	i = 0;
-	str = (unsigned char *)src;
-	dest = (unsigned char *)dst;
-	if (dst - src > 0)
-	{
-		while (len > 0)
-		{
-			dest[len] = str[len];
-			len--;
-		}
-	}
+	src = (unsigned char *)s1;
+	len_src = ft_strlen(s1);
+	dst = (char *)malloc(len_src + 1);
+	if (!(dst))
+		return (0);
 	else
 	{
-		while (i < len)
+		while (src[i])
 		{
-			dest[i] = str[i];
+			dst[i] = src[i];
 			i++;
 		}
 	}
+	dst[i] = '\0';
 	return (dst);
 }
 /*
-#include <string.h>
 #include <stdio.h>
+#include <string.h>
+
 int	main()
 {
-	char src[] = "cccccccccccccc";
-	char dst[] = "aaaaaaaaaaaaaa";
+	char	s1[] = "helloworld!";
+	char	*s2 = ft_strdup(s1);
 
-	printf("%s\n", memmove(dst, src, 5));
-	printf("%s\n", ft_memmove(dst, src, 5));
+	printf("%s", s2);
 }
 */

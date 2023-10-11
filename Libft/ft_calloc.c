@@ -1,45 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wonyocho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/07 15:15:43 by wonyocho          #+#    #+#             */
-/*   Updated: 2023/10/11 16:49:12 by wonyocho         ###   ########.fr       */
+/*   Created: 2023/10/11 14:07:11 by wonyocho          #+#    #+#             */
+/*   Updated: 2023/10/11 16:48:46 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_memcmp(const void *s1, const void *s2, size_t n)
+void	*ft_calloc(size_t count, size_t size)
 {
-	unsigned char	*str1;
-	unsigned char	*str2;
-	int				i;
+	void			*mal;
+	char			*arr;
+	unsigned int	i;
 
-	str1 = (unsigned char *)s1;
-	str2 = (unsigned char *)s2;
+	mal = (void *)malloc(size * count);
+	arr = (char *)mal;
 	i = 0;
-	while (n > 0 && (str1[i] || str2[i]))
+	while (i < size * count)
 	{
-		if (str1[i] != str2[i])
-			return (str1[i] - str2[i]);
+		arr[i] = '\0';
 		i++;
-		n--;
 	}
-	return (0);
+	return (arr);
 }
 /*
-#include <string.h>
 #include <stdio.h>
+
 int	main()
 {
-	char s1[] = "";
-	char s2[] = "";
-	int n = 3;
-	int a = ft_memcmp(s1, s2, n);
-	int b = memcmp(s1, s2, n);
-	printf("ft_memcmp: %d, memcmp: %d\n", a, b);
+	char	*arr0;
+	char	*arr1;
+
+	arr0 = calloc(5, 4);
+	arr1 = ft_calloc(5, 4);
+	for (int i = 0; i < 20; i++)
+		printf("%d: %s |%d: %s\n", i, arr0, i, arr1);
 }
 */

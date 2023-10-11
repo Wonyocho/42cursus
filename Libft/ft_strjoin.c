@@ -1,45 +1,62 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wonyocho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/07 15:15:43 by wonyocho          #+#    #+#             */
-/*   Updated: 2023/10/11 16:49:12 by wonyocho         ###   ########.fr       */
+/*   Created: 2023/10/11 17:02:59 by wonyocho          #+#    #+#             */
+/*   Updated: 2023/10/11 17:29:28 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_memcmp(const void *s1, const void *s2, size_t n)
+size_t	ft_strlen(const char *s1)
 {
+	int	i;
+
+	i = 0;
+	while (s1[i])
+		i++;
+	return (i);
+}
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char			*arr;
 	unsigned char	*str1;
 	unsigned char	*str2;
-	int				i;
+	size_t			i;
+	size_t			j;
 
 	str1 = (unsigned char *)s1;
 	str2 = (unsigned char *)s2;
+	arr = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	i = 0;
-	while (n > 0 && (str1[i] || str2[i]))
+	j = 0;
+	while (str1[i])
 	{
-		if (str1[i] != str2[i])
-			return (str1[i] - str2[i]);
+		arr[i] = str1[i];
 		i++;
-		n--;
 	}
-	return (0);
+	while (str2[j])
+	{
+		arr[i] = str2[j];
+		i++;
+		j++;
+	}
+	arr[i] = 0;
+	return (arr);
 }
 /*
-#include <string.h>
 #include <stdio.h>
+
 int	main()
 {
-	char s1[] = "";
-	char s2[] = "";
-	int n = 3;
-	int a = ft_memcmp(s1, s2, n);
-	int b = memcmp(s1, s2, n);
-	printf("ft_memcmp: %d, memcmp: %d\n", a, b);
+	char s1[] = "hello";
+	char s2[] = "world";
+
+	printf("%s\n", ft_strjoin(s1, s2));
 }
 */

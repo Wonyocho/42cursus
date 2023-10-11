@@ -6,11 +6,13 @@
 /*   By: wonyocho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:57:57 by wonyocho          #+#    #+#             */
-/*   Updated: 2023/10/06 20:10:06 by wonyocho         ###   ########.fr       */
+/*   Updated: 2023/10/11 16:58:51 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strlen(char *str)
+#include "libft.h"
+
+size_t	ft_strlen(const char *str)
 {
 	int	i;
 
@@ -20,32 +22,39 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
+size_t	ft_strlcat(char *restrict dest, const char *restrict src,
+		size_t dstsize)
 {
 	unsigned int	i;
-	unsigned int	dest_len;
-	unsigned int	src_len;
+	size_t			dest_len;
+	size_t			src_len;
+	unsigned char	*str;
+	unsigned char	*dst;
 
 	i = 0;
+	str = (unsigned char *)src;
+	dst = (unsigned char *)dest;
 	dest_len = ft_strlen(dest);
 	src_len = ft_strlen(src);
-	if (size <= dest_len)
-		return (src_len + size);
-	while (src[i] && (i + dest_len + 1) < size)
+	if (dstsize <= dest_len)
+		return (src_len + dstsize);
+	while (str[i] && (i + dest_len + 1) < dstsize)
 	{
-		dest[dest_len + i] = src[i];
+		dst[dest_len + i] = str[i];
 		i++;
 	}
-	dest[dest_len + i] = '\0';
+	dst[dest_len + i] = '\0';
 	return (src_len + dest_len);
 }
 /*
 #include <stdio.h>
+#include <string.h>
 int main()
 {
 	char src[] = "hello";
 	char dst[] = "world";
 
-	printf("%d", ft_strlcat(dst, src, 7));
+	printf("%zu\n", strlcat(dst, src, 4));
+	printf("%zu\n", ft_strlcat(dst, src, 4));
 }
 */

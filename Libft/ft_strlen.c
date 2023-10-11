@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonyocho <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 16:00:35 by wonyocho          #+#    #+#             */
-/*   Updated: 2023/10/06 16:25:07 by wonyocho         ###   ########.fr       */
+/*   Updated: 2023/10/11 16:42:59 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strlen(const char *s)
+#include "libft.h"
+
+size_t	ft_strlen(const char *s)
 {
 	int	i;
 
