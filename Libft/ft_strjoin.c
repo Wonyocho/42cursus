@@ -6,7 +6,7 @@
 /*   By: wonyocho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 17:02:59 by wonyocho          #+#    #+#             */
-/*   Updated: 2023/10/11 17:29:28 by wonyocho         ###   ########.fr       */
+/*   Updated: 2023/10/12 11:48:11 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 int	main()
 {
-	char s1[] = "hello";
+	char s1[] = "";
 	char s2[] = "world";
 
 	printf("%s\n", ft_strjoin(s1, s2));

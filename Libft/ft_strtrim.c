@@ -1,60 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wonyocho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/11 14:24:42 by wonyocho          #+#    #+#             */
-/*   Updated: 2023/10/12 14:45:10 by wonyocho         ###   ########.fr       */
+/*   Created: 2023/10/12 13:28:54 by wonyocho          #+#    #+#             */
+/*   Updated: 2023/10/12 14:58:24 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-/*
-size_t	ft_strlen(const char *str)
+
+char	*ft_strtrim(char const *s1, char const *set)
 {
-	int	i;
+	char	*arr;
+	size_t	i;
+	size_t	j;
+
 
 	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-*/
-char	*ft_strdup(const char *s1)
-{
-	char			*dst;
-	unsigned char	*src;
-	size_t			len_src;
-	unsigned int	i;
-
-	i = 0;
-	src = (unsigned char *)s1;
-	len_src = ft_strlen(s1);
-	dst = (char *)malloc(len_src + 1);
-	if (!(dst))
+	if (!(s1))
 		return (0);
-	else
+	if (!(set))
+		return (ft_strdup(s1));
+	arr = ft_strdup(s1);
+	while (arr[i++])
 	{
-		while (src[i])
-		{
-			dst[i] = src[i];
-			i++;
-		}
+		j = 0;
+		while (arr[i] == set[j++])
+			arr[i] == '\0';
 	}
-	dst[i] = '\0';
-	return (dst);
+	i = 0;
+	while (!(arr[i]))
+		i++;
+	return (&arr[i]);
 }
-/*
+
 #include <stdio.h>
-#include <string.h>
 
 int	main()
 {
-	char	s1[] = "helloworld!";
-	char	*s2 = ft_strdup(s1);
+	char s1[] = "aaahelloworldaaa";
+	char set[] = "a";
 
-	printf("%s", s2);
+	printf("%s\n", ft_strtrim(s1, set));
 }
-*/
