@@ -6,7 +6,7 @@
 /*   By: wonyocho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 15:40:44 by wonyocho          #+#    #+#             */
-/*   Updated: 2023/10/11 16:51:35 by wonyocho         ###   ########.fr       */
+/*   Updated: 2023/10/13 18:52:41 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <ctype.h>
 #include <string.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 int	ft_atoi(char *str);
 void	ft_bzero(void *s, size_t n);

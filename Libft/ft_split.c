@@ -6,29 +6,22 @@
 /*   By: wonyocho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 14:13:58 by wonyocho          #+#    #+#             */
-/*   Updated: 2023/10/12 14:14:11 by wonyocho         ###   ########.fr       */
+/*   Updated: 2023/10/13 14:10:07 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	check_sep(char c, char *charset)
+int	check_sep(char str, char c)
 {
-	int	i;
-
-	i = 0;
-	while (charset[i])
-	{
-		if (c == charset[i])
-			return (1);
-		i++;
-	}
-	if (c == '\0')
+	if (str == c)
+		return (1);
+	else if (str == '\0')
 		return (1);
 	return (0);
 }
 
-int	word_count(char *str, char *charset)
+int	word_count(char *str, char c)
 {
 	int	i;
 	int	count;
@@ -37,20 +30,20 @@ int	word_count(char *str, char *charset)
 	i = 0;
 	while (str[i])
 	{
-		if (check_sep(str[i + 1], charset) == 1
-			&& (check_sep(str[i], charset) == 0))
+		if (check_sep(str[i + 1], c) == 1
+			&& (check_sep(str[i], c) == 0))
 			count++;
 		i++;
 	}
 	return (count);
 }
 
-void	word_write(char *dest, char *src, char *charset)
+void	word_write(char *dest, char *src, char c)
 {
 	int	i;
 
 	i = 0;
-	while (check_sep(src[i], charset) == 0)
+	while (check_sep(src[i], c) == 0)
 	{
 		dest[i] = src[i];
 		i++;
@@ -58,7 +51,7 @@ void	word_write(char *dest, char *src, char *charset)
 	dest[i] = '\0';
 }
 
-void	write_split(char **split, char *str, char *charset)
+void	write_split(char **split, char *str, char c)
 {
 	int	i;
 	int	j;
@@ -68,38 +61,40 @@ void	write_split(char **split, char *str, char *charset)
 	i = 0;
 	while (str[i])
 	{
-		if (check_sep(str[i], charset) == 1)
+		if (check_sep(str[i], c) == 1)
 			i++;
 		else
 		{
 			j = 0;
-			while (check_sep (str[i + j], charset) == 0)
+			while (check_sep (str[i + j], c) == 0)
 				j++;
 			split[word] = (char *)malloc(sizeof(char) * (j + 1));
-			word_write(split[word], str + i, charset);
+			word_write(split[word], str + i, c);
 			i = i + j;
 			word++;
 		}
 	}
 }
 
-char	**ft_split(char *str, char *charset)
+char	**ft_split(char *str, char c)
 {
 	char	**array;
 	int		word;
 
-	word = word_count(str, charset);
+	word = word_count(str, c);
 	array = (char **)malloc(sizeof(char *) * (word + 1));
 	array[word] = 0;
-	write_split(array, str, charset);
+	write_split(array, str, c);
 	return (array);
 }
 /*
+#include <stdio.h>
+
 int	main()
 {
 	char **a;
 
-	a = ft_split("asdf*as*qswe*qbfsd", "as");
+	a = ft_split("a1a2a3a4a5a6a", 'a');
 	while (*a)
 	{
 		printf("%s\n", *a);
