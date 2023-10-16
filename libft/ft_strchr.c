@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonyocho <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 20:22:51 by wonyocho          #+#    #+#             */
-/*   Updated: 2023/10/16 17:36:00 by wonyocho         ###   ########.fr       */
+/*   Updated: 2023/10/16 20:41:40 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*ft_strchr(const char *str, int c)
 	}
 	return (0);
 }
-
+/*
 #include <string.h>
 #include <stdio.h>
 int main()
@@ -36,4 +36,4 @@ int main()
 	//if(ptr != NULL)
 	//	printf("%c, %s", *ptr, ptr);
 }
-
+*/

@@ -6,7 +6,7 @@
 /*   By: wonyocho <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 11:37:10 by wonyocho          #+#    #+#             */
-/*   Updated: 2023/10/13 13:44:45 by wonyocho         ###   ########.fr       */
+/*   Updated: 2023/10/16 19:37:19 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,10 @@ char	*ft_itoa(int n)
 	arr = NULL;
 	count = count_n(n);
 	arr = get_arr(arr, n, count);
+	if (!arr)
+		return (NULL);
 	if (n == -2147483648)
-		return ("-2147483648\0");
+		return ("-2147483648");
 	arr = put_arr(arr, n, count);
 	if (n < 0)
 		count++;
@@ -99,9 +101,9 @@ char	*ft_itoa(int n)
 
 int	main()
 {
-	int	n = 1;
+	int	n = "2147483648";
 	
-	printf("%d\n", count_n(n));
-	printf("%s\n", ft_itoa(n));
+	printf("자릿수: %d\n", count_n(n));
+	printf("결과: %s\n", ft_itoa(n));
 }
 */

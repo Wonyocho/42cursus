@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonyocho <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 14:29:52 by wonyocho          #+#    #+#             */
-/*   Updated: 2023/10/11 16:50:46 by wonyocho         ###   ########.fr       */
+/*   Updated: 2023/10/16 20:53:38 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void	*ft_memchr(const void *s, int c, size_t n)
 int main ()
 {
 	char *pch;
-	char str[] = "Example string";
-	pch = (char*)memchr(str, 'p', -1);
+	char str[] = "teste";
+	pch = (char*)memchr("teste", '\0', 20);
 	if (pch != NULL)
 		printf("'p' found at position %ld.\n", pch - str + 1);
 	else

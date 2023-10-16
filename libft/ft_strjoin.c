@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonyocho <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 17:02:59 by wonyocho          #+#    #+#             */
-/*   Updated: 2023/10/16 11:51:17 by wonyocho         ###   ########.fr       */
+/*   Updated: 2023/10/16 21:02:07 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	str1 = (unsigned char *)s1;
 	str2 = (unsigned char *)s2;
 	arr = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!(arr))
+		return (0);
 	i = 0;
 	j = 0;
 	while (str1[i])
