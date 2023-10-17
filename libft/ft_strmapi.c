@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonyocho <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 14:10:46 by wonyocho          #+#    #+#             */
-/*   Updated: 2023/10/16 17:14:49 by wonyocho         ###   ########.fr       */
+/*   Updated: 2023/10/17 11:01:20 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 
 	len = ft_strlen(s);
 	str = (char *)malloc(sizeof(char) * len + 1);
+	if (!(str))
+		return (0);
 	i = 0;
 	while (s[i])
 	{

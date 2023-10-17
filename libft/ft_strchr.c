@@ -6,9 +6,11 @@
 /*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 20:22:51 by wonyocho          #+#    #+#             */
-/*   Updated: 2023/10/16 20:41:40 by wonyocho         ###   ########.fr       */
+/*   Updated: 2023/10/17 11:47:53 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 char	*ft_strchr(const char *str, int c)
 {
@@ -17,9 +19,15 @@ char	*ft_strchr(const char *str, int c)
 
 	i = 0;
 	s = (char *)str;
-	while (s[i])
+	if ((char)c == 0)
 	{
-		if (s[i] == c)
+		while (s[i])
+			i++;
+		return (&s[i]);
+	}
+	while (s[i] && (char)c)
+	{
+		if (s[i] == (char)c)
 			return (&s[i]);
 		i++;
 	}
@@ -33,7 +41,8 @@ int main()
 	char str[] = "helloworld";
 	char *ptr1 = strchr(str, '\0');
 	char *ptr2 = ft_strchr(str, '\0');
-	//if(ptr != NULL)
-	//	printf("%c, %s", *ptr, ptr);
-}
+	
+	printf("%s\n", ptr1);
+	printf("%s\n", ptr2);
+	}
 */

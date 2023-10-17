@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoare.c                                        :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonyocho <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 11:37:10 by wonyocho          #+#    #+#             */
-/*   Updated: 2023/10/16 19:37:19 by wonyocho         ###   ########.fr       */
+/*   Updated: 2023/10/17 11:14:28 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	count_n(int n)
+static int	count_n(int n)
 {
 	int	count;
 
@@ -26,7 +26,7 @@ int	count_n(int n)
 	return (count);
 }
 
-char	*get_arr(char *arr, int n, int count)
+static char	*get_arr(char *arr, int n, int count)
 {
 	int	i;
 
@@ -38,15 +38,22 @@ char	*get_arr(char *arr, int n, int count)
 	return (arr);
 }
 
-char	*put_arr(char *arr, int n, int count)
+static char	*put_arr(char *arr, int n, int count)
 {
 	int	i;
 	int	num;
 
 	num = n;
-	if (n < 0)
-		num = -n;
 	i = 0;
+	if (n == -2147483648)
+	{
+		arr[i++] = '8';
+		num = num / 10;
+		num = -num;
+		count--;
+	}
+	else if (n < 0)
+		num = -n;
 	while (count > 0)
 	{
 		arr[i++] = num % 10 + '0';
@@ -59,7 +66,7 @@ char	*put_arr(char *arr, int n, int count)
 	return (arr);
 }
 
-char	*swap_arr(char *arr, int count)
+static char	*swap_arr(char *arr, int count)
 {
 	int		i;
 	char	temp;
@@ -88,8 +95,6 @@ char	*ft_itoa(int n)
 	arr = get_arr(arr, n, count);
 	if (!arr)
 		return (NULL);
-	if (n == -2147483648)
-		return ("-2147483648");
 	arr = put_arr(arr, n, count);
 	if (n < 0)
 		count++;
@@ -101,7 +106,7 @@ char	*ft_itoa(int n)
 
 int	main()
 {
-	int	n = "2147483648";
+	int	n = -2147483648;
 	
 	printf("자릿수: %d\n", count_n(n));
 	printf("결과: %s\n", ft_itoa(n));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonyocho <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 15:13:57 by wonyocho          #+#    #+#             */
-/*   Updated: 2023/10/16 11:54:10 by wonyocho         ###   ########.fr       */
+/*   Updated: 2023/10/17 16:41:12 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,28 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char			*arr;
-	unsigned char	*str;
-	unsigned int	i;
+	char	*arr;
+	size_t	i;
+	size_t	j;
 
-	str = (unsigned char *)s;
-	arr = (char *)malloc(len);
+	if (len > 4294967295)
+		arr = (char *)malloc(ft_strlen(s) + 1);
+	else
+		arr = (char *)malloc(len + 1);
+	if (!s || !(arr))
+		return (0);
 	i = 0;
-	if (!(arr))
-		return (0);
-	if (s == NULL)
-		return (0);
-	if (ft_strlen(s) < start)
-		return (0);
-	while (i < len)
+	j = 0;
+	while (s[i])
 	{
-		arr[i] = str[start];
+		if (i >= start && j < len)
+		{
+			arr[j] = s[i];
+			j++;
+		}
 		i++;
-		start++;
 	}
+	arr[j] = '\0';
 	return (arr);
 }
 /*

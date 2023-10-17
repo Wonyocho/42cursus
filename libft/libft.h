@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonyocho <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 15:40:44 by wonyocho          #+#    #+#             */
-/*   Updated: 2023/10/16 17:17:14 by wonyocho         ###   ########.fr       */
+/*   Updated: 2023/10/17 16:44:00 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		ft_memcmp(const void *s1, const void *s2, size_t n);
 void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n);
 void	*ft_memmove(void *dst, const void *src, size_t len);
 void	*ft_memset(void *b, int c, size_t len);
-void	*ft_strchr(const char *str, int c);
+char	*ft_strchr(const char *str, int c);
 char	*ft_strdup(const char *s1);
 size_t	ft_strlcat(char *restrict dest, const char *restrict src,
 			size_t dstsize);
@@ -54,5 +54,9 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
-
+typedef struct s_list
+{
+	void			*content;
+	struct s_list	*next;
+}t_list;
 #endif

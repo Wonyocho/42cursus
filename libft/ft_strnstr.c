@@ -6,7 +6,7 @@
 /*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 15:43:24 by wonyocho          #+#    #+#             */
-/*   Updated: 2023/10/16 11:53:50 by wonyocho         ###   ########.fr       */
+/*   Updated: 2023/10/17 16:26:32 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,19 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t n)
 {
 	size_t	i;
 	size_t	j;
-	char	*hst;
-	char	*ndl;
 
-	hst = (char *)haystack;
-	ndl = (char *)needle;
-	i = 0;
 	j = 0;
-	while (n > 0)
+	if (*needle == '\0')
+		return ((char *)haystack);
+	if (ft_strlen(haystack) < ft_strlen(needle))
+		return (NULL);
+	while (n > 0 && haystack[j])
 	{
-		while (hst[j] == ndl[i] && ndl[i] && n > 0)
+		i = 0;
+		while (haystack[j] == needle[i] && needle[i] && n > 0)
 		{
-			if (i + 1 == ft_strlen(ndl))
-				return (&hst[j - ft_strlen(ndl) + 1]);
+			if (i + 1 == ft_strlen(needle))
+				return (&((char *)haystack)[j - ft_strlen(needle) + 1]);
 			i++;
 			j++;
 			n--;
@@ -46,11 +46,12 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t n)
 
 int main()
 {
-	char haystack[] = "Foo Bar Baz";
-	char needle[] = "F";
-	char *ptr1 = strnstr(haystack, needle, 1);
-	char *ptr2 = ft_strnstr(haystack, needle, 1);
+	char haystack[] = "abc abcdef";
+	char needle[] = "abcdef";
+	char *ptr1 = strnstr(haystack, needle, 15);
+	char *ptr2 = ft_strnstr(haystack, needle, 15);
 	
 	printf("\n   strnstr: %s\nft_strnstr: %s\n\n", ptr1, ptr2);
+	//printf("%s\n",ptr1);
 }
 */

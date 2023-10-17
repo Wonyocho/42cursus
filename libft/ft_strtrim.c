@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonyocho <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 13:28:54 by wonyocho          #+#    #+#             */
-/*   Updated: 2023/10/16 11:43:39 by wonyocho         ###   ########.fr       */
+/*   Updated: 2023/10/17 16:58:10 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 
 int	main()
 {
-	char s1[] = "xyhelloworldz";
-	char set[] = "xyz";
+	char s1[] = "";
+	char set[] = "";
 
 	printf("%s\n", ft_strtrim(s1, set));
 }

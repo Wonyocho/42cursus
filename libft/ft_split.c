@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonyocho <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 14:13:58 by wonyocho          #+#    #+#             */
-/*   Updated: 2023/10/16 14:10:46 by wonyocho         ###   ########.fr       */
+/*   Updated: 2023/10/17 10:23:06 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	check_sep(char str, char c)
+static int	check_sep(char str, char c)
 {
 	if (str == c)
 		return (1);
@@ -21,7 +21,7 @@ int	check_sep(char str, char c)
 	return (0);
 }
 
-int	word_count(char *str, char c)
+static int	word_count(char *str, char c)
 {
 	int	i;
 	int	count;
@@ -38,7 +38,7 @@ int	word_count(char *str, char c)
 	return (count);
 }
 
-void	word_write(char *dest, char *src, char c)
+static void	word_write(char *dest, char *src, char c)
 {
 	int	i;
 
@@ -51,7 +51,7 @@ void	word_write(char *dest, char *src, char c)
 	dest[i] = '\0';
 }
 
-void	write_split(char **split, char *str, char c)
+static void	write_split(char **split, char *str, char c)
 {
 	int	i;
 	int	j;
@@ -85,6 +85,8 @@ char	**ft_split(const char *s, char c)
 	str = (char *)s;
 	word = word_count(str, c);
 	array = (char **)malloc(sizeof(char *) * (word + 1));
+	if (!(array))
+		return (0);
 	array[word] = 0;
 	write_split(array, str, c);
 	return (array);
