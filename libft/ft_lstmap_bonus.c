@@ -6,11 +6,11 @@
 /*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 15:52:27 by wonyocho          #+#    #+#             */
-/*   Updated: 2023/10/21 13:06:52 by wonyocho         ###   ########.fr       */
+/*   Updated: 2023/10/21 13:48:50 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libft_bonus.h"
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {

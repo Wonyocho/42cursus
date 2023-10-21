@@ -6,7 +6,7 @@
 #    By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/19 16:44:56 by wonyocho          #+#    #+#              #
-#    Updated: 2023/10/21 13:08:39 by wonyocho         ###   ########.fr        #
+#    Updated: 2023/10/21 13:55:46 by wonyocho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,8 @@ NAME = libft.a
 
 HEAD = libft.h
 
+BHEAD = libft_bonus.h
+
 CC = cc
 
 CFLAGS = -Wall -Wextra -Werror
@@ -29,7 +31,7 @@ CFLAGS = -Wall -Wextra -Werror
 ${NAME}:	all
 
 .c.o:
-	${CC} -c -I libft.h ${CFLAGS} $< -o $@
+	${CC} -c ${CFLAGS} $< -o $@
 
 all:	LAST_ALL
 
@@ -40,7 +42,7 @@ LAST_ALL: ${OBJS_MANDATORY} ${HEAD}
 	ar -rc ${NAME} ${OBJS_MANDATORY}
 	touch $@
 
-LAST_BONUS:	${OBJS_BONUS} ${HEAD}
+LAST_BONUS:	${OBJS_BONUS} ${BHEAD}
 	rm -f LAST_ALL
 	ar -rc ${NAME} ${OBJS_BONUS}
 	touch $@

@@ -6,11 +6,11 @@
 /*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 13:05:04 by wonyocho          #+#    #+#             */
-/*   Updated: 2023/10/21 13:07:01 by wonyocho         ###   ########.fr       */
+/*   Updated: 2023/10/21 13:48:59 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libft_bonus.h"
 
 int	ft_lstsize(t_list *lst)
 {
