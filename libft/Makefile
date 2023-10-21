@@ -6,7 +6,7 @@
 #    By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/19 16:44:56 by wonyocho          #+#    #+#              #
-#    Updated: 2023/10/20 10:55:06 by wonyocho         ###   ########.fr        #
+#    Updated: 2023/10/21 13:08:39 by wonyocho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,8 @@ OBJS_BONUS = ${BSRCS:.c=.o}
 
 NAME = libft.a
 
+HEAD = libft.h
+
 CC = cc
 
 CFLAGS = -Wall -Wextra -Werror
@@ -27,18 +29,18 @@ CFLAGS = -Wall -Wextra -Werror
 ${NAME}:	all
 
 .c.o:
-	${CC} -c ${CFLAGS} $< -o $@
+	${CC} -c -I libft.h ${CFLAGS} $< -o $@
 
 all:	LAST_ALL
 
 bonus:	LAST_BONUS
 
-LAST_ALL: ${OBJS_MANDATORY}
+LAST_ALL: ${OBJS_MANDATORY} ${HEAD}
 	rm -f LAST_BONUS
 	ar -rc ${NAME} ${OBJS_MANDATORY}
 	touch $@
 
-LAST_BONUS:	${OBJS_BONUS}
+LAST_BONUS:	${OBJS_BONUS} ${HEAD}
 	rm -f LAST_ALL
 	ar -rc ${NAME} ${OBJS_BONUS}
 	touch $@

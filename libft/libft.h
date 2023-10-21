@@ -6,15 +6,13 @@
 /*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 15:40:44 by wonyocho          #+#    #+#             */
-/*   Updated: 2023/10/20 16:33:56 by wonyocho         ###   ########.fr       */
+/*   Updated: 2023/10/21 13:24:52 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include <ctype.h>
-# include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
 

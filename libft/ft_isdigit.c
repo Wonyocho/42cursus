@@ -6,14 +6,14 @@
 /*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:22:18 by wonyocho          #+#    #+#             */
-/*   Updated: 2023/10/16 15:10:47 by wonyocho         ###   ########.fr       */
+/*   Updated: 2023/10/21 12:16:09 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_isdigit(int c)
 {
 	if ('0' <= c && c <= '9')
-		return (4);
+		return (1);
 	else
 		return (0);
 }

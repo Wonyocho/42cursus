@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 20:10:34 by wonyocho          #+#    #+#             */
-/*   Updated: 2023/10/19 16:27:40 by wonyocho         ###   ########.fr       */
+/*   Updated: 2023/10/21 13:06:56 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 t_list	*ft_lstnew(void *content)
 {
-	t_list	*lst;
+	t_list	*new_node;
 
-	lst = (t_list *)malloc(sizeof(t_list));
-	if (!lst)
+	new_node = (t_list *)malloc(sizeof(t_list));
+	if (!new_node)
 		return (0);
-	lst->content = content;
-	lst->next = NULL;
-	return (lst);
+	new_node->content = content;
+	new_node->next = NULL;
+	return (new_node);
 }
