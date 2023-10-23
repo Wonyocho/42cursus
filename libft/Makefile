@@ -6,7 +6,7 @@
 #    By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/19 16:44:56 by wonyocho          #+#    #+#              #
-#    Updated: 2023/10/21 13:55:46 by wonyocho         ###   ########.fr        #
+#    Updated: 2023/10/23 11:28:27 by wonyocho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,6 @@ OBJS_BONUS = ${BSRCS:.c=.o}
 NAME = libft.a
 
 HEAD = libft.h
-
-BHEAD = libft_bonus.h
 
 CC = cc
 
@@ -42,7 +40,7 @@ LAST_ALL: ${OBJS_MANDATORY} ${HEAD}
 	ar -rc ${NAME} ${OBJS_MANDATORY}
 	touch $@
 
-LAST_BONUS:	${OBJS_BONUS} ${BHEAD}
+LAST_BONUS:	${OBJS_BONUS} ${HEAD}
 	rm -f LAST_ALL
 	ar -rc ${NAME} ${OBJS_BONUS}
 	touch $@
