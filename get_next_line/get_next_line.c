@@ -6,59 +6,107 @@
 /*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 13:39:47 by wonyocho          #+#    #+#             */
-/*   Updated: 2023/10/23 20:47:04 by wonyocho         ###   ########.fr       */
+/*   Updated: 2023/10/27 14:16:16 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-// static 변수를 이용한다.
-// read 함수의 리턴값은 int이다. -> i로 이용
+char	*ft_saving_line(int fd, char *saved_line)
+{
+	char	*buf;
+	int		read_byte;
 
-// case 1: (충분히 파일일 때)bufsize 만큼 읽었으나 개행문자가 없을 경우
-// case 2: (충분히 파일일 때)bufsize 만큼 읽었으나 개행문자가 있었을 경우
+	read_byte = 1;
+	buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buf)
+		return (NULL);
+	while (!(ft_strchr(saved_line, '\n')) && read_byte != 0)
+	{
+		read_byte = read(fd, buf, BUFFER_SIZE);
+		if (read_byte == -1)
+		{
+			free(buf);
+			return (NULL);
+		}
+		buf[read_byte] = '\0';
+		saved_line = ft_strjoin(saved_line, buf);
+	}
+	free(buf);
+	return (saved_line);
+}
+
+char	*ft_get_line(char *saved_line)
+{
+	char	*result;
+	int		i;
+	int		n;
+
+	i = 0;
+	n = 0;
+	while (saved_line[i] != '\n')
+		i++;
+	result = (char *)malloc(sizeof(char) * i);
+	if (!result)
+		return (NULL);
+	while (n < i)
+	{
+		result[n] = saved_line[n];
+		n++;
+	}
+	result[n] = '\0';
+	return (result);
+}
+
+char	*ft_leftover(char *saved_line)
+{
+	char	*leftover;
+	int		i;
+	int		n;
+
+	i = 0;
+	n = 0;
+	while (saved_line[i] != '\n' && saved_line[i])
+		i++;
+	leftover = (char *)malloc(sizeof(char) * ft_strlen(saved_line) - i);
+	if (!leftover)
+		return (NULL);
+	i++;
+	while (saved_line[i])
+	{
+		leftover[n] = saved_line[i];
+		n++;
+		i++;
+	}
+	return (leftover);
+}
 
 char	*get_next_line(int fd)
 {
-	static char	*buf;				// static: 다음 get_next_line이 실행되어도 이어서
-	static int	buf_size;			// static: 다음 get_next_line이 실행되어도 이어서
-	static int	i;					// static: 다음 get_next_line이 실행되어도 이어서
-	static int	n;					//
-	static char	*str;				//
-	
-	str = NULL;
-	n = 0;
-	buf_size = 10;
-	buf = (char *)malloc(sizeof(char) * buf_size);
-	str = (char *)malloc(sizeof(char) * buf_size + 1);
-	i = read(fd, buf, buf_size);	// buf_size 만큼 읽고 buf에 저장, i = 읽어들인 바이트수
-	if (i == - 1)					// read 실패시 예외처리
+	static char	*saved_line;
+	char		*line;
+
+	if (fd == -1 || BUFFER_SIZE <= 0)
 		return (NULL);
-	while (n < i)					// buf안에서 '\n'찾아서 str에 저장
-	{
-		str[n] = buf[n];			// str에다가 buf 하나씩저장
-		if (buf[n] == '\n')			// 인덱스 증가시키면서 '\n'찾기
-		{
-			n++;
-			break ;
-		}
-		n++;
-	}
-	i = n;							// case 1 일때는?
-	str[n] = '\0';
-	return (str);
+	if (!saved_line)
+		saved_line = ft_strdup("");
+	saved_line = ft_saving_line(fd, saved_line);
+	if (!saved_line)
+		return (NULL);
+	line = ft_get_line(saved_line);
+	saved_line = ft_leftover(saved_line);
+	return (line);
 }
 
+// int	main (void)
+// {
+// 	int	fd;
 
-int main ()
-{
-	int fd;
-
-	fd = open("test.txt", O_RDONLY);
-	printf("1) GNL 1:%s\n", get_next_line(fd));
-	printf("1) GNL 2:%s\n", get_next_line(fd));
-	printf("1) GNL 3:%s\n", get_next_line(fd));
-	printf("1) GNL 4:%s\n", get_next_line(fd));
-	printf("1) GNL 5:%s\n", get_next_line(fd));
-	printf("1) GNL 6:%s\n", get_next_line(fd));
-}
+// 	fd = open("test.txt", O_RDONLY);
+// 	printf("1) GNL 1:%s\n", get_next_line(fd));
+// 	printf("1) GNL 2:%s\n", get_next_line(fd));
+// 	printf("1) GNL 3:%s\n", get_next_line(fd));
+// 	printf("1) GNL 4:%s\n", get_next_line(fd));
+// 	printf("1) GNL 5:%s\n", get_next_line(fd));
+// 	printf("1) GNL 6:%s\n", get_next_line(fd));
+// }

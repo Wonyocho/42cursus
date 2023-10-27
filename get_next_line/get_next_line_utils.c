@@ -6,30 +6,40 @@
 /*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 13:40:31 by wonyocho          #+#    #+#             */
-/*   Updated: 2023/10/23 17:02:52 by wonyocho         ###   ########.fr       */
+/*   Updated: 2023/10/27 13:37:59 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strdup(const char *s1)
+size_t	ft_strlen(char *s)
+{
+	int	i;
+
+	i = 0;
+	if (!s)
+		return (0);
+	while (s[i] != '\0')
+		i++;
+	return (i);
+}
+
+char	*ft_strdup(char *s1)
 {
 	char			*dst;
-	unsigned char	*src;
 	size_t			len_src;
 	unsigned int	i;
 
 	i = 0;
-	src = (unsigned char *)s1;
 	len_src = ft_strlen(s1);
 	dst = (char *)malloc(len_src + 1);
 	if (!(dst))
 		return (0);
 	else
 	{
-		while (src[i])
+		while (s1[i])
 		{
-			dst[i] = src[i];
+			dst[i] = s1[i];
 			i++;
 		}
 	}
@@ -37,19 +47,50 @@ char	*ft_strdup(const char *s1)
 	return (dst);
 }
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+char	*ft_strjoin(char *s1, char *s2)
 {
-	size_t	i;
+	char			*arr;
+	size_t			i;
+	size_t			j;
+
+	arr = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!(arr))
+		return (0);
+	i = 0;
+	j = 0;
+	while (s1[i] != '\0')
+	{
+		arr[i] = s1[i];
+		i++;
+	}
+	while (s2[j] != '\0')
+	{
+		arr[i] = s2[j];
+		i++;
+		j++;
+	}
+	arr[i] = 0;
+	return (arr);
+}
+
+char	*ft_strchr(char *str, int c)
+{
+	int		i;
 
 	i = 0;
-	if (dstsize == 0)
-		return (ft_strlen(src));
-	while (dstsize > 1 && src[i])
+	if (!str)
+		return (NULL);
+	if ((char)c == 0)
 	{
-		dst[i] = src[i];
-		i++;
-		dstsize--;
+		while (str[i])
+			i++;
+		return (&str[i]);
 	}
-	dst[i] = '\0';
-	return (ft_strlen(src));
+	while (str[i] != '\0')
+	{
+		if (str[i] == (char)c)
+			return (&str[i]);
+		i++;
+	}
+	return (0);
 }
