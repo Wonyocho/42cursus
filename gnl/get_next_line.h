@@ -5,14 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/21 13:40:36 by wonyocho          #+#    #+#             */
-/*   Updated: 2023/11/03 11:10:41 by wonyocho         ###   ########.fr       */
+/*   Created: 2023/11/14 11:44:53 by wonyocho          #+#    #+#             */
+/*   Updated: 2023/11/14 15:19:00 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -25,30 +24,10 @@
 # endif
 
 char	*get_next_line(int fd);
-char	*ft_strchr(char *str, int c);
-char	*ft_strjoin(char *s1, char *s2);
-size_t	ft_strlen(char *s);
-char	*ft_strdup(char *s1);
-
-#endif
-
-
-
---------------
-  #ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <stdlib.h>
-# include <sys/types.h>
-# include <sys/uio.h>
-# include <unistd.h>
-
-char	*get_next_line(int fd);
 char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_strchr(const char *string, int searchedChar );
-
+char	*ft_strchr(const char *str, int c);
 void	ft_bzero(void *s, size_t n);
-void	*ft_calloc(size_t elementCount, size_t elementSize);
-
-size_t	ft_strlen(const char *theString);
+void	*ft_calloc(size_t count, size_t size);
+size_t	ft_strlen(const char *str);
 
 #endif
