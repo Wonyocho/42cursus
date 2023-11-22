@@ -12,78 +12,72 @@
 
 #include "get_next_line.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
-{
-	int		size;
-	char	*result;
-	int		i;
-	int		j;
-
-	i = 0;
-	size = ft_strlen(s1) + ft_strlen(s2);
-	result = malloc(sizeof(char) * (size + 1));
-	if (!result || !s1 || !s2)
-		return (NULL);
-	while (s1[i] != 0)
-	{
-		result[i] = s1[i];
-		i++;
-	}
-	j = 0;
-	while (s2[j] != 0)
-	{
-		result[i] = s2[j];
-		i++;
-		j++;
-	}
-	result[size] = 0;
-	return (result);
-}
-
-char	*ft_strchr(const char *str, int c)
-{
-	char	*buf;
-
-	buf = (char *)str;
-	while (*buf != c && *buf != 0)
-		buf++;
-	if (*buf == c)
-		return (buf);
-	else
-		return (NULL);
-}
-
-void	ft_bzero(void *s, size_t n)
-{
-	char	*str;
-	size_t	i;
-
-	str = (char *)s;
-	i = 0;
-	while (i < n)
-	{
-		str[i] = '\0';
-		i++;
-	}
-}
-
-void	*ft_calloc(size_t count, size_t size)
-{
-	char	*result;
-
-	result = malloc(size * count);
-	if (!result)
-		return (NULL);
-	ft_bzero(result, size * count);
-	return (result);
-}
-
 size_t	ft_strlen(const char *str)
 {
-	int	i;
+	size_t	len;
 
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
+	if (!str)
+		return (0);
+	len = 0;
+	while (str[len])
+		len++;
+	return (len);
 }
+
+char	*ft_strdup(const char *s)
+{
+	char	*r;
+	size_t	l;
+
+	if (!s || !*s)
+		return (NULL);
+	l = ft_strlen(s);
+	r = (char *)malloc((l + 1) * sizeof(char));
+	if (!r)
+		return (NULL);
+	r[l] = '\0';
+	while (l--)
+		r[l] = s[l];
+	return (r);
+}
+
+char	*ft_strchr(const char *s, int c)
+{
+	if (!s)
+		return (NULL);
+	while (*s)
+	{
+		if (*s == (char)c)
+			return ((char *)s);
+		s++;
+	}
+	return (NULL);
+}
+
+char	*ft_strjoin(char *s1, const char *s2)
+{
+	char	*r;
+	size_t	len1;
+	size_t	len2;
+
+	if (!s1 && !s2)
+		return (NULL);
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	r = (char *)malloc((len1 + len2 + 1) * sizeof(char));
+	if (!r)
+	{
+		if (s1)
+			free(s1);
+		return (NULL);
+	}
+	r[len1 + len2] = '\0';
+	while (len2--)
+		r[len1 + len2] = s2[len2];
+	while (len1--)
+		r[len1] = s1[len1];
+	if (s1)
+		free(s1);
+	return (r);
+}
+
