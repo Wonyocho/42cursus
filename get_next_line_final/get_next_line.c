@@ -12,114 +12,46 @@
 
 #include "get_next_line.h"
 
-char	*ft_append(char *saved_line, char *buf)
-{
-	char	*temp;
-
-	temp = ft_strjoin(saved_line, buf);
-	free(saved_line);
-	return (temp);
-}
-
-char	*read_file(int fd, char *saved_line)
-{
-	char	*buf;
-	int		read_byte;
-
-	if (!saved_line)
-		saved_line = ft_calloc(1, sizeof(char));
-	buf = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
-	if (!buf)
-		free(saved_line);
-	read_byte = 1;
-	while (read_byte > 0)
-	{
-		read_byte = read(fd, buf, BUFFER_SIZE);
-		if (read_byte == -1)
-		{
-			free(buf);
-			return (NULL);
-		}
-		buf[read_byte] = 0;
-		saved_line = ft_append(saved_line, buf);
-		if (ft_strchr(buf, '\n'))
-			break ;
-	}
-	free(buf);
-	return (saved_line);
-}
-
-char	*ft_line(char *buffer)
-{
-	char	*line;
-	int		i;
-
-	i = 0;
-	if (!buffer[i])
-		return (NULL);
-	while (buffer[i] && buffer[i] != '\n')
-		i++;
-	if (!(ft_strchr(buffer, '\n')))
-		line = ft_calloc(i + 1, sizeof(char));
-	else
-		line = ft_calloc(i + 2, sizeof(char));
-	i = 0;
-	while (buffer[i] && buffer[i] != '\n')
-	{
-		line[i] = buffer[i];
-		i++;
-	}
-	if (buffer[i] && buffer[i] == '\n')
-		line[i] = '\n';
-	return (line);
-}
-
-char	*ft_next(char *buffer)
-{
-	int		i;
-	int		j;
-	char	*line;
-
-	i = 0;
-	while (buffer[i] && buffer[i] != '\n')
-		i++;
-	if (!buffer[i])
-	{
-		free(buffer);
-		return (NULL);
-	}
-	line = ft_calloc((ft_strlen(buffer) - i + 1), sizeof(char));
-	if (!line)
-		return (NULL);
-	i++;
-	j = 0;
-	while (buffer[i])
-		line[j++] = buffer[i++];
-	free(buffer);
-	return (line);
-}
-
 char	*get_next_line(int fd)
 {
-	static char	*saved_line;
+	static char	*tail;
 	char		*line;
-
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, NULL, 0) == -1)
-	{
-		free(saved_line);
-		saved_line = NULL;
-		return (NULL);
-	}
-	saved_line = read_file(fd, saved_line);
-	if (!saved_line)
-		return (NULL);
-	line = ft_line(saved_line);
-	if (!line)
-	{
-		free (saved_line);
-		saved_line = NULL;
-		return (NULL);
-	}
-	saved_line = ft_next(saved_line);
+	
+	line = read_line(tail, fd);
+	tail = save_tail(line);
 	return (line);
+}
+
+char	*read_line(char *line, int fd)
+{
+	char	buffer[BUFFER_SIZE + 1];
+	ssize_t	nbytes;
+
+	while (!ft_strchr(line, '\n'))
+	{
+		nbytes = read(fd, buffer, BUFFER_SIZE);
+		if (nbytes == 0)
+			break ;
+		if (nbytes == -1)
+		{
+			free(line);
+			return (NULL);
+		}
+		buffer[nbytes] = '\0';
+		line = ft_strjoin(line, buffer);
+	}
+	return (line);
+}
+
+char	*save_tail(char *line)
+{
+	char	*next;
+	char	*tail;
+
+	next = ft_strchr(line, '\n');
+	if (!next++)
+		return (NULL);
+	tail = ft_strdup(next);
+	*next = '\0';
+	return (tail);
 }
