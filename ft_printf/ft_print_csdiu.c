@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
 int	print_char(va_list ap, int count)
 {
@@ -44,7 +44,7 @@ int	print_string(va_list ap, int count)
 	return (count);
 }
 
-int	print_decimal_integer(va_list ap, int count)
+int	print_dec_int(va_list ap, int count)
 {
 	int	n;
 
@@ -53,7 +53,7 @@ int	print_decimal_integer(va_list ap, int count)
 	return (count);
 }
 
-int	print_unsigned_integer(va_list ap, int count)
+int	print_unsigned_int(va_list ap, int count)
 {
 	unsigned int	n;
 

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 #include <stdio.h>
 
 static int	change(va_list ap, const char *format, int cnt)
@@ -76,7 +76,7 @@ int	ft_printf(const char *format, ...)
 // 	ft_printf("asdf: %c", 'a');
 // 	printf("asdf: %c", 'a');
 
-// 	// 문쟈열 출력
+// 	// 문자열 출력
 // 	ft_printf("%s", "hello");
 // 	printf("%s", "hello");
 
