@@ -23,26 +23,26 @@ int	ft_putnbr(int n, int count)
 	if (n < 0)
 	{
 		if (n == -2147483648)
+		{
 			write(1, "-2147483648", 11);
+			count = count + 11;
+		}
 		else
 		{
 			write(1, "-", 1);
 			n = -n;
-			ft_putnbr(n, 1);
+			ft_putnbr(n, ++count);
 		}
 	}
 	else
 	{
 		if (n >= 10)
 		{
-			ft_putnbr(n / 10, 1);
-			ft_putnbr(n % 10, 1);
+			ft_putnbr(n / 10, ++count);
+			ft_putnbr(n % 10, ++count);
 		}
 		else
-		{
 			ft_putchar(n + '0', 1);
-			count++;
-		}
 	}
 	return (count);
 }
