@@ -77,86 +77,86 @@ int	ft_printf(const char *format, ...)
 	return (count - 1);
 }
 
-// int	main()
-// {
-// 	int i;
-// 	int j;
+int	main()
+{
+	int i;
+	int j;
 
 
-// 	// // 단일 문자 한개를 출력
-// 	// i = ft_printf("%c\n", 'a');
-// 	// j = printf("%c\n", 'a');
-// 	// printf("ft_printf: %d\n", i);
-// 	// printf("printf: %d\n", j);
-
-
-
-// 	// // 문자열 출력
-// 	// i = ft_printf("%s\n", "hi");
-// 	// j = printf("%s\n", "hi");
-// 	// printf("ft_printf: %d\n", i);
-// 	// printf("printf: %d\n", j);
+	// // 단일 문자 한개를 출력
+	// i = ft_printf("%c\n", 'a');
+	// j = printf("%c\n", 'a');
+	// printf("ft_printf: %d\n", i);
+	// printf("printf: %d\n", j);
 
 
 
-
-// 	// // void *형식의 포인터 인자를 16진수로 출력
-// 	// i = ft_printf("%p\n", "hi");
-// 	// j = printf("%p\n", "hi");
-// 	// printf("ft_printf: %d\n", i);
-// 	// printf("printf: %d\n", j);
+	// // 문자열 출력
+	// i = ft_printf("%s\n", "hi");
+	// j = printf("%s\n", "hi");
+	// printf("ft_printf: %d\n", i);
+	// printf("printf: %d\n", j);
 
 
 
 
-// 	// // 10진수 숫자를 출력 (INT_MIN ~ INT_MAX)
-// 	// i = ft_printf("%d\n", -214748364);
-// 	// j = printf("%d\n", -214748364);
-// 	// printf("ft_printf: %d\n", i);
-// 	// printf("printf: %d\n", j);
+	// // void *형식의 포인터 인자를 16진수로 출력
+	// i = ft_printf("%p\n", "hi");
+	// j = printf("%p\n", "hi");
+	// printf("ft_printf: %d\n", i);
+	// printf("printf: %d\n", j);
 
 
 
 
-// 	// // 10진수 '정수'를 출력 (INT_MIN ~ INT_MAX)
-// 	// i = ft_printf("%i\n", -214748364);
-// 	// j = printf("%i\n", -214748364);
-// 	// printf("ft_printf: %d\n", i);
-// 	// printf("printf: %d\n", j);
+	// // 10진수 숫자를 출력 (INT_MIN ~ INT_MAX)
+	// i = ft_printf("%d\n", -214748364);
+	// j = printf("%d\n", -214748364);
+	// printf("ft_printf: %d\n", i);
+	// printf("printf: %d\n", j);
 
 
 
 
-// 	// // 10진수 부호없는 정수를 출력
-// 	// i = ft_printf("%u\n", 0);
-// 	// j = printf("%u\n", 0);
-// 	// printf("ft_printf: %d\n", i);
-// 	// printf("printf: %d\n", j);
+	// 10진수 '정수'를 출력 (INT_MIN ~ INT_MAX)
+	i = ft_printf("%i\n", 42);
+	j = printf("%i\n", 42);
+	printf("ft_printf: %d\n", i);
+	printf("printf: %d\n", j);
 
 
 
 
-// 	// // 소문자를 사용하여 숫자를 16진수로 출력
-// 	// i = ft_printf("%x\n", 2147483647);
-// 	// j = printf("%x\n", 2147483647);
-// 	// printf("ft_printf: %d\n", i);
-// 	// printf("printf: %d\n", j);
+	// // 10진수 부호없는 정수를 출력
+	// i = ft_printf("%u\n", 0);
+	// j = printf("%u\n", 0);
+	// printf("ft_printf: %d\n", i);
+	// printf("printf: %d\n", j);
 
 
 
 
-// 	// // 대문자를 사용하여 숫자를 16진수로 출력
-// 	// i = ft_printf("%X\n", 2147483647);
-// 	// j = printf("%X\n", 2147483647);
-// 	// printf("ft_printf: %d\n", i);
-// 	// printf("printf: %d\n", j);
+	// // 소문자를 사용하여 숫자를 16진수로 출력
+	// i = ft_printf("%x\n", 2147483647);
+	// j = printf("%x\n", 2147483647);
+	// printf("ft_printf: %d\n", i);
+	// printf("printf: %d\n", j);
 
 
 
 
-// 	// // 퍼센트 기호를 출력
-// 	// i = ft_printf("%%\n");
-// 	// j = printf("%%\n");
-// 	// printf("ft_printf: %d\n", i);
-// 	// printf("printf: %d\n", j);
-// }
+	// // 대문자를 사용하여 숫자를 16진수로 출력
+	// i = ft_printf("%X\n", 2147483647);
+	// j = printf("%X\n", 2147483647);
+	// printf("ft_printf: %d\n", i);
+	// printf("printf: %d\n", j);
+
+
+
+
+	// // 퍼센트 기호를 출력
+	// i = ft_printf("%%\n");
+	// j = printf("%%\n");
+	// printf("ft_printf: %d\n", i);
+	// printf("printf: %d\n", j);
+}

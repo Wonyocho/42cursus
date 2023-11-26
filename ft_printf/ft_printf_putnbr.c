@@ -15,34 +15,41 @@
 int	ft_putchar(char c, int count)
 {
 	write(1, &c, 1);
+	count++;
 	return (count);
 }
 
 int	ft_putnbr(int n, int count)
 {
-	if (n < 0)
+	int	array[10];
+	int	i;
+	int	j;
+
+	if (n == -2147483648)
 	{
-		if (n == -2147483648)
-		{
-			write(1, "-2147483648", 11);
-			count = count + 11;
-		}
-		else
-		{
-			write(1, "-", 1);
-			n = -n;
-			ft_putnbr(n, ++count);
-		}
+		write(1, "-2147483648", 11);
+		count = count + 11;
 	}
-	else
+	else if (n < 0)
 	{
-		if (n >= 10)
-		{
-			ft_putnbr(n / 10, ++count);
-			ft_putnbr(n % 10, ++count);
-		}
-		else
-			ft_putchar(n + '0', 1);
+		write(1, "-", 1);
+		n = -n;
+		count++;
+	}
+	i = 0;
+	while(n > 0)
+	{
+		array[10 - i - 1] = n % 10; //i = 0, array[9] = 2    i = 1,array[8] = 4,
+		n = n / 10;
+		i++;
+	} // i = 2;
+	j = 10 - i; //j = 8, i = 2
+	while (i > 0)
+	{
+		write(1, &array[j], 1);
+		j++;
+		i--;
+		count++;
 	}
 	return (count);
 }
