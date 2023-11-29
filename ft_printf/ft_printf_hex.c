@@ -42,19 +42,18 @@ int	print_address(unsigned long long address, int count)
 	i = 0;
 	while (address > 0)
 	{
-		arr[15 - i] = address % 16;
+		arr[15 - i] = hex[address % 16];
 		address = address / 16;
 		i++;
 	}
-	i = 16 - i + 1;
-	while (i < 16)
+	while (i > -1)
 	{
-		if (write(1, &hex[arr[i]], 1) == -1)
+		if (write(1, &arr[15 - i], 1) == -1)
 			return (-1);
 		count++;
-		i++;
+		i--;
 	}
-	return (count);
+	return (count - 1);
 }
 
 int	printf_lower_hex(va_list ap, int count)

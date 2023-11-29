@@ -81,6 +81,7 @@ int	main()
 {
 	int i;
 	int j;
+	char *test = "hello world";
 
 
 	// // 단일 문자 한개를 출력
@@ -101,8 +102,8 @@ int	main()
 
 
 	// // void *형식의 포인터 인자를 16진수로 출력
-	// i = ft_printf("%p\n", "hi");
-	// j = printf("%p\n", "hi");
+	// i = ft_printf("%p\n", test);
+	// j = printf("%p\n", test);
 	// printf("ft_printf: %d\n", i);
 	// printf("printf: %d\n", j);
 
