@@ -61,6 +61,7 @@ int	printf_lower_hex(va_list ap, int count)
 {
 	const char		*hex = "0123456789abcdef";
 	int				i;
+	int				j;
 	int				arr[16];
 	unsigned int	num;
 
@@ -68,25 +69,26 @@ int	printf_lower_hex(va_list ap, int count)
 	i = 0;
 	while (num > 0)
 	{
-		arr[15 - i] = num % 16;
+		arr[15 - i] = hex[num % 16];
 		num = num / 16;
-		count++;
+		i++;
 	}
-	i = 16 - i + 1;
-	while (i < 16)
+	while (i > 0)
 	{
-		if (write(1, &hex[arr[i]], 1) == -1)
+		j = arr[16 - i];
+		if (write(1, &j, 1) == -1)
 			return (-1);
 		count++;
-		i++;
+		i--;
 	}
 	return (count);
 }
 
 int	printf_upper_hex(va_list ap, int count)
 {
-	const char		*hex = "0123456789abcdef";
+	const char		*hex = "0123456789ABCDEF";
 	int				i;
+	int				j;
 	int				arr[16];
 	unsigned int	num;
 
@@ -94,17 +96,17 @@ int	printf_upper_hex(va_list ap, int count)
 	i = 0;
 	while (num > 0)
 	{
-		arr[15 - i] = num % 16;
+		arr[15 - i] = hex[num % 16];
 		num = num / 16;
-		count++;
+		i++;
 	}
-	i = 16 - i + 1;
-	while (i < 16)
+	while (i > 0)
 	{
-		if (write(1, &hex[arr[i]], 1) == -1)
+		j = arr[16 - i];
+		if (write(1, &j, 1) == -1)
 			return (-1);
 		count++;
-		i++;
+		i--;
 	}
 	return (count);
 }

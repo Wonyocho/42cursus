@@ -118,11 +118,11 @@ int	main()
 
 
 
-	// 10진수 '정수'를 출력 (INT_MIN ~ INT_MAX)
-	i = ft_printf("%i\n", 42);
-	j = printf("%i\n", 42);
-	printf("ft_printf: %d\n", i);
-	printf("printf: %d\n", j);
+	// // 10진수 '정수'를 출력 (INT_MIN ~ INT_MAX)
+	// i = ft_printf("%i\n", 214748364);
+	// j = printf("%i\n", 214748364);
+	// printf("ft_printf: %d\n", i);
+	// printf("printf: %d\n", j);
 
 
 

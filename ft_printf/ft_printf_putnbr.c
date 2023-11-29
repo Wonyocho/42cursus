@@ -12,19 +12,8 @@
 
 #include "ft_printf.h"
 
-int	ft_putchar(char c, int count)
+void	case_minus(int n, int count)
 {
-	write(1, &c, 1);
-	count++;
-	return (count);
-}
-
-int	ft_putnbr(int n, int count)
-{
-	int	array[10];
-	int	i;
-	int	j;
-
 	if (n == -2147483648)
 	{
 		write(1, "-2147483648", 11);
@@ -36,18 +25,26 @@ int	ft_putnbr(int n, int count)
 		n = -n;
 		count++;
 	}
+}
+
+int	ft_putnbr(int n, int count)
+{
+	int	array[10];
+	int	i;
+	int	j;
+
+	case_minus;
 	i = 0;
 	while(n > 0)
 	{
-		array[10 - i - 1] = n % 10; //i = 0, array[9] = 2    i = 1,array[8] = 4,
+		array[10 - i - 1] = n % 10 + '0';
 		n = n / 10;
 		i++;
-	} // i = 2;
-	j = 10 - i; //j = 8, i = 2
+	}
 	while (i > 0)
 	{
-		write(1, &array[j], 1);
-		j++;
+		if (write(1, &array[10 - i], 1) == -1)
+			return (-1);
 		i--;
 		count++;
 	}
