@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/25 15:01:21 by wonyocho          #+#    #+#             */
-/*   Updated: 2023/11/26 13:44:30 by wonyocho         ###   ########.fr       */
+/*   Created: 2023/12/04 10:29:37 by wonyocho          #+#    #+#             */
+/*   Updated: 2023/12/13 10:27:14 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,9 @@ int	print_string(va_list ap, int count)
 	str = va_arg(ap, char *);
 	if (str == NULL)
 	{
-		write(1, "(null)", 6);
-		count++;
+		if (write(1, "(null)", 6) == -1)
+			return (-1);
+		count = count + 6;
 		return (count);
 	}
 	while (*str)

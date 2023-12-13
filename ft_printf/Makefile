@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/11/24 10:04:51 by wonyocho          #+#    #+#              #
-#    Updated: 2023/11/26 16:12:18 by wonyocho         ###   ########.fr        #
+#    Created: 2023/12/04 10:33:21 by wonyocho          #+#    #+#              #
+#    Updated: 2023/12/12 15:23:20 by wonyocho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ CFLAGS = -Wall -Wextra -Werror
 NAME = libftprintf.a
 SRCS = ft_printf.c ft_printf_hex.c ft_printf_cs_numbs.c ft_printf_putnbr.c
 OBJS = $(SRCS:.c=.o)
+HEAD = ft_printf.h
 
 .PHONY : all clean fclean re
 

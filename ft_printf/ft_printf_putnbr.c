@@ -5,37 +5,51 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/25 15:52:54 by wonyocho          #+#    #+#             */
-/*   Updated: 2023/11/26 16:12:49 by wonyocho         ###   ########.fr       */
+/*   Created: 2023/12/04 10:32:39 by wonyocho          #+#    #+#             */
+/*   Updated: 2023/12/13 10:27:23 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	case_minus(int n, int count)
+static int	case_minus(int n, int count)
 {
+	if (n == 0)
+	{
+		if (write(1, "0", 1) == -1)
+			return (-1);
+		return (count + 1);
+	}
 	if (n == -2147483648)
 	{
-		write(1, "-2147483648", 11);
+		if (write(1, "-2147483648", 11) == -1)
+			return (-1);
 		count = count + 11;
 	}
 	else if (n < 0)
 	{
-		write(1, "-", 1);
+		if (write(1, "-", 1) == -1)
+			return (-1);
 		n = -n;
 		count++;
 	}
+	return (count);
 }
 
 int	ft_putnbr(int n, int count)
 {
 	int	array[10];
 	int	i;
-	int	j;
 
-	case_minus;
 	i = 0;
-	while(n > 0)
+	if (n <= 0)
+	{
+		count = case_minus(n, count);
+		if (count == -1)
+			return (-1);
+		n = -n;
+	}
+	while (n > 0)
 	{
 		array[10 - i - 1] = n % 10 + '0';
 		n = n / 10;
@@ -57,11 +71,10 @@ int	ft_putnbr_u(unsigned int n, int count)
 	int		i;
 
 	i = 0;
-	if (n == 0)
+	if (n <= 0)
 	{
-		if (write(1, "0", 1) < 0)
-			return (-1);
-		count++;
+		count = case_minus(n, count);
+		n = -n;
 	}
 	while (n != 0)
 	{
