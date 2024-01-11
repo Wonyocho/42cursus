@@ -6,41 +6,43 @@
 /*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:52:15 by wonyocho          #+#    #+#             */
-/*   Updated: 2024/01/10 19:45:03 by wonyocho         ###   ########.fr       */
+/*   Updated: 2024/01/11 18:11:22 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
 // read .ber files
-void	read_map_file(char *filename, t_game *game)
+void	read_map_file(char *filename, t_game *g)
 {
 	int		fd;
 	char	*line;
 
 	fd = open(filename, O_RDONLY);
+	if (fd <= 0)
+		printf("File open fail.\n");
 	line = get_next_line(fd);
 	/* 맵 에러 체크 하는 함수 작성*/
-	game->win_wid = ft_strlen(line) - 1;
-	game->win_hei = 0;
-	game->map_info = ft_strdup_no_nl(line);
+	g->win_wid = ft_strlen(line) - 1;
+	g->win_hei = 0;
+	g->map = ft_strdup_no_nl(line);
 	free(line);
 	while (line)
 	{
-		game->win_hei++;
+		g->win_hei++;
 		line = get_next_line(fd);
 		/* 맵 에러 체크 하는 함수 작성*/
 		if (line == NULL)
 			break ;
 		delete_nl(line);
 		if (line)
-			game->map_info = ft_append(game->map_info, line);
+			g->map = ft_append(g->map, line);
 		free(line);
 	}
 	close(fd);
 }
 
-void	delete_nl(char *str)
+static void	delete_nl(char *str)
 {
 	int	i;
 
@@ -53,7 +55,7 @@ void	delete_nl(char *str)
 	}
 }
 
-char	*ft_strdup_no_nl(const char *s1)
+static char	*ft_strdup_no_nl(const char *s1)
 {
 	char			*dst;
 	unsigned char	*src;

@@ -6,7 +6,7 @@
 /*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:44:17 by wonyocho          #+#    #+#             */
-/*   Updated: 2024/01/10 15:02:04 by wonyocho         ###   ########.fr       */
+/*   Updated: 2024/01/11 17:25:56 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	*ft_calloc(size_t count, size_t size)
 	return (result);
 }
 
-size_t	ft_strlen(const char *str)
+int	ft_strlen(const char *str)
 {
 	int	i;
 

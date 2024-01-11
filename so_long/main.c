@@ -6,7 +6,7 @@
 /*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:22:06 by wonyocho          #+#    #+#             */
-/*   Updated: 2024/01/10 19:54:20 by wonyocho         ###   ########.fr       */
+/*   Updated: 2024/01/11 19:02:11 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,67 +20,22 @@
 	// printf("%s\n", game.map_info);
 	// printf("%d\n", game.win_wid);
 	// printf("%d\n", game.win_hei);
-	// system("leaks a.out");
+	// 	system("leaks a.out");
 
 #include "header.h"
 
 int	main(int argc, char **argv)
 {
-	t_game		game;
-	t_data_img	imgs;
-	void		*mlx;
-	void		*win;
+	t_game	g;
+	int		keycode;
+	int		fd;
 
-	read_map_file(argv[1], &game);
-	mlx = mlx_init();
-	win = mlx_new_window(mlx, game.win_wid * 40, game.win_hei * 40, "so_long");
-	setting_map(mlx, win, &game, &imgs);
-	mlx_loop(mlx);
+	if (argc != 2)
+		printf("Try again.\n");
+	read_map_file(argv[1], &g);
+	g.mlx = mlx_init();
+	g.win = mlx_new_window(g.mlx, g.win_wid * 40, g.win_hei * 40, "so_long");
+	setting_map(&g);
+	mlx_key_hook(g.win, key_hook, &g);
+	mlx_loop(g.mlx);
 }
-
-// typedef struct s_data
-// {
-// 	void	*img;
-// 	char	*addr;
-// 	int		bits_per_pixel;
-// 	int		length;
-// 	int		endian;
-// }t_data;
-
-// typedef struct s_data
-// {
-// 	void	*img;
-// 	char	*addr;
-// 	int		width;
-// 	int		height;
-// }t_data;
-
-// int	render_next_frame(void *YourStruct);
-
-// IF PRESS ANY KEY, CLOSE WINDOW
-// int	close(int keycode, t_vars *vars)
-// {
-// 	mlx_destroy_window(vars->mlx, vars->win);
-// 	return (0);
-// }
-
-// void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
-// {
-// 	char	*dst;
-
-// 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-// 	*(unsigned int*)dst = color;
-// }
-
-// int	main(void)
-// {
-// 	t_vars	vars;
-//
-// 	vars.mlx = mlx_init();
-// 	vars.win = mlx_new_window(vars.mlx, 1920, 1080, "Hello world!");
-// 	mlx_hook(vars.win, 2, 1L<<0, close, &vars);
-// 	mlx_key_hook(vars.win, key_hook, &vars);
-// 	mlx_mouse_hook(vars.win, mouse_hook, &vars);
-// 	// mlx_loop_hook(mlx, render_next_frame, YourStruct);
-// 	mlx_loop(vars.mlx);
-// }

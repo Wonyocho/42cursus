@@ -6,7 +6,7 @@
 /*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 11:47:39 by wonyocho          #+#    #+#             */
-/*   Updated: 2024/01/10 19:43:42 by wonyocho         ###   ########.fr       */
+/*   Updated: 2024/01/11 19:01:53 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,14 @@
 
 typedef struct s_game
 {
-	char	*map_info;
+	void	*mlx;
+	void	*win;
+	char	*map;
 	int		win_wid;
 	int		win_hei;
-}t_game;
+	int		player_x;
+	int		player_y;
 
-typedef struct s_data_img
-{
 	int		img_wid;
 	int		img_hei;
 	void	*img_tile;
@@ -37,30 +38,41 @@ typedef struct s_data_img
 	void	*img_item;
 	void	*img_goal;
 	void	*img_player;
-}t_data_img;
+
+	int		item_count;
+}t_game;
 
 // GET_NEXT_LINE
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 20
 # endif
 
-char	*ft_append(char *saved_line, char *buf);
-char	*get_next_line(int fd);
-char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_strchr(const char *str, int c);
-void	*ft_calloc(size_t count, size_t size);
-size_t	ft_strlen(const char *str);
+char		*ft_append(char *saved_line, char *buf);
+char		*get_next_line(int fd);
+char		*ft_strjoin(char const *s1, char const *s2);
+char		*ft_strchr(const char *str, int c);
+void		*ft_calloc(size_t count, size_t size);
+int			ft_strlen(const char *str);
 
 // map_read_files.c
-void	setting_map(void *mlx, void *win, t_game *game, t_data_img *imgs);
-void	read_map_file(char *filename, t_game *game);
-void	delete_nl(char *str);
-char	*ft_strdup_no_nl(const char *s1);
+void		read_map_file(char *filename, t_game *g);
+static void	delete_nl(char *str);
+static char	*ft_strdup_no_nl(const char *s1);
 
 // map_make.c
-void	setting_map(void *mlx, void *win, t_game *game, t_data_img *imgs);
-void	fill_with_tiles(void *mlx, void *win, t_game *game, t_data_img *imgs);
-void	get_img_data(void *mlx, t_data_img *imgs);
-void	put_elements(void *mlx, void *win, t_game *game, t_data_img *imgs);
+void		setting_map(t_game *g);
+void		get_img_data(t_game *g);
+void		fill_with_tiles(t_game *g);
+void		put_elements(t_game *g);
+
+// key_hook.c
+int			key_hook(int keycode, t_game *g);
+static void	move_w(t_game *g);
+static void	move_a(t_game *g);
+static void	move_s(t_game *g);
+static void	move_d(t_game *g);
+
+// play_clear.c
+void		game_clear(t_game *g, int item_ingame_count);
 
 #endif

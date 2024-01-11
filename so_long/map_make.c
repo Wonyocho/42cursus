@@ -6,50 +6,50 @@
 /*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:12:41 by wonyocho          #+#    #+#             */
-/*   Updated: 2024/01/10 19:54:19 by wonyocho         ###   ########.fr       */
+/*   Updated: 2024/01/11 19:04:44 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-void	setting_map(void *mlx, void *win, t_game *game, t_data_img *imgs)
+void	setting_map(t_game *g)
 {
-	get_img_data(mlx, imgs);
-	fill_with_tiles(mlx, win, game, imgs);
-	put_elements(mlx, win, game, imgs);
+	get_img_data(g);
+	fill_with_tiles(g);
+	put_elements(g);
 }
 
-void	get_img_data(void *mlx, t_data_img *imgs)
+void	get_img_data(t_game *g)
 {
-	imgs->img_tile = mlx_new_image(mlx, 40, 40);
-	imgs->img_wall = mlx_new_image(mlx, 40, 40);
-	imgs->img_item = mlx_new_image(mlx, 40, 40);
-	imgs->img_goal = mlx_new_image(mlx, 40, 40);
-	imgs->img_player = mlx_new_image(mlx, 40, 40);
-	imgs->img_tile = mlx_xpm_file_to_image(mlx, "textures/Grass.xpm",
-			&imgs->img_wid, &imgs->img_hei);
-	imgs->img_wall = mlx_xpm_file_to_image(mlx, "textures/Wall.xpm",
-			&imgs->img_wid, &imgs->img_hei);
-	imgs->img_item = mlx_xpm_file_to_image(mlx, "textures/Item.xpm",
-			&imgs->img_wid, &imgs->img_hei);
-	imgs->img_goal = mlx_xpm_file_to_image(mlx, "textures/Goal.xpm",
-			&imgs->img_wid, &imgs->img_hei);
-	imgs->img_player = mlx_xpm_file_to_image(mlx, "textures/Player.xpm",
-			&imgs->img_wid, &imgs->img_hei);
+	g->img_tile = mlx_new_image(g->mlx, 40, 40);
+	g->img_wall = mlx_new_image(g->mlx, 40, 40);
+	g->img_item = mlx_new_image(g->mlx, 40, 40);
+	g->img_goal = mlx_new_image(g->mlx, 40, 40);
+	g->img_player = mlx_new_image(g->mlx, 40, 40);
+	g->img_tile = mlx_xpm_file_to_image(g->mlx, "textures/Grass.xpm",
+			&g->img_wid, &g->img_hei);
+	g->img_wall = mlx_xpm_file_to_image(g->mlx, "textures/Wall.xpm",
+			&g->img_wid, &g->img_hei);
+	g->img_item = mlx_xpm_file_to_image(g->mlx, "textures/Item.xpm",
+			&g->img_wid, &g->img_hei);
+	g->img_goal = mlx_xpm_file_to_image(g->mlx, "textures/Goal.xpm",
+			&g->img_wid, &g->img_hei);
+	g->img_player = mlx_xpm_file_to_image(g->mlx, "textures/Player.xpm",
+			&g->img_wid, &g->img_hei);
 }
 
-void	fill_with_tiles(void *mlx, void *win, t_game *game, t_data_img *imgs)
+void	fill_with_tiles(t_game *g)
 {
 	int	x;
 	int	y;
 
 	x = 0;
 	y = 0;
-	while (y < game->win_hei * 40)
+	while (y < g->win_hei * 40)
 	{
-		mlx_put_image_to_window(mlx, win, imgs->img_tile, x, y);
+		mlx_put_image_to_window(g->mlx, g->win, g->img_tile, x, y);
 		x = x + 40;
-		if (x == game->win_wid * 40)
+		if (x == g->win_wid * 40)
 		{
 			x = 0;
 			y = y + 40;
@@ -57,7 +57,7 @@ void	fill_with_tiles(void *mlx, void *win, t_game *game, t_data_img *imgs)
 	}
 }
 
-void	put_elements(void *mlx, void *win, t_game *game, t_data_img *imgs)
+void	put_elements(t_game *g)
 {
 	int	i;
 	int	x;
@@ -66,18 +66,18 @@ void	put_elements(void *mlx, void *win, t_game *game, t_data_img *imgs)
 	i = 0;
 	x = 0;
 	y = 0;
-	while (game->map_info[i])
+	while (g->map[i])
 	{
-		if (game->map_info[i] == '1')
-			mlx_put_image_to_window(mlx, win, imgs->img_wall, x, y);
-		else if (game->map_info[i] == 'C')
-			mlx_put_image_to_window(mlx, win, imgs->img_item, x + 10, y + 10);
-		else if (game->map_info[i] == 'E')
-			mlx_put_image_to_window(mlx, win, imgs->img_goal, x, y);
-		else if (game->map_info[i] == 'P')
-			mlx_put_image_to_window(mlx, win, imgs->img_player, x + 5, y + 5);
+		if (g->map[i] == '1')
+			mlx_put_image_to_window(g->mlx, g->win, g->img_wall, x, y);
+		else if (g->map[i] == 'C')
+			mlx_put_image_to_window(g->mlx, g->win, g->img_item, x + 9, y + 9);
+		else if (g->map[i] == 'E')
+			mlx_put_image_to_window(g->mlx, g->win, g->img_goal, x, y);
+		else if (g->map[i] == 'P')
+			mlx_put_image_to_window(g->mlx, g->win, g->img_player, x, y);
 		x = x + 40;
-		if (x == game->win_wid * 40)
+		if (x == g->win_wid * 40)
 		{
 			x = 0;
 			y = y + 40;

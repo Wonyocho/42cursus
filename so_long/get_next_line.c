@@ -6,7 +6,7 @@
 /*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:43:43 by wonyocho          #+#    #+#             */
-/*   Updated: 2024/01/10 15:01:58 by wonyocho         ###   ########.fr       */
+/*   Updated: 2024/01/11 17:26:17 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_append(char *saved_line, char *buf)
 	return (temp);
 }
 
-char	*read_file(int fd, char *saved_line)
+static char	*read_file(int fd, char *saved_line)
 {
 	char	*buf;
 	int		read_byte;
@@ -49,7 +49,7 @@ char	*read_file(int fd, char *saved_line)
 	return (saved_line);
 }
 
-char	*ft_line(char *saved_line)
+static char	*ft_line(char *saved_line)
 {
 	char	*line;
 	int		i;
@@ -76,7 +76,7 @@ char	*ft_line(char *saved_line)
 	return (line);
 }
 
-char	*ft_next(char *saved_line)
+static char	*ft_next(char *saved_line)
 {
 	int		i;
 	int		j;
@@ -133,17 +133,3 @@ char	*get_next_line(int fd)
 	saved_line = ft_next(saved_line);
 	return (line);
 }
-
-// int	main (void)
-// {
-// 	int	fd;
-
-// 	fd = open("test.txt", O_RDONLY);
-// 	printf("GNL 1:%s\n", get_next_line(fd));
-// 	printf("GNL 2:%s\n", get_next_line(fd));
-// 	printf("GNL 3:%s\n", get_next_line(fd));
-// 	printf("GNL 4:%s\n", get_next_line(fd));
-// 	printf("GNL 5:%s\n", get_next_line(fd));
-// 	printf("GNL 6:%s\n", get_next_line(fd));
-// 	system("leaks a.out");
-// }
