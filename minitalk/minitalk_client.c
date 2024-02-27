@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minitalk_client.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/24 16:53:38 by wonyocho          #+#    #+#             */
+/*   Updated: 2024/02/26 11:33:22 by wonyocho         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "header.h"
 
 static void	bit_send(pid_t pid, char c)
@@ -37,7 +49,7 @@ int	main(int argc, char **argv)
 	if (argc == 3 && argv[2][0] != '\0')
 	{
 		to_pid = ft_atoi(argv[1]);
-		if (to_pid < 100 || to_pid > 99999)
+		if (to_pid < 100 || to_pid > 99998)
 		{
 			ft_putstr_fd("PID Error!.\n", 1);
 			return (0);

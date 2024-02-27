@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minitalk_server.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/24 16:53:45 by wonyocho          #+#    #+#             */
+/*   Updated: 2024/02/26 11:44:46 by wonyocho         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "header.h"
 
 static void	handler(int signal)
@@ -18,12 +30,12 @@ static void	handler(int signal)
 
 int	main(int argc, char **argv)
 {
-	pid_t server_pid;
+	pid_t	server_pid;
 
 	(void)argv;
 	if (argc != 1)
 		return (0);
- 	server_pid = getpid();
+	server_pid = getpid();
 	ft_putnbr_fd(server_pid, 1);
 	ft_putchar_fd('\n', 1);
 	signal(SIGUSR1, handler);
@@ -32,13 +44,3 @@ int	main(int argc, char **argv)
 		pause();
 	return (0);
 }
-
-/*
- 1. main
-  -> 리턴타입 void로?
-  -> argc 부분 수정하기
-  -> 
-
- 2. handler
- 3. pid print  
-*/

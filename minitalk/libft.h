@@ -1,15 +1,25 @@
-#include <unistd.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libft.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/24 16:53:29 by wonyocho          #+#    #+#             */
+/*   Updated: 2024/02/24 17:09:49 by wonyocho         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void    ft_putchar_fd(char c, int fd);
-void    ft_putstr_fd(char *s, int fd);
-void	ft_putnbr_fd(int n, int fd);
+#ifndef LIBFT_H
+# define LIBFT_H
+# include <unistd.h>
 
-void    ft_putchar_fd(char c, int fd)
+void	ft_putchar_fd(char c, int fd)
 {
-		write(fd, &c, 1);
+	write(fd, &c, 1);
 }
 
-void    ft_putstr_fd(char *s, int fd)
+void	ft_putstr_fd(char *s, int fd)
 {
 	while (*s)
 		write(fd, s++, 1);
@@ -66,3 +76,5 @@ int	ft_atoi(const char *str)
 	}
 	return ((int)(result * sign));
 }
+
+#endif
