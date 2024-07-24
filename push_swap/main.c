@@ -6,7 +6,7 @@
 /*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 17:53:04 by wonyocho          #+#    #+#             */
-/*   Updated: 2024/07/22 01:04:34 by wonyocho         ###   ########.fr       */
+/*   Updated: 2024/07/25 04:02:39 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	push_swap(t_stack *a, t_stack *b)
 	while (a->cnt > 3)
 	{
 		get_optimized_value(a, b, &op_cnt);
-		pb_best_value(a, b, &op_cnt);
+		op_push_b(a, b, &op_cnt);
 	}
 	set_b_max_on_top(a, b);
 	sort_3(a, b);
