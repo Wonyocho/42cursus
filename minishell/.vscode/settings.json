@@ -1,6 +1,8 @@
 {
 	"files.associations": {
+		"*.embeddedhtml": "html",
 		"readline.h": "c",
-		"parsing.h": "c"
+		"parsing.h": "c",
+		"macro.h": "c"
 	}
 }

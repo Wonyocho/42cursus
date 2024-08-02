@@ -6,7 +6,7 @@
 /*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 19:14:59 by wonyocho          #+#    #+#             */
-/*   Updated: 2024/08/02 15:29:54 by wonyocho         ###   ########.fr       */
+/*   Updated: 2024/08/02 17:50:32 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,33 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <termios.h>
+
 #include "libft.h"
+#include "macro.h"
 
 typedef struct s_cmd
 {
-	char	**cmdline; // cmdline[0] = "echo", cmdline[1] = "hi", cmdline[2] = NULL
+	char	**cmd_line; // cmdline[0] = "echo", cmdline[1] = "hi", cmdline[2] = NULL
 	int		flag; // flag 0: 세미콜론 또는 NULL, flag 1: 파이프
-	char	single_quote; // 파싱과정에서 ' 또는 " 를 저장, 짝을 찾으면 0으로 초기화 됨.
-	char	double_quote;
+	int		single_quote; // 파싱과정에서 ' 또는 " 를 저장, 짝을 찾으면 0으로 초기화 됨.
+	int		double_quote;
 }t_cmd;
 
 typedef struct s_data
 {
-	t_list	*lstlast;
-	t_cmd 	*cmd; //위의 t_cmd 구조체를 t_data 안에 선언함으로써 t_data만으로 2개의 구조체 사용 가능
+	t_list	*lst;
+	t_cmd 	*cmd_data; //위의 t_cmd 구조체를 t_data 안에 선언함으로써 t_data만으로 2개의 구조체 사용 가능
 	char 	*buff;
 }t_data;
 
 
+
+// minishell.c
 void	minishell();
+
+// check_quotes.c
+char	check_single_quotes(char *str);
+char	check_double_quotes(char *str);
 
 #endif
 
