@@ -6,34 +6,61 @@
 /*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 19:15:06 by wonyocho          #+#    #+#             */
-/*   Updated: 2024/08/02 15:53:10 by wonyocho         ###   ########.fr       */
+/*   Updated: 2024/08/14 16:14:31 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// https://techdebt.tistory.com/33
-// 1. 초기화
-// 2. 구조체로 넘겨라
-// 옵션 그냥 그대로 하면
-// cd -n 옵션은 그냥 우리가 처리를 한다.
-// 연결리스트에 담아서 넘겨서 맨 마지막 꺼로 실행
-// 3. 시그널 처리
-// 리디렉션
-// 히어독이면 따로 할건지 정해야함.
-
 #include "minishell.h"
-#include "macro.h"
 
-int	main(int argc, char **argv)
+static void	minishell(char **envp)
 {
+	t_shell	minishell;
+	char	*input;
+	int		fd_backup[2];
+
+	init_envp_lst(&minishell.env_list, envp); // 환경변수 리스트 초기화
+	while (1)
+	{
+		fd_backup[0] = dup(STDIN_FILENO);	// 표준 입력 백업
+		fd_backup[1] = dup(STDOUT_FILENO);	// 표준 출력 백업
+		input = readline("minishell $ ");
+		if (!input) // EOF(Ctrl + D) or readline 오류시 에러핸들링
+			break;
+		if (parsing(&minishell, input) == -1) // parsing 에러시 -1
+		{
+			perror("parsing error\n");
+			free(input);
+			continue;
+		}
+		// 명령어 경로 설정
+		// 명령어 실행
+		dup2(fd_backup[0], STDIN_FILENO);	// 백업
+		dup2(fd_backup[1], STDOUT_FILENO);	// 백업 
+		add_history(input);
+		free(input);
+	}
+}
+
+int	main(int argc, char **argv, char **envp)
+{
+	struct termios	term;
+	
+	(void)argv;
 	if (argc >= 2)
 	{
-		printf("too many arguments!\n");
+		printf("too many arguments!!!\n");
+		exit(0);
+	}  
+	if (tcgetattr(STDIN_FILENO, &term) != 0) // 터미널 속성 저장
+	{
+		perror("tcgetattr error!!!\n");
 		exit(0);
 	}
-	
-	// 1. 터미널설정 초기화
-	// 2. 시그널 초기화
-	minishell(); // 3. 미니쉘 실행부분
-
-	return (0);
+	init_signal(); // 시그널 초기화
+	minishell(envp); // 미니쉘 실행
+	if (tcsetattr(STDIN_FILENO, TCSANOW, &term) != 0) // 터미널 속성 복원
+	{
+		perror("tcsetattr error!!!\n");
+		exit(0);
+	}
 }
