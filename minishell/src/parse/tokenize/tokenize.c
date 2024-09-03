@@ -6,7 +6,7 @@
 /*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 12:42:32 by wonyocho          #+#    #+#             */
-/*   Updated: 2024/09/02 21:00:09 by wonyocho         ###   ########.fr       */
+/*   Updated: 2024/09/03 13:43:28 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	tokenize(t_shell *minishell, t_token **token_lst, char *input)
 			iter.end++;
 		else
 			process_quotes(input, &iter);
-		process_token(minishell, token_lst, input, &iter);
+		get_token(minishell, token_lst, input, &iter);
 	}
 	remove_quotes(*token_lst);
 	return (iter.in_sq || iter.in_dq);
