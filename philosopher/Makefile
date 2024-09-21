@@ -6,14 +6,14 @@
 #    By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/15 16:56:53 by wonyocho          #+#    #+#              #
-#    Updated: 2024/09/21 15:32:05 by wonyocho         ###   ########.fr        #
+#    Updated: 2024/09/21 19:59:48 by wonyocho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 NAME = philosopher
-SRCS = main.c utils.c init.c
+SRCS = main.c philo_utils.c philo_init.c philo_free.c philo_run.c
 OBJS = $(SRCS:.c=.o)
 HEAD = header.h
 

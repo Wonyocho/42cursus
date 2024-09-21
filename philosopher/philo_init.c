@@ -6,7 +6,7 @@
 /*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 15:27:38 by wonyocho          #+#    #+#             */
-/*   Updated: 2024/09/21 16:06:21 by wonyocho         ###   ########.fr       */
+/*   Updated: 2024/09/21 17:40:48 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	init_data(char **argv, int argc, t_data *data)
 {
-	data->stop_flag = 0;
+	data->dead_flag = 0;
 	data->p_num = ft_atoi(argv[1]);
 	data->lifetime = ft_atoi(argv[2]);
 	data->eat_time = ft_atoi(argv[3]);
@@ -54,7 +54,7 @@ int	init_philo(t_data *data, pthread_mutex_t *forks, t_philo **philo)
 	int		i;
 	long	start_time;
 
-	start_time = get_time() + data->p_num;
+	start_time = set_time() + data->p_num;
 	*philo = malloc(sizeof(t_philo) * (data->p_num));
 	if (!(*philo))
 		return (-1);

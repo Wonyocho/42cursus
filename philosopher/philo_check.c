@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   philo_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/21 15:45:49 by wonyocho          #+#    #+#             */
-/*   Updated: 2024/09/21 15:49:27 by wonyocho         ###   ########.fr       */
+/*   Created: 2024/09/21 20:04:22 by wonyocho          #+#    #+#             */
+/*   Updated: 2024/09/21 20:10:36 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-void free_all(pthread_t *threads, pthread_mutex_t *forks, t_philo *philo)
+int	check_status(t_data *data)
 {
-	if (threads)
-		free(threads);
-	if (philo)
-		free(philo);
-	if (forks)
-		free(forks);
+	int	status;
+	
+	pthread_mutex_lock(&data->mutex_dead);
+	status = data->dead_flag;
+	pthread_mutex_unlock(&data->mutex_dead);
+	return (status);
 }

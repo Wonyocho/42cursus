@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   philo_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 17:36:56 by wonyocho          #+#    #+#             */
-/*   Updated: 2024/09/19 17:02:37 by wonyocho         ###   ########.fr       */
+/*   Updated: 2024/09/21 20:49:48 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,56 @@ int	ft_atoi(const char *str)
 		i++;
 	}
 	return ((int)(result * sign));
+}
+
+int	check_argv(char **argv)
+{
+	int	i;
+	int	j;
+
+	i = 1;
+	while (argv[i])
+	{
+		j = 0;
+		while (argv[i][j])
+		{
+			if (!('0' <= argv[i][j] && argv[i][j] <= '9'))
+				return (-1);
+			j++;
+		}
+		i++;
+	}
+	return (1);
+}
+
+long	set_time(void)
+{
+	struct timeval	now;
+	long			result;
+
+	gettimeofday(&now, NULL);
+	result = ((size_t)now.tv_sec * 1000) + ((size_t)now.tv_usec / 1000);
+	return (result);
+}
+
+void	wait_philo(long time, t_data *data)
+{
+	long	end_time;
+
+	end_time = set_time() + time;
+	while (set_time < end_time)
+	{
+		if (check_stop_flag(data))
+			break ;
+		usleep(100);
+	}
+}
+
+void	print_status(t_philo *philo, const char *str)
+{
+	if (check_status(philo->data) == -1)
+		return ;
+	pthread_mutex_lock(&philo->data->mutex_print);
+	printf("%ld %d %s\n", set_time() - philo->start, philo->id, str);
+	pthread_mutex_unlock(&philo->data->mutex_print);
 }
