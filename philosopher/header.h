@@ -6,7 +6,7 @@
 /*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:55:07 by wonyocho          #+#    #+#             */
-/*   Updated: 2024/09/22 00:43:33 by wonyocho         ###   ########.fr       */
+/*   Updated: 2024/09/22 01:21:09 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ typedef struct s_philo
 
 // check.c
 int		check_main_status(t_data *data);
+int		check_philo_status(t_data *data, t_philo *philo);
+int		check_full_philo(t_data *data, t_philo *philo);
+int		check_dead_philo(t_data *data, t_philo *philo);
 
 // free.c
 void 	free_all(pthread_t *threads, pthread_mutex_t *forks, t_philo *philo);
@@ -65,6 +68,7 @@ int 	do_think(t_data *data, t_philo *philo);
 // run.c
 void	start(t_data *data, t_philo *philo, pthread_t *threads);
 void	*routine(void *arg);
+void	monitoring(t_data *data, t_philo *philo);
 
 // utils.c
 int		ft_atoi(const char *str);
