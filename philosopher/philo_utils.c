@@ -6,7 +6,7 @@
 /*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 17:36:56 by wonyocho          #+#    #+#             */
-/*   Updated: 2024/09/21 20:49:48 by wonyocho         ###   ########.fr       */
+/*   Updated: 2024/09/22 00:25:09 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,14 @@ long	set_time(void)
 	return (result);
 }
 
-void	wait_philo(long time, t_data *data)
+void	usleep_philo(long time, t_data *data)
 {
 	long	end_time;
 
 	end_time = set_time() + time;
-	while (set_time < end_time)
+	while (set_time() < end_time)
 	{
-		if (check_stop_flag(data))
+		if (check_status(data))
 			break ;
 		usleep(100);
 	}

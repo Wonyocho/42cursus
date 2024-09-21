@@ -6,12 +6,11 @@
 /*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:54:57 by wonyocho          #+#    #+#             */
-/*   Updated: 2024/09/21 17:41:21 by wonyocho         ###   ########.fr       */
+/*   Updated: 2024/09/22 00:37:06 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
-
 
 int	main(int argc, char **argv)
 {

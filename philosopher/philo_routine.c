@@ -6,7 +6,7 @@
 /*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 20:01:03 by wonyocho          #+#    #+#             */
-/*   Updated: 2024/09/21 21:20:30 by wonyocho         ###   ########.fr       */
+/*   Updated: 2024/09/22 00:36:31 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,11 @@ int	get_fork(t_data *data, t_philo *philo)
 	return (1);
 }
 
-int	eat(t_data *data, t_philo *philo)
+int	do_eat(t_data *data, t_philo *philo)
 {
+	int	result;
+
+	result = 1;
 	if (check_status(data) == -1)
 	{
 		pthread_mutex_unlock(philo->left);
@@ -39,10 +42,36 @@ int	eat(t_data *data, t_philo *philo)
 		return (-1);
 	}
 	print_status(philo, "is eating");
-
 	pthread_mutex_lock(&data->mutex_meal);
 	philo->last = set_time();
 	pthread_mutex_unlock(&data->mutex_meal);
-	
-	wait_philo(data->eat_time, data);
+	usleep_philo(data->eat_time, data);
+	pthread_mutex_lock(&data->mutex_meal);
+	philo->eat_cnt++;
+	if (data->eat_num == -1 && philo->eat_cnt >= data->eat_num)
+		result = 0;
+	pthread_mutex_unlock(&data->mutex_meal);
+	pthread_mutex_unlock(philo->left);
+	pthread_mutex_unlock(philo->right);
+	if (check_status(data) == -1)
+		return (-1);
+	return (result);
+}
+
+int	do_sleep(t_data *data, t_philo *philo)
+{
+	if (check_status(data) == -1)
+		return (-1);
+	print_status(philo, "is sleeping");
+	usleep_philo(data->sleep_time, data);
+	printf("!\n");
+	return (1);
+}
+
+int do_think(t_data *data, t_philo *philo)
+{
+	if (check_status(data) == -1)
+		return (-1);
+	print_status(philo, "is thinking");
+	return (1);
 }

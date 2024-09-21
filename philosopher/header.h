@@ -6,7 +6,7 @@
 /*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:55:07 by wonyocho          #+#    #+#             */
-/*   Updated: 2024/09/21 20:49:30 by wonyocho         ###   ########.fr       */
+/*   Updated: 2024/09/22 00:43:33 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_data
 	int				eat_time;
 	int 			sleep_time;
 	int				eat_num;
-	int				dead_flag;
+	int				stop_flag;
 	pthread_mutex_t	mutex_meal;
 	pthread_mutex_t	mutex_print;
 	pthread_mutex_t	mutex_dead;
@@ -46,7 +46,7 @@ typedef struct s_philo
 }	t_philo;
 
 // check.c
-int	check_status(t_data *data);
+int		check_main_status(t_data *data);
 
 // free.c
 void 	free_all(pthread_t *threads, pthread_mutex_t *forks, t_philo *philo);
@@ -57,7 +57,10 @@ int		init_mutex(t_data *data, pthread_mutex_t **forks);
 int		init_philo(t_data *data, pthread_mutex_t *forks, t_philo **philo);
 
 // routine.c
-int	get_fork(t_data *data, t_philo *philo);
+int		get_fork(t_data *data, t_philo *philo);
+int		do_eat(t_data *data, t_philo *philo);
+int		do_sleep(t_data *data, t_philo *philo);
+int 	do_think(t_data *data, t_philo *philo);
 
 // run.c
 void	start(t_data *data, t_philo *philo, pthread_t *threads);
@@ -67,7 +70,7 @@ void	*routine(void *arg);
 int		ft_atoi(const char *str);
 int		check_argv(char **argv);
 long	set_time(void);
-void	wait_philo(long time, t_data *data);
+void	usleep_philo(long time, t_data *data);
 void	print_status(t_philo *philo, const char *str);
 
 #endif
