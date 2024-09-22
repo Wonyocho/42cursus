@@ -6,7 +6,7 @@
 /*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:54:57 by wonyocho          #+#    #+#             */
-/*   Updated: 2024/09/22 00:37:06 by wonyocho         ###   ########.fr       */
+/*   Updated: 2024/09/22 08:56:54 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	main(int argc, char **argv)
 		if (init_philo(&data, forks, &philo) == -1)
 			return (0);
 		start(&data, philo, threads);
+		destroy_mutex(&data, forks);
 		free_all(threads, forks, philo);
 	}
 }

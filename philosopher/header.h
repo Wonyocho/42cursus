@@ -6,7 +6,7 @@
 /*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:55:07 by wonyocho          #+#    #+#             */
-/*   Updated: 2024/09/22 01:21:09 by wonyocho         ###   ########.fr       */
+/*   Updated: 2024/09/22 08:57:42 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int 	do_think(t_data *data, t_philo *philo);
 void	start(t_data *data, t_philo *philo, pthread_t *threads);
 void	*routine(void *arg);
 void	monitoring(t_data *data, t_philo *philo);
+void 	destroy_mutex(t_data *data, pthread_mutex_t *forks);
 
 // utils.c
 int		ft_atoi(const char *str);

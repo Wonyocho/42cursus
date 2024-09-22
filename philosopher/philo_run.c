@@ -6,7 +6,7 @@
 /*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 16:58:45 by wonyocho          #+#    #+#             */
-/*   Updated: 2024/09/22 01:21:02 by wonyocho         ###   ########.fr       */
+/*   Updated: 2024/09/22 11:43:58 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@ void	start(t_data *data, t_philo *philo, pthread_t *threads)
 		i++;
 	}
 	monitoring(data, philo);
+	i = 0;
+	while (i < data->p_num)
+	{
+		pthread_join(threads[i], NULL);
+		i++;
+	}
 }
 
 void	*routine(void *arg)
@@ -30,7 +36,6 @@ void	*routine(void *arg)
 	t_philo *philo;
 	t_data	*data;
 
-	printf("!\n");
 	philo = (t_philo *)arg;
 	data = philo->data;
 	while (set_time() < philo->start)
@@ -61,4 +66,19 @@ void	monitoring(t_data *data, t_philo *philo)
 			break;
 		usleep_philo(1, data);
 	}
+}
+
+void destroy_mutex(t_data *data, pthread_mutex_t *forks)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->p_num)
+	{
+		pthread_mutex_destroy(&forks[i]);
+		i++;
+	}
+	pthread_mutex_destroy(&data->mutex_dead);
+	pthread_mutex_destroy(&data->mutex_meal);
+	pthread_mutex_destroy(&data->mutex_print);
 }
