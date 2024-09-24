@@ -6,7 +6,7 @@
 /*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 20:04:22 by wonyocho          #+#    #+#             */
-/*   Updated: 2024/09/22 09:07:00 by wonyocho         ###   ########.fr       */
+/*   Updated: 2024/09/23 13:50:55 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	check_philo_status(t_data *data, t_philo *philo)
 	{
 		pthread_mutex_unlock(&data->mutex_meal);
 		pthread_mutex_lock(&data->mutex_dead);
-		data->stop_flag = 1;
+		data->stop_flag = -1;
 		pthread_mutex_unlock(&data->mutex_dead);
 		printf("All pholosophers are full.\n");
 		return (-1);
@@ -71,7 +71,7 @@ int	check_dead_philo(t_data *data, t_philo *philo)
 		pthread_mutex_unlock(&data->mutex_meal);
 		print_status(philo, "died");
 		pthread_mutex_lock(&data->mutex_dead);
-		data->stop_flag = 1;
+		data->stop_flag = -1;
 		pthread_mutex_unlock(&data->mutex_dead);
 		return (-1);
 	}

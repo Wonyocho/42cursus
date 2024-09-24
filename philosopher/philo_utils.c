@@ -6,7 +6,7 @@
 /*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 17:36:56 by wonyocho          #+#    #+#             */
-/*   Updated: 2024/09/22 01:20:16 by wonyocho         ###   ########.fr       */
+/*   Updated: 2024/09/24 11:18:01 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	usleep_philo(long time, t_data *data)
 	end_time = set_time() + time;
 	while (set_time() < end_time)
 	{
-		if (check_main_status(data))
+		if (check_main_status(data) == -1)
 			break ;
 		usleep(100);
 	}

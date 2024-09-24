@@ -6,7 +6,7 @@
 /*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 15:27:38 by wonyocho          #+#    #+#             */
-/*   Updated: 2024/09/22 00:42:38 by wonyocho         ###   ########.fr       */
+/*   Updated: 2024/09/24 11:19:45 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	init_data(char **argv, int argc, t_data *data)
 {
-	data->stop_flag = 0;
+	data->stop_flag = 1;
 	data->p_num = ft_atoi(argv[1]);
 	data->lifetime = ft_atoi(argv[2]);
 	data->eat_time = ft_atoi(argv[3]);
