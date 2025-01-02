@@ -6,7 +6,7 @@
 /*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 15:18:56 by wonyocho          #+#    #+#             */
-/*   Updated: 2025/01/02 16:18:18 by wonyocho         ###   ########.fr       */
+/*   Updated: 2025/01/02 17:18:41 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ void do_replace(std::ofstream &outfile, const std::string line, const std::strin
 	size_t start = 0;
 	size_t pos = 0;
 	
-	while ((pos = line.find(s1, start)) != std::string::npos)
-	{
+	while ((pos = line.find(s1, start)) != std::string::npos) {
 		modifiedLine += line.substr(start, pos - start);
 		modifiedLine += s2;
 		start = pos + s1.length();
@@ -38,13 +37,11 @@ void do_replace(std::ofstream &outfile, const std::string line, const std::strin
 
 bool isValidArguments(int argc, char **argv)
 {
-	if (argc != 4)
-	{
+	if (argc != 4) {
 		std::cout << "Error: Invalid arguments" << std::endl;
 		return (false);
 	}
-	if (std::string(argv[1]).empty() || std::string(argv[2]).empty() || std::string(argv[3]).empty())
-	{
+	if (std::string(argv[1]).empty() || std::string(argv[2]).empty() || std::string(argv[3]).empty()) {
 		std::cout << "Error: Invalid arguments" << std::endl;
 		return (false);
 	}
@@ -53,8 +50,7 @@ bool isValidArguments(int argc, char **argv)
 
 int main(int argc, char **argv)
 {
-	if (!isValidArguments(argc, argv))
-	{
+	if (!isValidArguments(argc, argv)) {
 		return (1);
 	}
 
@@ -64,27 +60,23 @@ int main(int argc, char **argv)
 	std::string s2 = argv[3];
 
 	std::ifstream infile(filename.c_str());
-	if (!infile.is_open())
-	{
+	if (!infile.is_open()) {
 		std::cout << "Error: File open failed" << std::endl;
 		return (1);
 	}
 
 	std::ofstream outfile(replaceFilename.c_str());
-	if (!outfile.is_open())
-	{
+	if (!outfile.is_open()) {
 		std::cout << "Error: File open failed" << std::endl;
 		return (1);
 	}
 	
 	std::string line;
-	while (std::getline(infile, line))
-	{
+	while (std::getline(infile, line)) {
 		do_replace(outfile, line, s1, s2);
 	}
 
-	if (infile.bad())
-	{
+	if (infile.bad()) {
 		std::cout << "Error: File read failed" << std::endl;
 		return (1);
 	}
