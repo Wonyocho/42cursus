@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/03 22:29:34 by wonyocho          #+#    #+#             */
-/*   Updated: 2025/01/04 12:50:01 by wonyocho         ###   ########.fr       */
+/*   Created: 2025/01/04 13:05:01 by wonyocho          #+#    #+#             */
+/*   Updated: 2025/01/04 13:27:34 by wonyocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,21 @@ class Fixed
 	public:
 		Fixed(); // 고정소수점 값을 0으로 초기화 해줄 기본 생성자
 		Fixed(const Fixed &src); // 복사 생성자
+		Fixed(float const raw);
+		Fixed(int const raw);
 		Fixed& operator=(const Fixed &src); // 대입연산자 오버로딩
+
 		~Fixed(); // 소멸자
 		
 		int getRawBits(void) const; // 고정 소수점 값의 원시값을 '반환'
 		void setRawBits(int const raw); // 고정 소수점수의 원시값을 '설정'
+		int toInt(void) const;
+		float toFloat(void) const;
 		
 	private:
 		int fixedPointValue;
 		const static int fractionalBits = 8;
 };
+
+std::ostream& operator<<(std::ostream &out, const Fixed &obj);
 # endif
