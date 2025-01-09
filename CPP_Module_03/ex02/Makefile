@@ -13,6 +13,7 @@
 SRCS =	./main.cpp\
 		./ClapTrap.cpp
 		./ScavTrap.cpp
+		./FragTrap.cpp
 
 CC = clang++
 NAME = a.out
