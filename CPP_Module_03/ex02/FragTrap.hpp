@@ -1,9 +1,10 @@
 #ifndef FRAGTRAP_HPP
 #define FRAGTRAP_HPP
 
+#include "ClapTrap.hpp"
 #include <iostream>
 
-class FragTrap
+class FragTrap: public ClapTrap
 {
     public:
         FragTrap();
@@ -17,7 +18,7 @@ class FragTrap
     
     private:
         std::string name;
-        unsigned int hitpoints; // HP
+        unsigned int hitPoints; // HP
         unsigned int energyPoints;
         unsigned int attackDamage;
 };
