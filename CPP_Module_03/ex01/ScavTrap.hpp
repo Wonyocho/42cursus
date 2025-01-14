@@ -1,26 +1,43 @@
 #ifndef SCAVTRAP_HPP
 # define SCAVTRAP_HPP
 
-# include <iostream>
+#include <iostream>
+#include "ClapTrap.hpp"
 
-class ScavTrap
+class ScavTrap : public ClapTrap
 {
     public:
-        ScavTrap();
-        ScavTrap(std::string name);
-        ScavTrap(const ScavTrap &copy);
-        ~ScavTrap();
-        ScavTrap &operator=(const ScavTrap &copy);
+        ScavTrap(std::string name);					// 생성자
+        ScavTrap(const ScavTrap &copy);				// 복사 생성자
+        ~ScavTrap();								// 소멸자
+        ScavTrap &operator=(const ScavTrap &copy);	// 복사 대입 연산자
 
         void attack(const std::string& target);
         void guardGate();
     
     private:
-        std::string name;
-        unsigned int hitpoints; // HP
-        unsigned int energyPoints;
-        unsigned int attackDamage;
-        bool isGuardGate;
+		ScavTrap(); // 디폴트 생성자
 };
 
 #endif
+
+
+// #ifndef SCAVTRAP_HPP
+// # define SCAVTRAP_HPP
+// # include <iostream>
+// # include "ClapTrap.hpp"
+
+// class ScavTrap: public ClapTrap {
+// private:
+// 	ScavTrap(void);
+// public:
+// 	ScavTrap(std::string name);
+// 	ScavTrap(const ScavTrap &src);
+// 	ScavTrap &operator=(const ScavTrap &src);
+// 	~ScavTrap();
+	
+// 	void attack(std::string const &target);
+// 	void guardGate(void);
+// };
+
+// #endif
