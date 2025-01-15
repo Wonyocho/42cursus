@@ -17,6 +17,10 @@ class ScavTrap : public ClapTrap
     
     private:
 		ScavTrap(); // 디폴트 생성자
+		std::string name;
+		unsigned int hitPoints;
+		unsigned int energyPoints;
+		unsigned int attackDamage;
 };
 
 #endif
