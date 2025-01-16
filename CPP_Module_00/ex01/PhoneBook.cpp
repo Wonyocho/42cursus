@@ -24,8 +24,6 @@ PhoneBook::~PhoneBook()
 }
 
 
-
-
 void PhoneBook::add(Contact contact)
 {
 	this->contact[this->_size % 8] = contact;
