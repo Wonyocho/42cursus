@@ -10,31 +10,27 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHONEBOOK_H
-#define PHONEBOOK_H
+#ifndef PHONEBOOK_HPP
+#define PHONEBOOK_HPP
 
 #include <iostream>
-#include <string>
 #include <iomanip>
-#include <sstream>
+#include "Contact.hpp"
 
 class PhoneBook
 {
 	public:
-		void input_contact (int index);
-
-        void print_page (void) const;
-        void print_column(std::string _text) const;
-        void print_privew(int index) const;
+		PhoneBook();
+		~PhoneBook();
+		
+		void add(Contact contact);
+		void show();
+		void ShowByIndex(int index);
+		int getSize();
 
     private:
-        int _idx;
-
-		std::string _first_name;
-		std::string _last_name;
-		std::string _nick_name;
-		std::string _phone_number;
-		std::string _darkest_secret;
+		Contact contact[8];
+		int _size;
 };
 
 #endif

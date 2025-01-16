@@ -10,18 +10,36 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-#define UTILS_H
+#ifndef CONTACT_HPP
+#define CONTACT_HPP
 
 #include <iostream>
-#include <string>
-#include <iomanip>
-#include <sstream>
-#include "PhoneBook.hpp"
 
-bool isNumber(std::string s);
-void show_pages(PhoneBook page[8]);
-void show_privew(PhoneBook page[8]);
-void select_index(PhoneBook page[8]);
+class Contact
+{
+    public:
+        Contact();
+        ~Contact();
+
+        void SetFirstName(std::string firstName);
+        void SetLastName(std::string lastName);
+        void SetNickName(std::string nickName);
+        void SetPhoneNumber(std::string phoneNumber);
+        void SetDarkestSecret(std::string darkestSecret);
+        void SetAllContact(Contact contact);
+
+        std::string GetFirstName();
+        std::string GetLastName();
+        std::string GetNickName();
+        std::string GetPhoneNumber();
+        std::string GetDarkestSecret();
+
+    private:
+        std::string _firstName;
+        std::string _lastName;
+        std::string _nickName;
+        std::string _phoneNumber;
+        std::string _darkestSecret;
+};
 
 #endif

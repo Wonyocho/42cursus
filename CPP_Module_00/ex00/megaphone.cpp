@@ -16,15 +16,21 @@
 
 int main(int argc, char **argv)
 {
-	if (argc <= 1) {	// 인자가 아무것도 안들어온 경우
-		std::cout << "*LOUD AND UNBEARABLE FEEDBACK NOISE *";
-	} else {			// 정상적으로 들어온 경우
-		for (int i = 1; i < argc; i++) {
-			std::string str = argv[i];
-			std::transform(str.begin(), str.end(), str.begin(), ::toupper);
-			std::cout << str;
+	if (argc < 2)
+	{
+		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
+		return 0;
+	}
+
+	char upperChar;
+	for (int i = 1; i < argc; i++)
+	{
+		for (int j = 0; argv[i][j]; j++)
+		{
+			upperChar = std::toupper(argv[i][j]);
+			std::cout << upperChar;
 		}
 	}
-	std::cout << std::endl; // 개행
-	return (0);
+	std::cout << std::endl;
+	return 0;
 }
