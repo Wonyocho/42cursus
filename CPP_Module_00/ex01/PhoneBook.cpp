@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include <iostream>
-#include <string>
 #include "PhoneBook.hpp"
 
 PhoneBook::PhoneBook()
