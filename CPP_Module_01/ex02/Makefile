@@ -1,15 +1,16 @@
-SRCS =	./main.cpp \
-
 CC = c++
-NAME = ex02
 CFLAGS = -Wall -Wextra -Werror -std=c++98
+NAME = a.out
+SRCS =	main.cpp
 OBJS = $(SRCS:.cpp=.o)
 
+%.o: %.cpp
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) 
 
 clean:
 	rm -f $(OBJS)
