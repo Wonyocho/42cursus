@@ -1,31 +1,18 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/01/02 14:12:05 by wonyocho          #+#    #+#              #
-#    Updated: 2025/01/02 14:56:13 by wonyocho         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
-
 SRCS =	./main.cpp \
 		./HumanA.cpp \
 		./HumanB.cpp \
 		./Weapon.cpp
 
-CC = clang++
+CC = c++
 NAME = a.out
-CFLAG = -Wall -Wextra -Werror -std=c++98
+CFLAGS = -Wall -Wextra -Werror -std=c++98
 OBJS = $(SRCS:.cpp=.o)
 
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAG) -o $(NAME) $(OBJS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 
 clean:
 	rm -f $(OBJS)

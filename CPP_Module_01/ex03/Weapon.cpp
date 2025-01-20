@@ -1,27 +1,15 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Weapon.cpp                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/02 14:13:19 by wonyocho          #+#    #+#             */
-/*   Updated: 2025/01/02 15:13:04 by wonyocho         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "Weapon.hpp"
 
-Weapon::Weapon(std::string type) : type(type)
+Weapon::Weapon(std::string type) : _type(type)
 {
 }
 
 const std::string& Weapon::getType(void) const
 {
-	return (this->type);
+	return (this->_type);
 }
 
 void Weapon::setType(std::string type)
 {
-	this->type = type;
+	this->_type = type;
 }

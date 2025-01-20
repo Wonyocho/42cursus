@@ -1,36 +1,22 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/02 14:12:13 by wonyocho          #+#    #+#             */
-/*   Updated: 2025/01/02 15:17:00 by wonyocho         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "HumanA.hpp"
 #include "HumanB.hpp"
 #include "Weapon.hpp"
 
 int main(void)
 {
-	{
-		Weapon club = Weapon("crude spiked club");
-		HumanA bob("Bob", club);
-		bob.attack();
-		club.setType("some other type of club");
-		bob.attack();
-	}
-	{
-		Weapon club = Weapon("crude spiked club");
-		HumanB jim("Jim");
-		// jim.setWeapon(club);
-		jim.attack();
-		// club.setType("some other type of club");
-		jim.setWeapon(club);
-		jim.attack();
-	}
+	Weapon club1 = Weapon("crude spiked club"); // Weapon 객체 생성
+	HumanA bob("Bob", club1); // HumanA 객체 생성
+	bob.attack(); // HumanA 객체의 attack() 호출
+	club1.setType("some other type of club"); // Weapon 객체의 setType() 호출
+	bob.attack(); // HumanA 객체의 attack() 호출
+	
+	Weapon club2 = Weapon("crude spiked club"); // Weapon 객체 생성
+	HumanB jim("Jim"); // HumanB 객체 생성
+	jim.setWeapon(club2); // HumanB 객체의 setWeapon() 호출
+	jim.attack(); // HumanB 객체의 attack() 호출
+	club2.setType("some other type of club"); // Weapon 객체의 setType() 호출
+	jim.setWeapon(club2); // HumanB 객체의 setWeapon() 호출
+	jim.attack(); // HumanB 객체의 attack() 호출
+
 	return (0);
 }

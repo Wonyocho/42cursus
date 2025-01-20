@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   HumanB.hpp                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/02 14:13:15 by wonyocho          #+#    #+#             */
-/*   Updated: 2025/01/02 14:59:44 by wonyocho         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef HUMANB_HPP
 # define HUMANB_HPP
 
@@ -20,15 +8,15 @@
 class HumanB
 {
 	public:
-		void attack(void);
+		HumanB(std::string name);
+		~HumanB();
+	
+		void attack();
 		void setWeapon(Weapon &weapon);
 		
-		HumanB(std::string name);
-		~HumanB(void);
-	
 	private:
-		std::string name;
-		Weapon *weapon;
+		std::string _name;
+		Weapon *_weapon;
 };
 
 #endif
