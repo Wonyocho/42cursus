@@ -1,5 +1,8 @@
 #include "Zombie.hpp"
 
+// 기본 생성자
+Zombie::Zombie() {}
+
 // 생성자
 Zombie::Zombie(std::string name)
 {

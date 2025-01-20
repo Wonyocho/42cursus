@@ -2,11 +2,11 @@
 # define ZOMBIE_HPP
 
 #include <iostream>
-#include <string>
 
 class Zombie
 {
 	public:
+		Zombie();					// 기본 생성자
 		Zombie(std::string name);	// 생성자
 		~Zombie(void);				// 소멸자
 

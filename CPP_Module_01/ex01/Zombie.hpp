@@ -1,34 +1,22 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Zombie.hpp                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/02 12:28:35 by wonyocho          #+#    #+#             */
-/*   Updated: 2025/01/02 12:47:52 by wonyocho         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef ZOMBIE_HPP
 # define ZOMBIE_HPP
 
 #include <iostream>
-#include <string>
-#include <sstream>
 
 class Zombie
 {
-	public:
-		void announce(void) const;
-		void get_name(std::string inputName);
+    public:
+        Zombie();                    // 기본 생성자
+        ~Zombie();                   // 소멸자
 
-		~Zombie(void);
+        void announce(void) const;   // announce 함수
+        void getName(std::string name); // 이름 설정 함수
 
-	private:
-		std::string _name;
+    private:
+        std::string _name;
 };
 
+Zombie* newZombie(std::string name);
 Zombie* zombieHorde(int N, std::string name);
 
 #endif
