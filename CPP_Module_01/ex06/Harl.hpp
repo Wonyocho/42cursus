@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Harl.hpp                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/02 16:20:05 by wonyocho          #+#    #+#             */
-/*   Updated: 2025/01/02 18:24:25 by wonyocho         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef HARL_HPP
 # define HARL_HPP
 
@@ -19,15 +7,16 @@
 class Harl
 {
 	public:
-		void complain(std::string level);
 		Harl(void);
 		~Harl(void);
 
+		void complain(std::string level);
+
 	private:
-		void Debug(void);
-		void Info(void);
-		void Warning(void);
-		void Error(void);
+		void Debug();
+		void Info();
+		void Warning();
+		void Error();
 };
 
 #endif
