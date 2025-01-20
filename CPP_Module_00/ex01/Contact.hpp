@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   utils.hpp                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/01 11:46:55 by wonyocho          #+#    #+#             */
-/*   Updated: 2025/01/01 11:49:53 by wonyocho         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef CONTACT_HPP
 #define CONTACT_HPP
 
@@ -21,6 +9,7 @@ class Contact
         Contact();
         ~Contact();
 
+        // Setter
         void SetFirstName(std::string firstName);
         void SetLastName(std::string lastName);
         void SetNickName(std::string nickName);
@@ -28,6 +17,7 @@ class Contact
         void SetDarkestSecret(std::string darkestSecret);
         void SetAllContact(Contact contact);
 
+        // Getter
         std::string GetFirstName();
         std::string GetLastName();
         std::string GetNickName();
@@ -35,6 +25,7 @@ class Contact
         std::string GetDarkestSecret();
 
     private:
+        // Contact Information
         std::string _firstName;
         std::string _lastName;
         std::string _nickName;

@@ -1,20 +1,8 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   PhoneBook.hpp                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/01 11:30:37 by wonyocho          #+#    #+#             */
-/*   Updated: 2025/01/02 12:11:20 by wonyocho         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef PHONEBOOK_HPP
 #define PHONEBOOK_HPP
 
 #include <iostream>
-#include <iomanip>
+#include <iomanip> // std::setw 사용하기 위해서
 #include "Contact.hpp"
 
 class PhoneBook
@@ -23,12 +11,14 @@ class PhoneBook
 		PhoneBook();
 		~PhoneBook();
 		
-		void add(Contact contact);
-		void show();
-		void ShowByIndex(int index);
-		int getSize();
+		// 멤버 함수
+		void Add(Contact contact);
+		void Show();
+		void SelectIndex(int index);
+		int GetSize();
 
     private:
+		// 멤버 변수
 		Contact contact[8];
 		int _size;
 };

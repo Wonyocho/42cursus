@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   utils.cpp                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/01 11:46:12 by wonyocho          #+#    #+#             */
-/*   Updated: 2025/01/01 14:15:04 by wonyocho         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "Contact.hpp"
 
 Contact::Contact()
@@ -74,13 +62,4 @@ void Contact::SetPhoneNumber(std::string phoneNumber)
 void Contact::SetDarkestSecret(std::string darkestSceret)
 {
     this->_darkestSecret = darkestSceret;
-}
-
-void Contact::SetAllContact(Contact contact)
-{
-    this->_firstName = contact.GetFirstName();
-    this->_lastName = contact.GetLastName();
-    this->_nickName = contact.GetNickName();
-    this->_phoneNumber = contact.GetPhoneNumber();
-    this->_darkestSecret = contact.GetDarkestSecret();
 }
