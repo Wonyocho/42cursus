@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Zombie.hpp                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/02 11:31:26 by wonyocho          #+#    #+#             */
-/*   Updated: 2025/01/02 12:06:47 by wonyocho         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef ZOMBIE_HPP
 # define ZOMBIE_HPP
 
@@ -19,10 +7,10 @@
 class Zombie
 {
 	public:
-		void announce(void) const;
-		
-		Zombie(std::string name);
-		~Zombie(void);
+		Zombie(std::string name);	// 생성자
+		~Zombie(void);				// 소멸자
+
+		void announce(void) const;	// announce 함수
 
 	private:
 		std::string _name;
