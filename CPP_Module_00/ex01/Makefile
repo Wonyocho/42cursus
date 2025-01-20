@@ -1,17 +1,17 @@
-SRCS =	./main.cpp \
-		./Contact.cpp \
-		./PhoneBook.cpp
-
-CC = clang++
+CC = c++
+CFLAGS = -Wall -Wextra -Werror -std=c++98
 NAME = phonebook
-CFLAG = -Wall -Wextra -Werror -std=c++98
+SRCS =	main.cpp Contact.cpp PhoneBook.cpp
 OBJS = $(SRCS:.cpp=.o)
+INCLUDE = Contact.hpp PhoneBook.hpp
 
+%.o: %.cpp $(INCLUDE)
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAG) -o $(NAME) $(OBJS)
+$(NAME): $(OBJS) $(INCLUDE)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) 
 
 clean:
 	rm -f $(OBJS)

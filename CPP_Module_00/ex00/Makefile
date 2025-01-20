@@ -1,16 +1,16 @@
-SRCS = ./megaphone.cpp
-
-CC = clang++
-NAME = megaphone
-
-CFLAG = -Wall -Wextra -Werror -std=c++98
+CC = c++
+CFLAGS = -Wall -Wextra -Werror -std=c++98
+NAME = phonebook
+SRCS =	megaphone.cpp
 OBJS = $(SRCS:.cpp=.o)
 
+%.o: %.cpp
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAG) -o $(NAME) $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) 
 
 clean:
 	rm -f $(OBJS)
