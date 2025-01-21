@@ -42,8 +42,8 @@ class Fixed
 		static const Fixed &max(Fixed const &left, Fixed const &right);
 		
 	private:
-		int fixedPointValue;
-		const static int fractionalBits = 8;
+		int _fixedPointValue;
+		const static int _fractionalBits = 8;
 };
 
 std::ostream& operator<<(std::ostream &out, const Fixed &obj);

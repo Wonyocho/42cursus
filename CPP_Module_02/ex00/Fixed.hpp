@@ -15,7 +15,7 @@ class Fixed
 		void setRawBits(int const raw); // 고정 소수점수의 원시값을 '설정'
 		
 	private:
-		int fixedPointValue;
-		const static int fractionalBits = 8;
+		int _fixedPointValue;
+		const static int _fractionalBits = 8;
 };
 # endif

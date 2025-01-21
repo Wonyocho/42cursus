@@ -1,7 +1,7 @@
 #include "Fixed.hpp"
 #include <cmath>
 
-Fixed::Fixed(void) : fixedPointValue(0)
+Fixed::Fixed(void) : _fixedPointValue(0)
 {
 	std::cout << "Default constructor called" << std::endl;
 }
@@ -13,18 +13,18 @@ Fixed::Fixed(const Fixed &src)
 
 Fixed::Fixed(float const raw)
 {
-	this->fixedPointValue = roundf(raw * (1 << this->fractionalBits));
+	this->_fixedPointValue = roundf(raw * (1 << this->_fractionalBits));
 }
 
 Fixed::Fixed(int const raw)
 {
-	this->fixedPointValue = raw << this->fractionalBits;
+	this->_fixedPointValue = raw << this->_fractionalBits;
 }
 
 Fixed& Fixed::operator=(const Fixed &src)
 {
 	if (this != &src)
-		this->fixedPointValue = src.getRawBits();
+		this->_fixedPointValue = src.getRawBits();
 	return *this;
 }
 
@@ -34,22 +34,22 @@ Fixed::~Fixed()
 
 int Fixed::getRawBits(void) const
 {
-	return this->fixedPointValue;
+	return this->_fixedPointValue;
 }
 
 void Fixed::setRawBits(int const raw)
 {
-	this->fixedPointValue = raw;
+	this->_fixedPointValue = raw;
 }
 
 float Fixed::toFloat(void) const
 {
-	return ((float)this->fixedPointValue / (1 << this->fractionalBits));
+	return ((float)this->_fixedPointValue / (1 << this->_fractionalBits));
 }
 
 int Fixed::toInt(void) const
 {
-	return (this->fixedPointValue >> this->fractionalBits);
+	return (this->_fixedPointValue >> this->_fractionalBits);
 }
 
 std::ostream &operator<<(std::ostream &out, const Fixed &obj)
@@ -60,32 +60,32 @@ std::ostream &operator<<(std::ostream &out, const Fixed &obj)
 
 bool Fixed::operator<(const Fixed &obj) const
 {
-	return (this->fixedPointValue < obj.getRawBits());
+	return (this->_fixedPointValue < obj.getRawBits());
 }
 
 bool Fixed::operator<=(const Fixed &obj) const
 {
-	return (this->fixedPointValue <= obj.getRawBits());
+	return (this->_fixedPointValue <= obj.getRawBits());
 }
 
 bool Fixed::operator>(const Fixed &obj) const
 {
-	return (this->fixedPointValue > obj.getRawBits());
+	return (this->_fixedPointValue > obj.getRawBits());
 }
 
 bool Fixed::operator>=(const Fixed &obj) const
 {
-	return (this->fixedPointValue >= obj.getRawBits());
+	return (this->_fixedPointValue >= obj.getRawBits());
 }
 
 bool Fixed::operator!=(const Fixed &obj) const
 {
-	return (this->fixedPointValue != obj.getRawBits());
+	return (this->_fixedPointValue != obj.getRawBits());
 }
 
 bool Fixed::operator==(const Fixed &obj) const
 {
-	return (this->fixedPointValue == obj.getRawBits());
+	return (this->_fixedPointValue == obj.getRawBits());
 }
 
 Fixed Fixed::operator+(const Fixed &obj) const
@@ -113,7 +113,7 @@ Fixed Fixed::operator/(const Fixed &obj) const
 
 Fixed &Fixed::operator++(void)
 {
-	this->fixedPointValue++;
+	this->_fixedPointValue++;
 	return (*this);
 }
 
@@ -126,7 +126,7 @@ const Fixed Fixed::operator++(int)
 
 Fixed &Fixed::operator--(void)
 {
-	this->fixedPointValue--;
+	this->_fixedPointValue--;
 	return (*this);
 }
 
