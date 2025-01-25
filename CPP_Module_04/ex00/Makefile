@@ -1,9 +1,8 @@
-CXX = clang++
+CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 NAME = a.out
-SRCS =	main.cpp Animal.cpp Dog.cpp Cat.cpp
+SRCS =	main.cpp Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.hpp
 OBJS = $(SRCS:.cpp=.o)
-INCLUDE = Animal.hpp Dog.hpp Cat.hpp
 
 %.o: %.cpp $(INCLUDE)
 	$(CC) $(CFLAGS) -c -o $@ $<
