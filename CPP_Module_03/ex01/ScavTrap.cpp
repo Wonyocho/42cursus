@@ -1,25 +1,3 @@
-/*
-	ScavTrap 생성
-
-	ClapTrap은 충분하지 않기 때문에 이제 파생 로봇을 하나 더 만들어야 합니다.
-	이 로봇의 이름은 ScavTrap이며, ClapTrap으로부터 생성자와 소멸자를 상속받습니다.
-	그러나 ScavTrap의 생성자, 소멸자, 그리고 attack() 메서드는 각각 다른 메시지를 출력해야 합니다.
-	결국 ClapTrap은 자신만의 개성을 가지고 있기 때문입니다.
-
-	생성 및 소멸 체인 테스트
-	테스트에서 올바른 생성/소멸 체인이 표시되어야 합니다.
-	ScavTrap이 생성되면 프로그램은 ClapTrap을 먼저 생성하는 방식으로 시작합니다.
-	소멸은 반대 순서로 이루어집니다. 왜 그런지 생각해 보세요.
-
-	ScavTrap 초기화
-	ScavTrap은 ClapTrap의 속성을 사용하고 (ClapTrap 클래스를 수정해야 할 수 있습니다) 아래 값으로 초기화해야 합니다:
-
-	이름(name): 생성자에 전달되는 매개변수로 설정
-	체력(hit points): 100, ClapTrap의 건강을 나타냄
-	에너지 포인트(energy points): 50
-	공격력(attack damage): 20
-*/
-
 #include "ScavTrap.hpp"
 
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
