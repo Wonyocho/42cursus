@@ -109,11 +109,12 @@ void ClapTrap::beRepaired(unsigned int amount)
     if (_hitPoints <= 0) // 이미 죽어있는 경우
     {
         std::cout << "ClapTrap " << _name << " 은 이미 쓰러져있다..." << std::endl; // 메시지 출력
-        return;
+        return ;
     }
     if (_energyPoints <= 0) // 행동할 수 없을 때
     {
         std::cout << "ClapTrap " << _name << " 은 지쳐서 아무것도 할 수 없다!" << std::endl;
+        return ;
     }
     _energyPoints--; // energyPoints 1 감소
     _hitPoints += amount; // hitPoints에서 amount만큼 증가
