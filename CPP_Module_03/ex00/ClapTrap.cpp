@@ -12,36 +12,32 @@
 
 #include "ClapTrap.hpp"
 
-// 생성자
-ClapTrap::ClapTrap(std::string name) : name(name), hitPoints(10), energyPoints(10), attackDamage(0)
+// OCCF
+ClapTrap::ClapTrap(std::string name) : _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0)
 {
-    std::cout << "ClapTrap constructor called" << std::endl; // 생성자 호출 시 메시지 출력
+    std::cout << "ClapTrap constructor called" << std::endl;
 }
 
-// 복사 생성자
 ClapTrap::ClapTrap(const ClapTrap &copy)
 {
-    std::cout << "ClapTrap copy constructor called" << std::endl; // 복사 생성자 호출 시 메시지 출력
-    *this = copy; // 대입 연산자 호출
+    std::cout << "ClapTrap copy constructor called" << std::endl;
+    *this = copy;
 }
 
-// 복사 대입 연산자
 ClapTrap &ClapTrap::operator=(const ClapTrap &copy)
 {
-    std::cout << "ClapTrap assignation operator called" << std::endl; // 대입 연산자 호출 시 메시지 출력
-    if (this == &copy) // 자기 자신과 대입 연산 시 아무것도 하지 않음
+    std::cout << "ClapTrap assignation operator called" << std::endl;
+    if (this == &copy)
     {
         return *this;
     }
-    // name, hitPoints, energyPoints, attackDamage 모두 복사
-    name = copy.name; // 깊은 복사
-    hitPoints = copy.hitPoints; // 깊은 복사
-    energyPoints = copy.energyPoints; // 깊은 복사
-    attackDamage = copy.attackDamage; // 깊은 복사
-    return *this; // 대입 연산자는 *this를 반환
+    _name = copy._name;
+    _hitPoints = copy._hitPoints;
+    _energyPoints = copy._energyPoints;
+    _attackDamage = copy._attackDamage;
+    return *this;
 }
 
-// 소멸자
 ClapTrap::~ClapTrap()
 {
     std::cout << "ClapTrap destructor called" << std::endl; // 소멸자 호출 시 메시지 출력
@@ -50,39 +46,88 @@ ClapTrap::~ClapTrap()
 
 
 
+
+// getter
+std::string ClapTrap::getName() const
+{
+    return this->_name;
+}
+
+int ClapTrap::getHitPoints() const
+{
+    return this->_hitPoints;
+}
+
+int ClapTrap::getEnergyPoints() const
+{
+    return this->_energyPoints;
+}
+
+int ClapTrap::getAttackDamage() const
+{
+    return this->_attackDamage;
+}
+
+
+
+
+
 // attack 멤버 함수
 void ClapTrap::attack(const std::string& target)
 {
-    if (hitPoints == 0 || energyPoints == 0) // hitPoints 또는 energyPoints가 0이면 아무것도 하지 않음
+    if (_hitPoints <= 0) // 이미 죽어있는 경우
     {
-        std::cout << "ClapTrap " << name << " can't attack because it has no hit points or energy points left" << std::endl; // 메시지 출력
-        return;
+        std::cout << "ClapTrap " << _name << " 은 이미 쓰러져있다..." << std::endl;
+        return ;
     }
-    energyPoints--; // energyPoints 1 감소
-    std::cout << "ClapTrap " << name << " attacks " << target << ", causing " << attackDamage << " points of damage!" << std::endl; // 메시지 출력
+    if (_energyPoints <= 0) // 행동할 수 없는 경우(에너지 부족)
+    {
+        std::cout << "ClapTrap" << _name << " 은 지쳐서 아무것도 할 수 없다!" << std::endl;
+        return ;
+    }
+    _energyPoints--; // 공격 성공, energyPoints 1 감소
+    std::cout << "ClapTrap " << _name << " 은 " << target << " 에게 " << _attackDamage << " 의 피해를 입혔다!" << std::endl; // 메시지 출력
 }
 
 // takeDamage 멤버 함수
 void ClapTrap::takeDamage(unsigned int amount)
 {
-    if (hitPoints == 0) // hitPoints가 0이면 아무것도 하지 않음
+    if (_hitPoints <= 0) // 이미 죽어있는 경우
     {
-        std::cout << "ClapTrap " << name << " can't take damage because it has no hit points left" << std::endl; // 메시지 출력
+        std::cout << "ClapTrap " << _name << " 은 이미 쓰러져있다..." << std::endl; // 메시지 출력
         return;
     }
-    hitPoints -= amount; // hitPoints에서 amount만큼 감소
-    std::cout << "ClapTrap " << name << " takes " << amount << " points of damage!" << std::endl; // 메시지 출력
+
+    if (_hitPoints < amount) // 받은 데미지가 남은 HP보다 클경우 혹시 몰라서 처리
+    {
+        amount = _hitPoints;
+    }
+
+    _hitPoints -= amount; // 공격 받았으니 HP에서 amount만큼 감소
+
+    if (_hitPoints <= 0) // 공격받고 죽은경우
+    {
+        std::cout << "ClapTrap " << _name << " 은 쓰러졌다..." << std::endl; // 메시지 출력
+    }
+    else // 공격받고 살아남은 경우
+    {
+        std::cout << "ClapTrap " << _name << " 은 " << amount << " 의 피해를 입었다!" << std::endl; // 메시지 출력
+    }
 }
 
 // beRepaired 멤버 함수
 void ClapTrap::beRepaired(unsigned int amount)
 {
-    if (hitPoints == 0) // hitPoints가 0이면 아무것도 하지 않음
+    if (_hitPoints <= 0) // 이미 죽어있는 경우
     {
-        std::cout << "ClapTrap " << name << " can't be repaired because it has no hit points left" << std::endl; // 메시지 출력
+        std::cout << "ClapTrap " << _name << " 은 이미 쓰러져있다..." << std::endl; // 메시지 출력
         return;
     }
-    energyPoints--; // energyPoints 1 감소
-    hitPoints += amount; // hitPoints에서 amount만큼 증가
-    std::cout << "ClapTrap " << name << " is repaired by " << amount << " points!" << std::endl; // 메시지 출력
+    if (_energyPoints <= 0) // 행동할 수 없을 때
+    {
+        std::cout << "ClapTrap " << _name << " 은 지쳐서 아무것도 할 수 없다!" << std::endl;
+    }
+    _energyPoints--; // energyPoints 1 감소
+    _hitPoints += amount; // hitPoints에서 amount만큼 증가
+    std::cout << "ClapTrap " << _name << " 은 " << amount << " 만큼 회복헸다!" << std::endl; // 메시지 출력
 }
