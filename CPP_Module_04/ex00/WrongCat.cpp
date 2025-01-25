@@ -1,0 +1,28 @@
+#include "WrongCat.hpp"
+
+WrongCat::WrongCat()
+{
+	type = "WrongCat";
+	std::cout << "WrongCat constructor called" << std::endl;
+}
+
+WrongCat::~WrongCat()
+{
+	std::cout << "WrongCat destructor called" << std::endl;
+}
+
+WrongCat::WrongCat(const WrongCat& wrongCat)
+{
+	*this = wrongCat;
+}
+
+WrongCat& WrongCat::operator=(const WrongCat& wrongCat)
+{
+	type = wrongCat.type;
+	return *this;
+}
+
+void WrongCat::makeSound() const
+{
+	std::cout << "꽥꽥" << std::endl;
+}
