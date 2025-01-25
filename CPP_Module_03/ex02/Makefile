@@ -3,7 +3,7 @@ CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 NAME = a.out
 SRCS =	main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp
 OBJS = $(SRCS:.cpp=.o)
-INCLUDE = Fixed.hpp
+INCLUDE = ClapTrap.hpp ScavTrap.hpp FragTrap.hpp
 
 %.o: %.cpp $(INCLUDE)
 	$(CC) $(CFLAGS) -c -o $@ $<
