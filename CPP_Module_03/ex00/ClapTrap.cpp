@@ -1,18 +1,6 @@
-// 1. When ClapTrack attacks, it causes its target to lose <attack damage> hit points.
-// 2. When ClapTrap repairs itself, it gets <amount> hit points back.
-// 3. Attacking and repairing cost 1 energy point each.
-// 4. ClapTrap can’t do anything if it has no hit points or energy points left.
-
-// In all of these member functions, you have to print a message to describe what happens. 
-// For example, the attack() function may display something like (of course, without the angle brackets):
-// ClapTrap <name> attacks <target>, causing <damage> points of damage!
-
-// The constructors and destructor must also display a message, so your peer-evaluators can easily see they have been called.
-// Implement and turn in your own tests to ensure your code works as expected.
-
 #include "ClapTrap.hpp"
 
-// OCCF
+// ********************** OCCF **********************
 ClapTrap::ClapTrap(std::string name) : _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0)
 {
     std::cout << "ClapTrap constructor called" << std::endl;
@@ -47,7 +35,7 @@ ClapTrap::~ClapTrap()
 
 
 
-// getter
+// ********************** getter **********************
 std::string ClapTrap::getName() const
 {
     return this->_name;
