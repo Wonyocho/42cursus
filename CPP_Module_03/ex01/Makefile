@@ -1,28 +1,17 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: wonyocho <wonyocho@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/01/03 22:29:39 by wonyocho          #+#    #+#              #
-#    Updated: 2025/01/03 22:33:25 by wonyocho         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
-SRCS =	./main.cpp\
-		./ClapTrap.cpp
-		./ScavTrap.cpp
-
-CC = clang++
+CXX = clang++
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 NAME = a.out
-CFLAG = -Wall -Wextra -Werror -std=c++98
+SRCS =	main.cpp ClapTrap.cpp ScavTrap.cpp
 OBJS = $(SRCS:.cpp=.o)
+INCLUDE = Fixed.hpp
+
+%.o: %.cpp $(INCLUDE)
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAG) -o $(NAME) $(OBJS)
+$(NAME): $(OBJS) $(INCLUDE)
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME) 
 
 clean:
 	rm -f $(OBJS)

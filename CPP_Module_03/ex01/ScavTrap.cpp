@@ -22,8 +22,11 @@ ScavTrap &ScavTrap::operator=(const ScavTrap &copy) // ClapTrap 복사 대입 �
         ClapTrap::operator=(copy); // ClapTrap의 복사 대입 연산자 호출
         std::cout << "ScavTrap assignment operator called" << std::endl;
     }
-    return *this;
+    return (*this);
 }
+
+
+
 
 void ScavTrap::attack(const std::string& target)
 {

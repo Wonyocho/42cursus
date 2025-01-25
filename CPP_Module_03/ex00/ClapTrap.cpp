@@ -47,6 +47,9 @@ ClapTrap::~ClapTrap()
     std::cout << "ClapTrap destructor called" << std::endl; // 소멸자 호출 시 메시지 출력
 }
 
+
+
+
 // attack 멤버 함수
 void ClapTrap::attack(const std::string& target)
 {

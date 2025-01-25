@@ -6,6 +6,13 @@
 
 class ScavTrap : public ClapTrap
 {
+    private:
+		ScavTrap();									// 디폴트 생성자
+		std::string name;
+		unsigned int hitPoints;
+		unsigned int energyPoints;
+		unsigned int attackDamage;
+    
     public:
         ScavTrap(std::string name);					// 생성자
         ScavTrap(const ScavTrap &copy);				// 복사 생성자
@@ -14,13 +21,6 @@ class ScavTrap : public ClapTrap
 
         void attack(const std::string& target);
         void guardGate();
-    
-    private:
-		ScavTrap(); // 디폴트 생성자
-		std::string name;
-		unsigned int hitPoints;
-		unsigned int energyPoints;
-		unsigned int attackDamage;
 };
 
 #endif

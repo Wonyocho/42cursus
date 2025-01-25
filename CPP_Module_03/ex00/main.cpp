@@ -3,7 +3,7 @@
 
 int main()
 {
-    ClapTrap claptrap("ClapTrap");
+    ClapTrap claptrap("ClapTrap1");
     ClapTrap claptrap2(claptrap);
     claptrap2.attack("enemy");
     claptrap2.takeDamage(5);
