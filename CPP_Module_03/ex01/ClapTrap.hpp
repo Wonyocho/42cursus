@@ -6,21 +6,29 @@
 class ClapTrap
 {
     private:
-        std::string name;
-        unsigned int hitPoints;
-        unsigned int energyPoints;
-        unsigned int attackDamage;
+        ClapTrap();
+
+    protected:
+        std::string _name;
+        unsigned int _hitPoints;
+        unsigned int _energyPoints;
+        unsigned int _attackDamage;
 
     public:
-        ClapTrap();
-        ClapTrap(std::string name);
-        ClapTrap(const ClapTrap &copy);
-        ~ClapTrap();
-        ClapTrap &operator=(const ClapTrap &copy);
+        ClapTrap(std::string name);					// 생성자
+        ClapTrap(const ClapTrap &copy);				// 복사 생성자
+        ClapTrap &operator=(const ClapTrap &copy); 	// 복사 대입 연산자
+        ~ClapTrap();								// 소멸자
 
         void attack(const std::string& target);
         void takeDamage(unsigned int amount);
         void beRepaired(unsigned int amount);
+
+        // getter
+        std::string getName() const;
+        int getHitPoints() const;
+        int getEnergyPoints() const;
+        int getAttackDamage() const;
 };
 
 #endif
