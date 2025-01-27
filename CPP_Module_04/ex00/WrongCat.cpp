@@ -22,6 +22,7 @@ WrongCat& WrongCat::operator=(const WrongCat& wrongCat)
 {
 	std::cout << "WrongCat copy constructor called" << std::endl;
 	
+	if (this == &wrongCat) return *this;
 	type = wrongCat.type;
 	return *this;
 }

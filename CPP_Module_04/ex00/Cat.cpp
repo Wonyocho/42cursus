@@ -22,6 +22,7 @@ Cat& Cat::operator=(const Cat& cat)
 {
 	std::cout << "Cat assignation operator called" << std::endl;
 
+	if (this == &cat) return *this;
 	type = cat.type;
 	return *this;
 }
