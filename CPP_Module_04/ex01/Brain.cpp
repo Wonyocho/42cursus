@@ -42,7 +42,7 @@ void Brain::setIdea(int i, std::string idea)
 
 std::string Brain::getIdea(int i) const
 {
-	if (!(0 <= i && i <= 100))
+	if (!(0 <= i && i < 100))
 	{
 		std::cout << "Invalid index" << std::endl;
 		return "";
