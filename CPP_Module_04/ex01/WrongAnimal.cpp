@@ -12,11 +12,16 @@ WrongAnimal::~WrongAnimal()
 
 WrongAnimal::WrongAnimal(const WrongAnimal& wrongAnimal)
 {
+	std::cout << "WrongAnimal copy constructor called" << std::endl;
+	
 	*this = wrongAnimal;
 }
 
 WrongAnimal& WrongAnimal::operator=(const WrongAnimal& wrongAnimal)
 {
+	std::cout << "WrongAnimal assignation operator called" << std::endl;
+
+	if (this == &wrongAnimal) return *this;
 	type = wrongAnimal.type;
 	return *this;
 }

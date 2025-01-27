@@ -13,11 +13,15 @@ WrongCat::~WrongCat()
 
 WrongCat::WrongCat(const WrongCat& wrongCat)
 {
+	std::cout << "WrongCat copy constructor called" << std::endl;
+	
 	*this = wrongCat;
 }
 
 WrongCat& WrongCat::operator=(const WrongCat& wrongCat)
 {
+	std::cout << "WrongCat assignation operator called" << std::endl;
+
 	type = wrongCat.type;
 	return *this;
 }
