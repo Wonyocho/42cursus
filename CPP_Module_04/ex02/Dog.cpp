@@ -2,22 +2,25 @@
 
 Dog::Dog()
 {
+	std::cout << "Dog constructor called" << std::endl;
+
 	type = "Dog";
 	brain = new Brain();
-	std::cout << "Dog constructor called" << std::endl;
 }
 
 Dog::~Dog()
 {
-	delete brain;
 	std::cout << "Dog destructor called" << std::endl;
+
+	delete brain;
 }
 
 Dog::Dog(const Dog& dog) : Animal(dog)
 {
+	std::cout << "Dog copy constructor called" << std::endl;
+	
 	brain = new Brain(*dog.brain);
 	*this = dog;
-	std::cout << "Dog copy constructor called" << std::endl;
 }
 
 Dog& Dog::operator=(const Dog& dog)
