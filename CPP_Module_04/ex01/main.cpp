@@ -2,7 +2,8 @@
 #include "Dog.hpp"
 #include "Cat.hpp"
 
-int main() {
+int main()
+{
 	const Animal* animals[10];
 
 	for (int i = 0; i < 10; i++)
@@ -19,19 +20,22 @@ int main() {
 		delete animals[i];
 	}
 
-	std::cout << std::endl << "---------------------------" << std::endl;
+	std::cout << std::endl << "------------------------------------------" << std::endl;
 	const Dog* dog = new Dog();
+	std::cout << std::endl;
 	const Dog* copiedDog = new Dog(*dog);
+	std::cout << std::endl;
 	
 	dog->getBrain()->setIdea(0, "Idea Idea Idea");
 	copiedDog->getBrain()->setIdea(0, "Copied Idea Copied Idea");
 
 	std::cout << "Dog's Brain: " << dog->getBrain()->getIdea(0) << std::endl;
+	std::cout << std::endl;
 	std::cout << "Copied Dog's Brain: " << copiedDog->getBrain()->getIdea(0) << std::endl;
+	std::cout << std::endl;
 	
 	delete dog;
 	delete copiedDog;
-
 
 	return 0;
 }
