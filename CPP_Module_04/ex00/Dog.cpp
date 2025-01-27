@@ -13,11 +13,15 @@ Dog::~Dog()
 
 Dog::Dog(const Dog& dog) : Animal(dog)
 {
+	std::cout << "Dog copy constructor called" << std::endl;
+	
 	*this = dog;
 }
 
 Dog& Dog::operator=(const Dog& dog)
 {
+	std::cout << "Animal assignation operator called" << std::endl;
+
 	type = dog.type;
 	return *this;
 }

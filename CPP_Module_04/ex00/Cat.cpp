@@ -8,16 +8,20 @@ Cat::Cat()
 
 Cat::~Cat()
 {
-	std::cout << "Cat Destructor called" << std::endl;
+	std::cout << "Cat destructor called" << std::endl;
 }
 
 Cat::Cat(const Cat& cat) : Animal(cat)
 {
+	std::cout << "Cat copy dontstructor called" << std::endl;
+
 	*this = cat;
 }
 
 Cat& Cat::operator=(const Cat& cat)
 {
+	std::cout << "Cat assignation operator called" << std::endl;
+
 	type = cat.type;
 	return *this;
 }
