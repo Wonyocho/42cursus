@@ -1,12 +1,12 @@
+NAME = a.out
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
-NAME = a.out
 SRCS =	main.cpp Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp
-OBJS = $(SRCS:.cpp=.o)
 INCLUDE = Animal.hpp Dog.hpp Cat.hpp WrongAnimal.hpp WrongCat.hpp
+OBJS = $(SRCS:.cpp=.o)
 
 %.o: %.cpp $(INCLUDE)
-	$(CC) $(CFLAGS) -c -o $@ $<
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 all: $(NAME)
 
