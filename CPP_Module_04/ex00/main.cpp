@@ -6,19 +6,19 @@
 
 int main()
 {
-	const Animal* meta = new Animal();
+	const Animal* animalBasic = new Animal();
 	const Animal* dog = new Dog();
 	const Animal* cat = new Cat();
 
 	std::cout << dog->getType() << " " << std::endl;
 	std::cout << cat->getType() << " " << std::endl;
-	std::cout << meta->getType() << " " << std::endl;
+	std::cout << animalBasic->getType() << " " << std::endl;
 
 	cat->makeSound();
 	dog->makeSound();
-	meta->makeSound();
+	animalBasic->makeSound();
 
-	delete meta;
+	delete animalBasic;
 	delete cat;
 	delete dog;
 
