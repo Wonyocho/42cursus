@@ -1,17 +1,16 @@
 #include <unistd.h>
 #include <string.h>
-#include <sys/wait.h>
 #include <stdlib.h>
+#include <sys/wait.h>
 
-
-int	err(char *msg)
+int err(char *str)
 {
-	while (*msg)
-		write(2, msg++, 1);
+	while (*str)
+		write(2, str++, 1);
 	return 1;
 }
 
-int	cd(int argc, char **argv)
+int cd(int argc, char **argv)
 {
 	if (argc != 2)
 		return err("error: cd: bad arguments\n");
@@ -20,13 +19,12 @@ int	cd(int argc, char **argv)
 	return 0;
 }
 
-int	exec(int i, char **argv, char **env)
+int exec(int i, char **argv, char **env)
 {
 	int fd[2];
-	int status;
+	int status = 0;
 	int is_pipe;
 
-	status = 0;
 	is_pipe = argv[i] && !strcmp(argv[i], "|");
 	if (is_pipe && pipe(fd) == -1)
 		return err("error: fatal\n");
@@ -49,7 +47,6 @@ int	exec(int i, char **argv, char **env)
 int main(int argc, char **argv, char **env)
 {
 	int i = 0, result = 0;
-
 	if (argc == 1) return 0;
 	while (argv[i] && argv[++i])
 	{
