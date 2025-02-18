@@ -6,13 +6,15 @@
 # include "RobotomyRequestForm.hpp"
 # include "PresidentialPardonForm.hpp"
 
-class Intern {
+class Intern
+{
     private:
         AForm *createShrubbery(const std::string &target);
         AForm *createRobotomy(const std::string &target);
         AForm *createPresidential(const std::string &target);
 
     public:
+        // Constructors
         Intern();
         Intern(const Intern &rhs);
         Intern &operator=(const Intern &rhs);
@@ -20,7 +22,8 @@ class Intern {
 
         AForm* makeForm(const std::string &formName, const std::string &target);
 
-        class FormNotExistException : public std::exception {
+        class FormNotExistException : public std::exception
+        {
             public:
                 const char* what() const throw();
         };

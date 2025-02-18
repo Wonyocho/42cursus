@@ -1,61 +1,62 @@
 #include "Bureaucrat.hpp"
+#include "AForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
-#include "Intern.hpp"
+#include "Intern.hpp" // Include the Intern header
 
-int main() {
-    try {
-        Bureaucrat chim("chim", 1);
-        Bureaucrat spark2("spark2", 50);
+int main()
+{
+    try
+    {
+        Bureaucrat alice("Alice", 2);
+        Bureaucrat bob("Bob", 149);
+        ShrubberyCreationForm shrubbery("Home");
+        RobotomyRequestForm robotomy("Bender");
+        PresidentialPardonForm pardon("Ford Prefect");
 
-        Intern intern;
-        AForm* form1 = intern.makeForm("shrubbery creation", "Garden");
-        AForm* form2 = intern.makeForm("robotomy request", "Bender");
-        AForm* form3 = intern.makeForm("presidential pardon", "Ford Prefect");
-        AForm* form4 = intern.makeForm("unknown form", "Unknown");
+        std::cout << "=============================================================" << std::endl;
+        std::cout << alice;
+        std::cout << bob;
+        std::cout << shrubbery;
+        std::cout << robotomy;
+        std::cout << pardon;
+        
+        std::cout << "=============================================================" << std::endl;
+        alice.upGrade();
+        bob.downGrade();
 
-        std::cout << std::endl;
+        std::cout << alice;
+        std::cout << bob;
 
-        if (form1) {
-            try {
-                chim.signForm(*form1);
-                chim.executeForm(*form1);
-            } catch (const std::exception &e) {
-                std::cerr << e.what() << std::endl;
-            }
-            delete form1;
+        std::cout << "=============================================================" << std::endl;
+        shrubbery.beSigned(alice);
+        robotomy.beSigned(alice);
+        pardon.beSigned(alice);
+
+        std::cout << shrubbery;
+        std::cout << robotomy;
+        std::cout << pardon;
+
+        std::cout << "=============================================================" << std::endl;
+        alice.executeForm(shrubbery);
+        alice.executeForm(robotomy);
+        alice.executeForm(pardon);
+        std::cout << "=============================================================" << std::endl;
+
+        Intern someRandomIntern;
+        AForm* rrf;
+        rrf = someRandomIntern.makeForm("robotomy request", "Bender");
+        if (rrf)
+        {
+            alice.executeForm(*rrf);
+            delete rrf;
         }
-
-        std::cout << std::endl;
-
-        if (form2) {
-            try {
-                spark2.signForm(*form2);
-                spark2.executeForm(*form2);
-            } catch (const std::exception &e) {
-                std::cerr << e.what() << std::endl;
-            }
-            delete form2;
-        }
-
-        std::cout << std::endl;
-
-        if (form3) {
-            try {
-                chim.signForm(*form3);
-                chim.executeForm(*form3);
-            } catch (const std::exception &e) {
-                std::cerr << e.what() << std::endl;
-            }
-            delete form3;
-        }
-
-        if (form4) {
-            delete form4;
-        }
-    } catch (const std::exception &e) {
-        std::cerr << e.what() << std::endl;
+        std::cout << "=============================================================" << std::endl;
+    }
+    catch(const std::exception& except)
+    {
+        std::cerr << except.what() << std::endl;
     }
 
     return 0;

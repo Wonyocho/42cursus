@@ -1,5 +1,6 @@
 #include "ShrubberyCreationForm.hpp"
 
+// Constructors
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target)
     : AForm("Shrubbery", 145, 137)
     , _target(target)
@@ -29,11 +30,17 @@ ShrubberyCreationForm::~ShrubberyCreationForm()
     std::cout << getName() << " destructor called" << std::endl;
 }
 
+
+
+// Getters
 std::string ShrubberyCreationForm::getTarget() const
 {
     return (_target);
 }
 
+
+
+// Methods
 void ShrubberyCreationForm::execute(const Bureaucrat &executor) const
 {
     checkExecuteRequirements(executor);
@@ -60,6 +67,9 @@ void ShrubberyCreationForm::execute(const Bureaucrat &executor) const
         throw FileException();
 }
 
+
+
+// Exceptions
 const char  *ShrubberyCreationForm::FileException::what(void) const throw()
 {
 	return ("File error");

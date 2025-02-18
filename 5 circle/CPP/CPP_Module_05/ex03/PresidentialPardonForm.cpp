@@ -1,5 +1,6 @@
 #include "PresidentialPardonForm.hpp"
 
+// Constructors
 PresidentialPardonForm::PresidentialPardonForm(const std::string& target)
     : AForm("PresidentialPardon", 25, 5)
     , _target(target)
@@ -29,11 +30,15 @@ PresidentialPardonForm::~PresidentialPardonForm()
     std::cout << getName() << " destructor called" << std::endl;
 }
 
+
+// Getters
 std::string PresidentialPardonForm::getTarget() const
 {
     return _target;
 }
 
+
+// Methods
 void PresidentialPardonForm::execute(const Bureaucrat &executor) const
 {
     checkExecuteRequirements(executor);

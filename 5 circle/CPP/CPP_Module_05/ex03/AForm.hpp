@@ -6,8 +6,10 @@
 
 class Bureaucrat;
 
-class AForm {
+class AForm
+{
     private:
+        // Attributes
         const std::string _name;
         bool _isSigned;
         const int _signGrade;
@@ -16,30 +18,36 @@ class AForm {
         AForm();
     
     public:
+        // Constructors
         AForm(const std::string &name, int signGrade, int execGrade);
         AForm(const AForm &rhs);
         AForm &operator=(const AForm &rhs);
         virtual ~AForm();
 
+        // Getters
         std::string getName() const;
-        bool isSigned() const;
         int getSignGrade() const;
         int getExecGrade() const;
-
+        
+        // Methods
+        bool isSigned() const;
         void beSigned(Bureaucrat const &person);
         virtual void execute(Bureaucrat const & executor) const = 0;
-    
         void checkExecuteRequirements(Bureaucrat const &executor) const;
-
-        class GradeTooHighException : public std::exception {
+    
+        // Exceptions
+        class GradeTooHighException : public std::exception
+        {
             public:
                 const char* what() const throw();
         };
-        class GradeTooLowException : public std::exception {
+        class GradeTooLowException : public std::exception
+        {
             public:
                 const char* what() const throw();
         };
-        class NotSignedException : public std::exception {
+        class NotSignedException : public std::exception
+        {
             public:
                 const char* what() const throw();
         };

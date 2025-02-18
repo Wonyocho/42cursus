@@ -1,5 +1,6 @@
 #include "RobotomyRequestForm.hpp"
 
+// Constructors
 RobotomyRequestForm::RobotomyRequestForm(const std::string& target)
     : AForm("Robotomy", 72, 45)
     , _target(target)
@@ -30,22 +31,32 @@ RobotomyRequestForm::~RobotomyRequestForm()
     std::cout << getName() << " destructor called" << std::endl;
 }
 
+
+// Getters
 std::string RobotomyRequestForm::getTarget() const
 {
     return (_target);
 }
 
+
+// Methods
 void RobotomyRequestForm::execute(const Bureaucrat &executor) const
 {
     checkExecuteRequirements(executor);
 
     std::cout << "BZZZZZZZ..." << std::endl;
     if (rand() % 2)
+    {
         std::cout << _target << " has been robotomized successfully!" << std::endl;
+    }
     else
+    {
         throw RobotomyFailureException();
+    }
 }
 
+
+// Exceptions
 const char* RobotomyRequestForm::RobotomyFailureException::what() const throw()
 {
     return ("robotomy failed!");
