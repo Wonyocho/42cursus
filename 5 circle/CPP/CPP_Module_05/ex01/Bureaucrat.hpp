@@ -21,18 +21,18 @@ class Bureaucrat
         ~Bureaucrat();                                  // 소멸
 
 
-        // Getter
+        // Getters
         std::string getName() const;
         int getGrade() const;
 
 
-        // Member function
+        // Methods
         void upGrade();
         void downGrade();
         void signForm(class Form &form);
 
 
-        // GradeTooHighException, GradeTooLowException
+        // Exceptions
         class GradeTooHighException : public std::exception
         {
             public:

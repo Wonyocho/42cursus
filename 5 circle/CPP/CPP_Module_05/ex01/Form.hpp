@@ -9,6 +9,7 @@ class Bureaucrat;
 class Form
 {
     private:
+        // Attributes
         const std::string _name;
         bool _isSigned;
         const int _signGrade;
@@ -33,11 +34,13 @@ class Form
         void beSigned(Bureaucrat const &person);
         
         // Exceptions
-        class GradeTooHighException : public std::exception {
+        class GradeTooHighException : public std::exception
+        {
             public:
                 const char* what() const throw();
         };
-        class GradeTooLowException : public std::exception {
+        class GradeTooLowException : public std::exception
+        {
             public:
                 const char* what() const throw();
         };
