@@ -1,70 +1,52 @@
 #include "Bureaucrat.hpp"
+#include "AForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
 
 int main()
 {
-    try {
-        Bureaucrat spark2("spark2", 50);
-        Bureaucrat chim("chim", 1);
-
+    try
+    {
+        Bureaucrat alice("Alice", 2);
+        Bureaucrat bob("Bob", 149);
         ShrubberyCreationForm shrubbery("Home");
         RobotomyRequestForm robotomy("Bender");
         PresidentialPardonForm pardon("Ford Prefect");
 
-        std::cout << "\nTesting ShrubberyCreationForm with chim:" << std::endl;
-        try {
-            chim.signForm(shrubbery);
-            chim.executeForm(shrubbery);
-        } catch (const std::exception &e) {
-            std::cerr << e.what() << std::endl;
-        }
+        std::cout << "=============================================================" << std::endl;
+        std::cout << alice;
+        std::cout << bob;
+        std::cout << shrubbery;
+        std::cout << robotomy;
+        std::cout << pardon;
+        
+        std::cout << "=============================================================" << std::endl;
+        alice.upGrade();
+        bob.downGrade();
 
-        std::cout << "\nTesting ShrubberyCreationForm with spark2:" << std::endl;
-        try {
-            spark2.signForm(shrubbery);
-            spark2.executeForm(shrubbery);
-        } catch (const std::exception &e) {
-            std::cerr << e.what() << std::endl;
-        }
+        std::cout << alice;
+        std::cout << bob;
 
-        std::cout << "\nTesting RobotomyRequestForm with chim:" << std::endl;
-        try {
-            chim.signForm(robotomy);
-            chim.executeForm(robotomy);
-        } catch (const std::exception &e) {
-            std::cerr << e.what() << std::endl;
-        }
+        std::cout << "=============================================================" << std::endl;
+        shrubbery.beSigned(alice);
+        robotomy.beSigned(alice);
+        pardon.beSigned(alice);
 
-        std::cout << "\nTesting RobotomyRequestForm with spark2:" << std::endl;
-        try {
-            spark2.signForm(robotomy);
-            spark2.executeForm(robotomy);
-        } catch (const std::exception &e) {
-            std::cerr << e.what() << std::endl;
-        }
+        std::cout << shrubbery;
+        std::cout << robotomy;
+        std::cout << pardon;
 
-        std::cout << "\nTesting PresidentialPardonForm with chim:" << std::endl;
-        try {
-            chim.signForm(pardon);
-            chim.executeForm(pardon);
-        } catch (const std::exception &e) {
-            std::cerr << e.what() << std::endl;
-        }
+        std::cout << "=============================================================" << std::endl;
+        alice.executeForm(shrubbery);
+        alice.executeForm(robotomy);
+        alice.executeForm(pardon);
+        std::cout << "=============================================================" << std::endl;
 
-        std::cout << "\nTesting PresidentialPardonForm with spark2:" << std::endl;
-        try {
-            spark2.signForm(pardon);
-            spark2.executeForm(pardon);
-        } catch (const std::exception &e) {
-            std::cerr << e.what() << std::endl;
-        }
-        std::cout << std::endl;
     }
-    catch (const std::exception &e)
+    catch(const std::exception& except)
     {
-        std::cerr << e.what() << std::endl;
+        std::cerr << except.what() << std::endl;
     }
 
     return 0;
