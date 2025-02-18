@@ -29,6 +29,7 @@ class Bureaucrat
 
 
         // Method
+        void signForm(class AForm &form);
         void upGrade();
         void downGrade();
         void executeForm(AForm const &form) const;

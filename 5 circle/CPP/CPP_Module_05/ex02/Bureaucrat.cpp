@@ -44,6 +44,19 @@ int Bureaucrat::getGrade() const
 
 
 // Methods
+void Bureaucrat::signForm(AForm &form)
+{
+    try
+    {
+        form.beSigned(*this);
+        std::cout << _name << " signs " << form.getName() << std::endl;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << _name << " cannot sign " << form.getName() << " because " << e.what() << std::endl;
+    }
+}
+
 void Bureaucrat::upGrade()
 {
     if (_grade <= 1)
