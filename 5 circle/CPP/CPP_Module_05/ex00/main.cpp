@@ -8,11 +8,13 @@ int main()
         // Bureaucrat a("a", 200);
         std::cout << a;
     }
-    catch(const std::exception& e)
+    catch(const std::exception& error)
     {
-        std::cerr << e.what() << std::endl;
+        std::cerr << error.what() << std::endl;
     }
 
+    std::cout << "-----------------------------------------" << std::endl;
+    
     try
     {
         Bureaucrat b("b", 1);
@@ -28,9 +30,9 @@ int main()
         std::cout << b;
         std::cout << c;
     }
-    catch(const std::exception& e)
+    catch(const std::exception& error)
     {
-        std::cerr << e.what() << std::endl;
+        std::cerr << error.what() << std::endl;
     }
 
     return (0);
