@@ -1,20 +1,20 @@
 #ifndef BUREAUCRAT_HPP
 # define BUREAUCRAT_HPP
 
-# include <iostream>
+#include <iostream>
+#include "Form.hpp"
 
 class Bureaucrat
 {
     private:
-        // 이름, 등급
+        // Attributes
         const std::string _name;
         int _grade;
         
-
         Bureaucrat();
 
     public:
-        // OCCF
+        // Constructors
         Bureaucrat(const std::string& name, int grade); // 이름, 등급
         Bureaucrat(Bureaucrat const &rhs);              // 복사
         Bureaucrat &operator=(Bureaucrat const &rhs);   // 대입
@@ -26,9 +26,10 @@ class Bureaucrat
         int getGrade() const;
 
 
-        // UpGrade, DownGrade
+        // Member function
         void upGrade();
         void downGrade();
+        void signForm(class Form &form);
 
 
         // GradeTooHighException, GradeTooLowException

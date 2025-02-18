@@ -16,21 +16,25 @@ int main()
         std::cout << formA;
         std::cout << formB;
 
-
+        std::cout <<  "==============================" << std::endl;
+        a.signForm(formA);
+        a.signForm(formB);
+        b.signForm(formA);
+        b.signForm(formB);
 
         std::cout <<  "==============================" << std::endl;
         a.upGrade();
         b.downGrade();
-
         std::cout << a;
         std::cout << b;
-
-
+        a.signForm(formA);
+        a.signForm(formB);
+        b.signForm(formA);
+        b.signForm(formB);
 
         std::cout <<  "==============================" << std::endl;
         formA.beSigned(a);
         formB.beSigned(b);
-
         std::cout << formA;
         std::cout << formB;
     }
