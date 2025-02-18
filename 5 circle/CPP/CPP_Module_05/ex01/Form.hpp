@@ -6,7 +6,8 @@
 
 class Bureaucrat;
 
-class Form {
+class Form
+{
     private:
         const std::string _name;
         bool _isSigned;
@@ -16,18 +17,22 @@ class Form {
         Form();
     
     public:
+        // Constructors
         Form(const std::string &name, int signGrade, int execGrade);
         Form(const Form &rhs);
         Form &operator=(const Form &rhs);
         ~Form();
 
+        // Getters
         std::string getName() const;
-        bool isSigned() const;
         int getSignGrade() const;
         int getExecGrade() const;
-
+        
+        // Member functions
+        bool isSigned() const;
         void beSigned(Bureaucrat const &person);
         
+        // Exceptions
         class GradeTooHighException : public std::exception {
             public:
                 const char* what() const throw();

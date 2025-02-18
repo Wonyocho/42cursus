@@ -3,30 +3,42 @@
 
 # include <iostream>
 
-class Bureaucrat {
+class Bureaucrat
+{
     private:
+        // 이름, 등급
         const std::string _name;
         int _grade;
         
-        Bureaucrat();
-        
-    public:
-        Bureaucrat(const std::string& name, int grade);
-        Bureaucrat(Bureaucrat const &rhs);
-        Bureaucrat &operator=(Bureaucrat const &rhs);
-        ~Bureaucrat();
 
+        Bureaucrat();
+
+    public:
+        // OCCF
+        Bureaucrat(const std::string& name, int grade); // 이름, 등급
+        Bureaucrat(Bureaucrat const &rhs);              // 복사
+        Bureaucrat &operator=(Bureaucrat const &rhs);   // 대입
+        ~Bureaucrat();                                  // 소멸
+
+
+        // Getter
         std::string getName() const;
         int getGrade() const;
 
+
+        // UpGrade, DownGrade
         void upGrade();
         void downGrade();
 
-        class GradeTooHighException : public std::exception {
+
+        // GradeTooHighException, GradeTooLowException
+        class GradeTooHighException : public std::exception
+        {
             public:
                 const char* what() const throw();
         };
-        class GradeTooLowException : public std::exception {
+        class GradeTooLowException : public std::exception
+        {
             public:
                 const char* what() const throw();
         };

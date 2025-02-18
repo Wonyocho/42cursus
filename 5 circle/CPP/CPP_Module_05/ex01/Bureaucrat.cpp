@@ -1,8 +1,7 @@
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat(const std::string& name, int grade)
-    : _name(name)
-    , _grade(grade)
+// OCCF
+Bureaucrat::Bureaucrat(const std::string& name, int grade) : _name(name), _grade(grade)
 {
     if (grade < 1)
         throw GradeTooHighException();
@@ -11,9 +10,7 @@ Bureaucrat::Bureaucrat(const std::string& name, int grade)
     std::cout << _name << " constructor called" << std::endl;
 }
 
-Bureaucrat::Bureaucrat(Bureaucrat const &rhs)
-    : _name(rhs._name)
-    , _grade(rhs._grade)
+Bureaucrat::Bureaucrat(Bureaucrat const &rhs) : _name(rhs._name), _grade(rhs._grade)
 {
     std::cout << _name << " copy constructor called" << std::endl;
 }
@@ -31,6 +28,9 @@ Bureaucrat::~Bureaucrat()
     std::cout << _name << " destructor called" << std::endl;
 }
 
+
+
+// Getter
 std::string Bureaucrat::getName() const
 {
     return (_name);
@@ -41,6 +41,9 @@ int Bureaucrat::getGrade() const
     return (_grade);
 }
 
+
+
+// UpGrade, DownGrade
 void Bureaucrat::upGrade()
 {
     if (_grade <= 1)
@@ -55,6 +58,8 @@ void Bureaucrat::downGrade()
     _grade++;
 }
 
+
+// GradeTooHighException, GradeTooLowException
 const char* Bureaucrat::GradeTooHighException::what() const throw()
 {
     return ("grade is too high!");
@@ -65,6 +70,8 @@ const char* Bureaucrat::GradeTooLowException::what() const throw()
     return ("grade is too low!");
 }
 
+
+// 출력 연산자 오버로딩
 std::ostream &operator<<(std::ostream &out, const Bureaucrat &rhs)
 {
     out << rhs.getName() << ", " << rhs.getGrade() << std::endl;
