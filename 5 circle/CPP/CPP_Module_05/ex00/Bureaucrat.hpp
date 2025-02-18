@@ -6,32 +6,31 @@
 class Bureaucrat
 {
     private:
-        // 이름, 등급
+        // Attributes
         const std::string _name;
         int _grade;
-        
 
         Bureaucrat();
 
     public:
-        // OCCF
+        // Constructors
         Bureaucrat(const std::string& name, int grade); // 이름, 등급
         Bureaucrat(Bureaucrat const &rhs);              // 복사
         Bureaucrat &operator=(Bureaucrat const &rhs);   // 대입
         ~Bureaucrat();                                  // 소멸
 
 
-        // Getter
+        // Getters
         std::string getName() const;
         int getGrade() const;
 
 
-        // UpGrade, DownGrade
+        // Methods
         void upGrade();
         void downGrade();
 
 
-        // GradeTooHighException, GradeTooLowException
+        // Exceptions
         class GradeTooHighException : public std::exception
         {
             public:

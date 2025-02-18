@@ -1,12 +1,10 @@
 #include "Bureaucrat.hpp"
 
-// OCCF
+// Constructors
 Bureaucrat::Bureaucrat(const std::string& name, int grade) : _name(name), _grade(grade)
 {
-    // 등급이 1보다 작으면 GradeTooHighException 예외를 던진다.
     if (grade < 1)
         throw GradeTooHighException();
-    // 등급이 150보다 크면 GradeTooLowException 예외를 던진다.
     if (grade > 150)
         throw GradeTooLowException();
     std::cout << _name << " constructor called" << std::endl;
@@ -21,7 +19,9 @@ Bureaucrat& Bureaucrat::operator=(Bureaucrat const &rhs)
 {
     std::cout << _name << " copy assignment operator called" << std::endl;
     if (this != &rhs)
+    {
         _grade = rhs._grade;
+    }
     return (*this);
 }
 
@@ -48,14 +48,18 @@ int Bureaucrat::getGrade() const
 void Bureaucrat::upGrade()
 {
     if (_grade <= 1)
+    {
         throw GradeTooHighException();
+    }
     _grade--;
 }
 
 void Bureaucrat::downGrade()
 {
     if (_grade >= 150)
+    {
         throw GradeTooLowException();
+    }
     _grade++;
 }
 
