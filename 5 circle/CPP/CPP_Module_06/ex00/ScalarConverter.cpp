@@ -19,10 +19,9 @@ void ScalarConverter::charConvert(const std::string& literal)
 void ScalarConverter::intConvert(const std::string& literal)
 {
 	errno = 0;
-	char* endptr; // 정상적으로 strtol이 진행되면 '\0', 변환할 수 없는 문자가 남아 있으면 그 문자의 주소를 가리킨다.
+	char* endptr;
 	long l = std::strtol(literal.c_str(), &endptr, 10);
 
-	// 변환할 수 없는 문자가 남아 있거나 변환된 값이 int의 범위를 벗어나면 에러
 	if (errno == ERANGE || l < std::numeric_limits<int>::min() || l > std::numeric_limits<int>::max() || *endptr != '\0')
 		return (sizeError(literal));
 
