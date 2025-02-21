@@ -4,11 +4,13 @@
 # include <iostream>
 # define uintptr_t unsigned long
 
-struct Data {
+struct Data
+{
 	std::string value;
 };
 
-class Serializer {
+class Serializer
+{
 	private:
 		Serializer();
 		Serializer(const Serializer& rhs);

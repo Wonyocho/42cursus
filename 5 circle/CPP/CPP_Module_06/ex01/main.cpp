@@ -2,18 +2,18 @@
 
 int	main()
 {
-	Data prev;
-	Data *next;
-	uintptr_t ptr;
+	Data src;
+	Data *deserialized;
+	uintptr_t serialized;
 
-	prev.value = "spark2";
-	std::cout << "prev: " << prev.value << std::endl;
+	src.value = "hello world";
+	std::cout << "src: " << src.value << std::endl;
 
-	ptr = Serializer::serialize(&prev);
-	std::cout << "ptr: " << ptr << std::endl;
+	serialized = Serializer::serialize(&src);
+	std::cout << "serialized: " << serialized << std::endl;
 
-	next = Serializer::deserialize(ptr);
-	std::cout << "next: " << next->value << std::endl;
+	deserialized = Serializer::deserialize(serialized);
+	std::cout << "deserialized: " << deserialized->value << std::endl;
 
 	return (0);
 }

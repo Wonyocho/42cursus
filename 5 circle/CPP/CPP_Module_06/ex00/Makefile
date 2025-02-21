@@ -4,7 +4,8 @@ CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
 SRCS = main.cpp \
-       ScalarConverter.cpp
+       ScalarConverter.cpp \
+       Utils.cpp
 
 INCLUDE = ScalarConverter.hpp
 

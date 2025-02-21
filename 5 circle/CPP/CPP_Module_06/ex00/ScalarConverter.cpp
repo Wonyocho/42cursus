@@ -6,7 +6,8 @@ ScalarConverter& ScalarConverter::operator=(const ScalarConverter& rhs) { (void)
 ScalarConverter::~ScalarConverter() {}
 
 
-void ScalarConverter::charConvert(const std::string& literal) {
+void ScalarConverter::charConvert(const std::string& literal)
+{
 	char c = literal[0];
 	printCharResult(c);
 
@@ -15,47 +16,57 @@ void ScalarConverter::charConvert(const std::string& literal) {
 	std::cout << "double: " << static_cast<double>(c) << ".0\n";
 }
 
-void ScalarConverter::intConvert(const std::string& literal) {
+void ScalarConverter::intConvert(const std::string& literal)
+{
 	errno = 0;
-	char* endptr;
+	char* endptr; // 정상적으로 strtol이 진행되면 '\0', 변환할 수 없는 문자가 남아 있으면 그 문자의 주소를 가리킨다.
 	long l = std::strtol(literal.c_str(), &endptr, 10);
 
+	// 변환할 수 없는 문자가 남아 있거나 변환된 값이 int의 범위를 벗어나면 에러
 	if (errno == ERANGE || l < std::numeric_limits<int>::min() || l > std::numeric_limits<int>::max() || *endptr != '\0')
 		return (sizeError(literal));
 
-	int i = static_cast<int>(l);
-	printCharResult(static_cast<char>(i));
+	int result = static_cast<int>(l);
+	printCharResult(static_cast<char>(result));
 
-	std::cout << "int: " << i << "\n";
-	std::cout << "float: " << static_cast<float>(i) << ".0f\n";
-	std::cout << "double: " << static_cast<double>(i) << ".0\n";
+	std::cout << "int: " << result << "\n";
+	std::cout << "float: " << static_cast<float>(result) << ".0f\n";
+	std::cout << "double: " << static_cast<double>(result) << ".0\n";
 }
 
-void ScalarConverter::floatConvert(const std::string& literal) {
+void ScalarConverter::floatConvert(const std::string& literal)
+{
 	errno = 0;
 	float f = std::strtof(literal.c_str(), NULL);
+	
+	if (errno == ERANGE) return (sizeError(literal));
+	
+	int i = static_cast<int>(f);
 	double d = static_cast<double>(f);
 
-	if (errno == ERANGE) return (sizeError(literal));
-
-	int i = static_cast<int>(f);
-
-	if (literal == "nanf" || literal == "+inff" || literal == "-inff" || literal == "inff") {
+	if (literal == "nanf" || literal == "+inff" || literal == "-inff" || literal == "inff")
+	{
 		std::cout << "char: impossible\n";
 		std::cout << "int: impossible\n";
 	}
-	else {
+	else
+	{
 		printCharResult(static_cast<char>(f));
 
 		if (d < std::numeric_limits<int>::min() || d > std::numeric_limits<int>::max())
+		{
 			std::cout << "int: impossible\n";
+		}
 		else
+		{
 			std::cout << "int: " << i << "\n";
+		}
 	}
 	printFloatDoubleResult(i, f, d);
 }
 
-void ScalarConverter::doubleConvert(const std::string& literal) {
+void ScalarConverter::doubleConvert(const std::string& literal)
+{
 	errno = 0;
 	double d = std::strtod(literal.c_str(), NULL);
 
@@ -64,24 +75,33 @@ void ScalarConverter::doubleConvert(const std::string& literal) {
 	int i = static_cast<int>(d);
 	float f = static_cast<float>(d);
 
-	if (literal == "nan" || literal == "+inf" || literal == "-inf" || literal == "inf") {
+	if (literal == "nan" || literal == "+inf" || literal == "-inf" || literal == "inf")
+	{
 		std::cout << "char: impossible\n";
 		std::cout << "int: impossible\n";
 	}
-	else {
+	else
+	{
 		printCharResult(static_cast<char>(d));
 
 		if (d < std::numeric_limits<int>::min() || d > std::numeric_limits<int>::max())
+		{
 			std::cout << "int: impossible\n";
+		}
 		else
+		{
 			std::cout << "int: " << i << "\n";
+		}
 	}
 	printFloatDoubleResult(i, f, d);
 }
 
-void ScalarConverter::convert(const std::string& literal) {
+void ScalarConverter::convert(const std::string& literal)
+{
 	int type = checkType(literal);
-	switch (type) {
+	
+	switch (type)
+	{
 		case CHAR:
 			charConvert(literal);
 			break;

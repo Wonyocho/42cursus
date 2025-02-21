@@ -4,7 +4,8 @@
 # include <iostream>
 # include <cstdlib>
 
-class Base {
+class Base
+{
 	public:
 		virtual ~Base();
 };
