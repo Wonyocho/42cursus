@@ -1,10 +1,10 @@
 #pragma once
 
-# include <iostream>
-# include <vector>
-# include <map>
-# include <stdexcept>
-# include "IConfigDirective.hpp"
+#include <iostream>
+#include <vector>
+#include <map>
+#include <stdexcept>
+#include "IConfigDirective.hpp"
 
 class IConfigDirective;
 
@@ -21,27 +21,28 @@ class IConfigContext
 {
 	private:
 		IConfigContext *parent_;
-		int	type_;
+		int contextType_;
+		std::vector<std::string> options_;
 		std::vector<IConfigContext *> child_;
 		std::vector<IConfigDirective *> directives_;
-		std::vector<std::string> options_;
 
-		void	AddChild(IConfigContext *child);
+		void AddChild(IConfigContext *child);
+
 	public:
-		IConfigContext(IConfigContext *parent, int type);
+		IConfigContext(IConfigContext *parent, int contextType);
 		~IConfigContext();
-		int getType() const;
-		void PrintType(std::ostream &os) const;
-		bool IsValid() const;
-		
-		IConfigContext* getParent() const;
-		std::vector<IConfigContext *> getChild() const;
-		std::vector<std::string> getOptions() const;
 
-		void	AddDirectives(IConfigDirective *directive);
-		void	AddOptions(std::string token);
+		// Getters
+		IConfigContext* getParent() const;
+		int getType() const;
+		std::vector<std::string> getOptions() const;
+		std::vector<IConfigContext *> getChild() const;
 		std::vector<IConfigDirective *> getDirectives() const;
 
+		void AddDirectives(IConfigDirective *directive);
+		void AddOptions(std::string token);
+		void PrintType(std::ostream &os) const;
+		bool IsValid() const;
 };
 
 int IsContext(std::string token);

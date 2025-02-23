@@ -1,33 +1,34 @@
 #include "IConfigDirective.hpp"
 
-IConfigDirective::IConfigDirective()
+IConfigDirective::IConfigDirective() {}
+
+IConfigDirective::IConfigDirective(IConfigContext *parent, int directiveType)
+	: parent_(parent)
+	, directiveType_(directiveType)
 {}
 
-IConfigDirective::IConfigDirective(IConfigContext *parent, int type) : type_(type), parent_(parent)
-{
-}
+IConfigDirective::~IConfigDirective() {}
 
-IConfigDirective::~IConfigDirective()
-{}
-
+// Getters
 IConfigContext* IConfigDirective::getParent() const
 {
-	return (parent_);
-}
-
-void IConfigDirective::AddValue(std::string value)
-{
-	values_.push_back(value);
+	return parent_;
 }
 
 int IConfigDirective::getType() const
 {
-	return (type_);
+	return directiveType_;
 }
 
 std::vector<std::string> IConfigDirective::getValues() const
 {
-	return (values_);
+	return values_;
+}
+
+// 
+void IConfigDirective::AddValue(std::string value)
+{
+	values_.push_back(value);
 }
 
 int IsDirective(std::string token)
@@ -41,7 +42,7 @@ int IsDirective(std::string token)
 	DirectiveStrings.push_back("index");
 	DirectiveStrings.push_back("allow_method");
 	DirectiveStrings.push_back("access_log");
-	DirectiveStrings.push_back("autoindex");
+	DirectiveStrings.push_back("auto_index");
 	DirectiveStrings.push_back("fastcgi_pass");
 	DirectiveStrings.push_back("fastcgi_index");
 	DirectiveStrings.push_back("fastcgi_param");
@@ -49,10 +50,11 @@ int IsDirective(std::string token)
 	DirectiveStrings.push_back("return");
 	DirectiveStrings.push_back("include");
 
-	for (size_t i = 0; i <= DirectiveStrings.size(); ++i)
+	for (size_t i = 0; i < DirectiveStrings.size(); ++i)
 	{
-		if (token == DirectiveStrings[static_cast<int>(i)])
-			return (i);
+		if (DirectiveStrings[i] == token)
+			return i;
 	}
-	return (-1);
+	
+	return -1;
 }

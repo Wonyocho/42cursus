@@ -1,21 +1,22 @@
 #pragma once
 
-# include "IConfigContext.hpp"
-# include "IConfigDirective.hpp"
+#include "IConfigContext.hpp"
+#include "IConfigDirective.hpp"
 
 class ConfigData
 {
 	private:
-		IConfigContext *root_;
+		IConfigContext *dataRoot_;
 		ConfigData();
-
+	
 	public:
-		ConfigData(IConfigContext *root);
-		~ConfigData(); // 트리 전부 삭제.
-		IConfigContext *GetRoot();
+		ConfigData(IConfigContext* contextRoot);
+		~ConfigData();
+		
+		IConfigContext *getRoot();
 		void PrintData(IConfigContext *parent);
 
-	class ConfigDataError : public std::exception
+	class ConfigSyntaxError : public std::exception
 	{
 		public:
 			virtual const char* what() const throw();

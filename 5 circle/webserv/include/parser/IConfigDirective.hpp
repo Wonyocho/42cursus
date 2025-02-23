@@ -1,6 +1,6 @@
 #pragma once
 
-# include "IConfigContext.hpp"
+#include "IConfigContext.hpp"
 
 class IConfigContext;
 
@@ -12,9 +12,9 @@ enum DirectiveType
 	SERVER_NAME,
 	ROOT,
 	INDEX,
-	ALLODW_METHOD,
+	ALLOW_METHOD,
 	ACCESS_LOG,
-	AUTOINDEX,
+	AUTO_INDEX,
 	FASTCGI_PASS,
 	FASTCGI_INDEX,
 	FASTCGI_PARAM,
@@ -25,24 +25,21 @@ enum DirectiveType
 
 class IConfigDirective
 {
-
 	private:
-		int type_;
+		int directiveType_;
 		IConfigContext *parent_;
 		std::vector<std::string> values_;
 		IConfigDirective();
 
 	public:
-		IConfigDirective(IConfigContext *parent, int type);
+		IConfigDirective(IConfigContext *parent, int directiveType);
 		~IConfigDirective();
 
 		IConfigContext* getParent() const;
+		int getType() const;
 
 		void AddValue(std::string value);
 		std::vector<std::string> getValues() const;
-
-		int getType() const;
 };
 
 int IsDirective(std::string token);
-

@@ -1,23 +1,21 @@
 #include "ConfigData.hpp"
 
-ConfigData::ConfigData()
-{}
+ConfigData::ConfigData() {}
 
-ConfigData::ConfigData(IConfigContext *root)
+ConfigData::ConfigData(IConfigContext *contextRoot)
 {
-	if (!root)
-		throw (ConfigData::ConfigDataError());
-	root_ = root;
+	if (!contextRoot) throw (ConfigData::ConfigSyntaxError());
+	dataRoot_ = contextRoot;
 }
 
 ConfigData::~ConfigData()
 {
-	DeleteTree(root_);
+	DeleteTree(dataRoot_);
 }
 
-IConfigContext* ConfigData::GetRoot()
+IConfigContext* ConfigData::getRoot()
 {
-	return (root_);
+	return (dataRoot_);
 }
 
 void ConfigData::PrintData(IConfigContext *parent)
@@ -27,10 +25,10 @@ void ConfigData::PrintData(IConfigContext *parent)
 	{
 		PrintData(childs[i]);
 	}
-	std::cout << "=================================\n\n"
+	std::cout << "========================================\n\n"
 	<< "Child Data\n"
-	<< "Type : " << parent->getType() << "\n"
-	<< "Options : ";
+	<< "Type: " << parent->getType() << "\n"
+	<< "Options: ";
 	std::vector<std::string> options = parent->getOptions();
 	for (size_t i = 0; i < options.size(); ++i)
 	{
@@ -38,23 +36,23 @@ void ConfigData::PrintData(IConfigContext *parent)
 	}
 	std::cout << std::endl;
 	std::vector<IConfigDirective *> directives = parent->getDirectives();
-	std::cout << "Directive count : " << directives.size() << std::endl;
-	std::cout << "------------------ Directives --------------- " << std::endl;
+	std::cout << "Directive count: " << directives.size() << std::endl;
+	std::cout << "-----------------Directives-----------------\n";
 	for (size_t i = 0; i < directives.size(); ++i)
 	{
-		std::cout << i+1 << " Directive\n" << "Type : " << directives[i]->getType() << std::endl;
+		std::cout << i + 1 << " Directive\n" << "Directive Type: " << directives[i]->getType() << std::endl;
 		std::vector<std::string> tokens = directives[i]->getValues();
-		std::cout << "Tokens : ";
+		std::cout << "Tokens: ";
 		for (size_t j = 0; j < tokens.size(); ++j)
 		{
 			std::cout << tokens[j] << " ";
 		}
-		std::cout << std::endl;
+		std::cout << std::endl; 
 	}
-	std::cout << "------------------ Directives End ----------------\n\n" << std::endl;
+	std::cout << "-----------------Directives End-----------------\n";
 }
 
-const char* ConfigData::ConfigDataError::what() const throw()
+const char* ConfigData::ConfigSyntaxError::what() const throw()
 {
-	return ("Error: Config Data : root is null");
+	return ("Syntax Error in Config File");
 }
