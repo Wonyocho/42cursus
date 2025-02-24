@@ -4,34 +4,34 @@ SpellBook::SpellBook() {}
 
 SpellBook::~SpellBook()
 {
-    std::map<std::string, ASpell *>::iterator it_begin = this->arr_spell.begin();
-    std::map<std::string, ASpell *>::iterator it_end = this->arr_spell.end();
-    while (it_begin != it_end)
-    {
-        delete it_begin->second;
-        ++it_begin;
-    }
-    this->arr_spell.clear();
+	std::map<std::string, ASpell *>::iterator it_begin = this->arr.begin();
+	std::map<std::string, ASpell *>::iterator it_end = this->arr.end();
+	while (it_begin != it_end)
+	{
+		delete it_begin->second;
+		++it_begin;
+	}
+	this->arr.clear();
 }
 
-void SpellBook::learnSpell(ASpell* spell_ptr)
+void SpellBook::learnSpell(ASpell *spell)
 {
-    if (spell_ptr)
-        arr_spell.insert(std::pair<std::string, ASpell *>(spell_ptr->getName(), spell_ptr->clone()));
+	if (spell)
+		arr.insert(std::pair<std::string, ASpell *>(spell->getName(), spell->clone()));
 }
 
-void SpellBook::forgetSpell(std::string const &spell_name)
+void SpellBook::forgetSpell(std::string const &name)
 {
-    std::map<std::string, ASpell *>::iterator it = arr_spell.find(spell_name);
-	if (it != arr_spell.end())
+	std::map<std::string, ASpell *>::iterator it = arr.find(name);
+	if (it != arr.end())
 		delete it->second;
-    arr_spell.erase(spell_name);
+	arr.erase(name);
 }
 
-ASpell* SpellBook::createSpell(std::string const &spell_name)
+ASpell* SpellBook::createSpell(std::string const &name)
 {
-    std::map<std::string, ASpell *>::iterator it = arr_spell.find(spell_name);
-    if (it != arr_spell.end())
-        return arr_spell[spell_name];
-    return NULL;
+	std::map<std::string, ASpell *>::iterator it = arr.find(name);
+	if (it != arr.end())
+		return arr[name];
+	return NULL;
 }
