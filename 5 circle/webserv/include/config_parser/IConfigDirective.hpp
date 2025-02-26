@@ -6,6 +6,8 @@ class IConfigContext;
 
 enum DirectiveType
 {
+	HOST,
+	PORT,
 	WORKER_PROCESSES,
 	ERROR_PAGE,
 	LISTEN,
@@ -29,6 +31,7 @@ class IConfigDirective
 		int directiveType_;
 		IConfigContext *parent_;
 		std::vector<std::string> values_;
+		
 		IConfigDirective();
 
 	public:
@@ -38,8 +41,8 @@ class IConfigDirective
 		IConfigContext* getParent() const;
 		int getType() const;
 
-		void AddValue(std::string value);
+		void addValue(std::string value);
 		std::vector<std::string> getValues() const;
 };
 
-int IsDirective(std::string token);
+int isDirective(std::string token);

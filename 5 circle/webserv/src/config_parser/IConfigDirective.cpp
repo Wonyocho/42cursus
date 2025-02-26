@@ -3,11 +3,14 @@
 IConfigDirective::IConfigDirective() {}
 
 IConfigDirective::IConfigDirective(IConfigContext *parent, int directiveType)
-	: parent_(parent)
-	, directiveType_(directiveType)
+	: directiveType_(directiveType)
+	, parent_(parent)
 {}
 
 IConfigDirective::~IConfigDirective() {}
+
+
+
 
 // Getters
 IConfigContext* IConfigDirective::getParent() const
@@ -25,8 +28,11 @@ std::vector<std::string> IConfigDirective::getValues() const
 	return values_;
 }
 
-// 
-void IConfigDirective::AddValue(std::string value)
+
+
+
+
+void IConfigDirective::addValue(std::string value)
 {
 	values_.push_back(value);
 }
@@ -34,15 +40,16 @@ void IConfigDirective::AddValue(std::string value)
 int IsDirective(std::string token)
 {
 	std::vector<std::string> DirectiveStrings;
-	DirectiveStrings.push_back("worker_processes");
+	DirectiveStrings.push_back("host");
+	DirectiveStrings.push_back("port");
 	DirectiveStrings.push_back("error_page");
 	DirectiveStrings.push_back("listen");
 	DirectiveStrings.push_back("server_name");
 	DirectiveStrings.push_back("root");
 	DirectiveStrings.push_back("index");
-	DirectiveStrings.push_back("allow_method");
+	DirectiveStrings.push_back("allow_methods");
 	DirectiveStrings.push_back("access_log");
-	DirectiveStrings.push_back("auto_index");
+	DirectiveStrings.push_back("autoindex");
 	DirectiveStrings.push_back("fastcgi_pass");
 	DirectiveStrings.push_back("fastcgi_index");
 	DirectiveStrings.push_back("fastcgi_param");

@@ -5,7 +5,7 @@ IConfigContext::IConfigContext(IConfigContext *parent, int contextType)
 	, contextType_(contextType)
 {
 	if (parent)
-		parent->AddChild(this);;
+		parent->addChild(this);;
 }
 
 IConfigContext::~IConfigContext() {}
@@ -40,27 +40,27 @@ std::vector<std::string> IConfigContext::getOptions() const
 
 
 
-void IConfigContext::AddDirectives(IConfigDirective *directive)
+void IConfigContext::addDirectives(IConfigDirective *directive)
 {
 	directives_.push_back(directive);
 }
 
-void IConfigContext::AddChild(IConfigContext *child)
+void IConfigContext::addChild(IConfigContext *child)
 {
 	child_.push_back(child);
 }
 
-void IConfigContext::AddOptions(std::string token)
+void IConfigContext::addOptions(std::string token)
 {
 	options_.push_back(token);
 }
 
-bool IConfigContext::IsValid() const
+bool IConfigContext::isValid() const
 {
 	return (true);
 }
 
-void DeleteTree(IConfigContext *root)
+void deleteTree(IConfigContext *root)
 {
 	if (!root)
 	{
@@ -70,7 +70,7 @@ void DeleteTree(IConfigContext *root)
 	std::vector<IConfigContext *> childs = root->getChild();
 	for (size_t i = 0; i < childs.size(); ++i)
 	{
-		DeleteTree(childs[i]);
+		deleteTree(childs[i]);
 	}
 	
 	std::vector<IConfigDirective *> directives = root->getDirectives();
@@ -82,7 +82,7 @@ void DeleteTree(IConfigContext *root)
 	delete root;
 }
 
-void IConfigContext::PrintType(std::ostream &os) const
+void IConfigContext::printType(std::ostream &os) const
 {
 	os << "Context Type: " << getType() << std::endl;
 }
@@ -95,6 +95,7 @@ int IsContext(std::string token)
 	ContextStrings.push_back("server");
 	ContextStrings.push_back("events");
 	ContextStrings.push_back("location");
+	
 
 	for (size_t i = 0; i < ContextStrings.size(); ++i)
 	{

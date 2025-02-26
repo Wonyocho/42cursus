@@ -26,7 +26,7 @@ class IConfigContext
 		std::vector<IConfigContext *> child_;
 		std::vector<IConfigDirective *> directives_;
 
-		void AddChild(IConfigContext *child);
+		void addChild(IConfigContext *child);
 
 	public:
 		IConfigContext(IConfigContext *parent, int contextType);
@@ -39,11 +39,11 @@ class IConfigContext
 		std::vector<IConfigContext *> getChild() const;
 		std::vector<IConfigDirective *> getDirectives() const;
 
-		void AddDirectives(IConfigDirective *directive);
-		void AddOptions(std::string token);
-		void PrintType(std::ostream &os) const;
-		bool IsValid() const;
+		void addDirectives(IConfigDirective *directive);
+		void addOptions(std::string token);
+		void printType(std::ostream &os) const;
+		bool isValid() const;
 };
 
-int IsContext(std::string token);
-void DeleteTree(IConfigContext *root);
+int isContext(std::string token);
+void deleteTree(IConfigContext *root);

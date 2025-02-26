@@ -11,6 +11,6 @@ class ConfigReader
 	public:
 		ConfigReader();
 
-		std::string ReadFile(std::string filepath);
-		std::string GetDefaultPath();
+		std::string readConfigFile(std::string filepath);
+		std::string getDefaultPath();
 };

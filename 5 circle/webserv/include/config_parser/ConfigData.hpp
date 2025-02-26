@@ -14,7 +14,7 @@ class ConfigData
 		~ConfigData();
 		
 		IConfigContext *getRoot();
-		void PrintData(IConfigContext *parent);
+		void printConfigData(IConfigContext *parent);
 
 	class ConfigSyntaxError : public std::exception
 	{

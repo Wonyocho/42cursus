@@ -1,9 +1,9 @@
 #include "ConfigParser.hpp"
 
-void ConfigParser::Tokenize(std::string config_data)
+void ConfigParser::tokenize(std::string config_data)
 {
 	std::stringstream configStream(config_data);
-	std::string currentToken; // 현재 처리중인 토큰
+	std::string currentToken;
 
 	while (configStream >> currentToken)
 	{
@@ -11,93 +11,105 @@ void ConfigParser::Tokenize(std::string config_data)
 	}
 }
 
-IConfigContext* ConfigParser::Parser()
+IConfigContext* ConfigParser::parseConfig()
 {
 	IConfigContext *root = new IConfigContext(NULL, MAIN);
 	
 	try
 	{
-		ParserRecursive(configTokens_, root);
+		parseConfigRecursive(configTokens_, root);
 	}
 	catch(const std::exception& e)
 	{
 		std::cerr << e.what() << std::endl;
-		DeleteTree(root);
+		deleteTree(root);
 		return NULL;
 	}
 
 	return root;
 }
 
-void ConfigParser::ParserRecursive(std::vector<std::string> configTokens, IConfigContext* parentContext)
+void ConfigParser::parseConfigRecursive(std::vector<std::string> configTokens, IConfigContext* parentContext)
 {
 	// iterator 설정.
 	std::vector<std::string>::iterator currentIter = configTokens.begin();
 	std::vector<std::string>::iterator lastIter = configTokens.end();
 	lastIter--;
-
+	
 	// 예외 처리.
 	if (currentIter == lastIter) throw (ConfigParser::ConfigSyntaxError());
-
-	// 파싱 시작.
+	
+	// 파싱
 	while (currentIter != configTokens.end())
 	{
-		// 1. 현재 토큰이 Context / Directive 인지 확인.
-		int contextType = IsContext(*currentIter);
-		int directiveType = IsDirective(*currentIter);
-
-		// 2. Context 인 경우.
+		// 현재 토큰이 Context / Directive 인지 확인.
+		int contextType = isContext(*currentIter);
+		int directiveType = isDirective(*currentIter);
+		
+		// Context
 		if (contextType != -1 && directiveType == -1)
 		{
-			// 다음 토큰이 없는 경우 예외 처리.
-			if (currentIter == lastIter) throw ConfigParser::ConfigSyntaxError();
-			++currentIter; // 다음 토큰으로 이동. ('/' or '{' 를 가리키게 됨.)
-
-			// 새로운 Context 노드 생성.
-			IConfigContext* newContextNode = new IConfigContext(parentContext, contextType);
-
-			// Context 옵션 추가. (없을시 실행 안됨.)
+			if (currentIter == lastIter) throw ConfigParser::ConfigSyntaxError(); // 다음 토큰이 없는 경우 예외 처리.
+			IConfigContext* newContextNode = new IConfigContext(parentContext, contextType); // 현재 새로운 Context -> 새로운 IConfigContext 노드 생성.
+			++currentIter; // 다음 토큰으로 이동. ('/~~~' or '{' 를 가리키게 됨.)
+			
+			
+			
+			// 옵션 추가.
 			while ((currentIter != configTokens.end()) && (*currentIter != "{"))
 			{
-				newContextNode->AddOptions(*currentIter);
+				newContextNode->addOptions(*currentIter);
 				++currentIter;
 			}
-			// 예외 처리.
 			if (currentIter == configTokens.end()) throw ConfigParser::ConfigSyntaxError();
-
-			// Context 중괄호 내부 파싱.
+			
+			
+			
+			
+			// cuurentIter 이후 중괄호 내부 남아있는 토큰 innerBracketTokens에 저장.
 			int BracketCount = 1;
-			std::vector<std::string> BracketTokens;
+			std::vector<std::string> innerBracketTokens;
 			while (currentIter != configTokens.end())
 			{
-				++currentIter; // 중괄호 이후의 토큰으로 이동.
-				if (currentIter == configTokens.end()) throw ConfigParser::ConfigSyntaxError();
+				++currentIter;
 				if (*currentIter == "{") BracketCount++;
 				if (*currentIter == "}") BracketCount--;
 				if (BracketCount == 0) break;
-				BracketTokens.push_back(*currentIter);
+				innerBracketTokens.push_back(*currentIter);
 			}
 			if (BracketCount != 0) throw ConfigParser::ConfigSyntaxError();
-
-			// 재귀적으로 파싱.
+			
+			
+			
+			
+			// 재귀
 			try
 			{
-				ParserRecursive(BracketTokens, newContextNode);
+				parseConfigRecursive(innerBracketTokens, newContextNode);
 			}
 			catch(...)
 			{
 				throw ConfigParser::ConfigSyntaxError();
 			}
+
+
+
+
+			// 재귀 호출이 끝난 후 `}`을 한 번 더 증가시켜서 남아있는 `}`를 처리
+			if (currentIter != configTokens.end() && *currentIter == "}")
+			{
+				++currentIter;
+			}
 		}
-		// 3. Directive 인 경우.
+		// Directive
 		else if (directiveType != -1 && contextType == -1)
 		{
-			// 예외 처리.
-			if (currentIter == lastIter) throw ConfigParser::ConfigSyntaxError();
-			
+			if (currentIter == lastIter) throw ConfigParser::ConfigSyntaxError(); // 예외 처리.
 			std::string DirectiveString = *currentIter; // Directive 이름 저장. ex) "listen"
-			IConfigDirective *directive = new IConfigDirective(parentContext, directiveType);
+			IConfigDirective *directive = new IConfigDirective(parentContext, directiveType); // 새로운 IConfigDirective 생성
 			++currentIter; // ex) "80;"
+			
+
 
 			// Directive 값 추가.
 			while ((currentIter != configTokens.end()) && (*currentIter != ";"))
@@ -106,17 +118,19 @@ void ConfigParser::ParserRecursive(std::vector<std::string> configTokens, IConfi
 				--TokenIterEnd;
 				if (*TokenIterEnd == ';')
 				{
-					directive->AddValue(currentIter->substr(0, currentIter->size() - 1)); // ';' 제거하고 추가.
+					directive->addValue(currentIter->substr(0, currentIter->size() - 1)); // ';' 제거하고 추가.
+					++currentIter;
 					break;
 				}
-				directive->AddValue(*currentIter);
+				directive->addValue(*currentIter);
 				++currentIter;
 			}
 
-			// parentContext에 directive 추가.
-			parentContext->AddDirectives(directive);
+
+
+			parentContext->addDirectives(directive); // 부모의 directives에 추가.
 		}
-		// 4. 그 외의 경우.
+		// 그 외의 경우
 		else if (directiveType == -1 && contextType == -1) 
 		{
 			throw ConfigParser::ConfigSyntaxError();
