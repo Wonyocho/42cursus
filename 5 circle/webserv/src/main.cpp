@@ -4,53 +4,30 @@
 #include "HTTPConfig.hpp"
 #include "LocationConfig.hpp"
 
-WebserverConfig* initializeConfig() {
-	// LocationConfig를 위한 벡터 생성 및 초기화
-	std::vector<std::string> location1Methods;
-	location1Methods.push_back("GET");
-	location1Methods.push_back("POST");
+#include "ConfigReader.hpp"
+#include "ConfigParser.hpp"
+#include "ConfigAdapter.hpp"
 
-	std::vector<std::string> location1FastcgiIndex;
-	location1FastcgiIndex.push_back("index.php");
-	location1FastcgiIndex.push_back("main.php");
+WebserverConfig* initializeConfig()
+{
+    // 설정 파일을 읽기
+    ConfigReader reader;
+    std::string configContent = reader.readConfigFile("default.conf");  // 설정 파일 경로
 
-	LocationConfig location1(
-		"/var/www/images", false, "/redirect/path", location1Methods, "/usr/local/bin/php-cgi", location1FastcgiIndex
-	);
+    if (configContent.empty()) throw std::runtime_error("Failed to read configuration file.");
 
-	std::vector<std::string> location2Methods;
-	location2Methods.push_back("GET");
+    // 설정을 파싱하여 트리 구조 생성
+    ConfigParser parser;
+    parser.tokenize(configContent);
+    IConfigContext* rootContext = parser.parseConfig();
 
-	std::vector<std::string> location2FastcgiIndex;
-	location2FastcgiIndex.push_back("api.py");
+    if (!rootContext) throw std::runtime_error("Failed to parse configuration.");
 
-	LocationConfig location2(
-		"/var/www/api", false, "", location2Methods, "/usr/bin/python-cgi", location2FastcgiIndex
-	);
+    // 트리를 HTTPConfig 객체로 변환
+    ConfigData configData(rootContext);
+    HTTPConfig httpConfig = ConfigAdapter::convertToHTTPConfig(configData);
 
-	// 빈 map 생성
-	std::map<std::string, LocationConfig> emptyLocations;
-	std::map<std::string, std::string> errorPages;
-	errorPages["404"] = "/error_pages/404.html";
-	errorPages["500"] = "/error_pages/500.html";
-
-	std::vector<std::string> server1Index;
-	server1Index.push_back("index.html");
-	server1Index.push_back("index.htm");
-
-	ServerConfig serverConfig1(
-		"MyServer1", "/var/www/html", 8080, server1Index, 1024 * 1024,
-		errorPages, emptyLocations, emptyLocations, emptyLocations
-	);
-
-	// HTTPConfig 인스턴스 생성
-	std::vector<ServerConfig> servers;
-	servers.push_back(serverConfig1);
-
-	HTTPConfig httpConfig(servers);
-
-	// WebserverConfig 인스턴스 생성
-	return new WebserverConfig(httpConfig, 1024);
+    return new WebserverConfig(httpConfig);
 }
 
 #include <stdlib.h>
@@ -60,11 +37,11 @@ void leak() {
 }
 
 Webserver* dependencyInjection(WebserverConfig* config) {
-	Kqueue* kqueue = new Kqueue(config->getWorkerConnections());
+	Kqueue* kqueue = new Kqueue(1024);
 	Servers* servers = new Servers(*kqueue);
 	for (std::vector<ServerConfig>::const_iterator it = config->getHTTPConfig().getServers().begin(); it != config->getHTTPConfig().getServers().end(); ++it) {
 		ServerConfig serverConfig = *it;
-		Socket* serverSocket = new Socket("127.0.0.1", serverConfig.getPort());
+		Socket* serverSocket = new Socket(serverConfig.getHost(), serverConfig.getPort());
 		Server* server = servers->createServer(*serverSocket, serverConfig, *kqueue);
 
 		kqueue->addEvent(server->getSocketFd(), SERVER, server->getSocketFd());
@@ -79,10 +56,8 @@ int main(int argc, char* argv[]) {
 	WebserverConfig* config = initializeConfig();
 	std::cout << "WebserverConfig initialized" << std::endl;
 	std::cout << "HTTPConfig: " << config->getHTTPConfig().getServers().size() << std::endl;
-	std::cout << "Worker connections: " << config->getWorkerConnections() << std::endl;
 
 	std::cout << "ServerConfig: " << config->getHTTPConfig().getServers()[0].getServerName() << std::endl;
-	std::cout << "Root: " << config->getHTTPConfig().getServers()[0].getRoot() << std::endl;
 	std::cout << "Port: " << config->getHTTPConfig().getServers()[0].getPort() << std::endl;
 
 	std::cout << std::endl;

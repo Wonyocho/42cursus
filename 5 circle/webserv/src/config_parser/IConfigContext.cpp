@@ -82,12 +82,7 @@ void deleteTree(IConfigContext *root)
 	delete root;
 }
 
-void IConfigContext::printType(std::ostream &os) const
-{
-	os << "Context Type: " << getType() << std::endl;
-}
-
-int IsContext(std::string token)
+int isContext(std::string token)
 {
 	std::vector<std::string> ContextStrings;
 	ContextStrings.push_back("main");

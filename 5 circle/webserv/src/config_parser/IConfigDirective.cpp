@@ -37,11 +37,12 @@ void IConfigDirective::addValue(std::string value)
 	values_.push_back(value);
 }
 
-int IsDirective(std::string token)
+int isDirective(std::string token)
 {
 	std::vector<std::string> DirectiveStrings;
 	DirectiveStrings.push_back("host");
 	DirectiveStrings.push_back("port");
+	DirectiveStrings.push_back("worker_processes");
 	DirectiveStrings.push_back("error_page");
 	DirectiveStrings.push_back("listen");
 	DirectiveStrings.push_back("server_name");
@@ -56,6 +57,7 @@ int IsDirective(std::string token)
 	DirectiveStrings.push_back("client_max_body_size");
 	DirectiveStrings.push_back("return");
 	DirectiveStrings.push_back("include");
+	DirectiveStrings.push_back("cgi_interpreter");
 
 	for (size_t i = 0; i < DirectiveStrings.size(); ++i)
 	{
