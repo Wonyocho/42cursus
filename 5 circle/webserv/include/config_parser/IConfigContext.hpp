@@ -8,14 +8,14 @@
 
 class IConfigDirective;
 
-enum ContextType
-{
-	MAIN,
-	HTTP,
-	SERVER,
-	EVENTS,
-	LOCATION,
-};
+// enum ContextType
+// {
+// 	MAIN,
+// 	HTTP,
+// 	SERVER,
+// 	EVENTS,
+// 	LOCATION,
+// };
 
 class IConfigContext
 {
