@@ -1,6 +1,7 @@
 #include "iter.hpp"
 
-int main() {
+int main()
+{
     char arr1[] = "abc";
     int arr2[] = {1, 2, 3, 4, 5};
 
