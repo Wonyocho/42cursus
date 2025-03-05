@@ -28,11 +28,11 @@ int main() {
         Span sp2 = Span(5);
         sp2.addNumber(10);
         sp2.addNumber(20);
-        sp2.addNumber(30);
+        sp2.addNumber(31);
 
         std::list<int> lists;
-        lists.push_back(40);
-        lists.push_back(50);
+        lists.push_back(42);
+        lists.push_back(53);
         sp2.addNumbers(lists);
 
         std::cout << "Shortest Span: " << sp2.shortestSpan() << std::endl;

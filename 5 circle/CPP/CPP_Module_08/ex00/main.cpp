@@ -2,22 +2,28 @@
 #include <vector>
 #include <list>
 
-int main() {
-	try {
+int main()
+{
+	try
+	{
 		std::vector<int> vec;
 		for (int i = 0; i < 10; i++)
+		{
 			vec.push_back(i);
+		}
 
 		std::vector<int>::iterator it;
 		it = easyfind(vec, 3);
 		// it = easyfind(vec, 100);
 		std::cout << *it << std::endl;
 	}
-	catch (const NotFoundException& e) {
+	catch (const NotFoundException& e)
+	{
 		std::cout << e.what() << std::endl;
 	}
 
-	try {
+	try
+	{
 		std::list<int> lst;
 		for (int i = 0; i < 10; i++)
 			lst.push_back(i);
@@ -27,7 +33,8 @@ int main() {
 		// it = easyfind(lst, 100);
 		std::cout << *it << std::endl;
 	}
-	catch (const NotFoundException& e) {
+	catch (const NotFoundException& e)
+	{
 		std::cout << e.what() << std::endl;
 	}
 

@@ -5,18 +5,20 @@
 # include <algorithm>
 # include <limits>
 
-class NotFoundException : public std::exception {
+class NotFoundException : public std::exception
+{
 	public:
-		const char* what() const throw() {
+		const char* what() const throw()
+		{
 			return ("Element not found!");
 		}
 };
 
-template <typename T>
-typename T::iterator easyfind(T& container, int value) {
+template <typename T> // 정수 컨테이너라고 가정.
+typename T::iterator easyfind(T& container, int value)
+{
 	typename T::iterator it = std::find(container.begin(), container.end(), value);
-	if (it == container.end())
-		throw NotFoundException();
+	if (it == container.end()) throw NotFoundException();
 	return (it);
 }
 
