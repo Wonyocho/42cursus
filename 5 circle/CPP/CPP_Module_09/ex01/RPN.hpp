@@ -4,13 +4,14 @@
 # include <iostream>
 # include <stack>
 
-class RPN {
+class RPN
+{
     private:
         int _result;
         std::stack<int> _stack;
 
-        bool isOperator(char token) const;
-        int performOperator(char op, int n1, int n2) const;
+        bool isOperator(char op) const;
+        int do_op(char op, int n1, int n2) const;
 
     public:
         RPN();

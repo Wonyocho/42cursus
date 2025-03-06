@@ -7,7 +7,8 @@
 # include <cstdlib>
 # include <map>
 
-class BitcoinExchange {
+class BitcoinExchange
+{
 	private:
 		std::map<std::string, double> exchangeRates;
 
@@ -21,8 +22,8 @@ class BitcoinExchange {
 		BitcoinExchange& operator=(const BitcoinExchange& rhs);
 		~BitcoinExchange();
 
-		void parseDb(const std::string& dataFile);
-		void exchange(const std::string& inputFile);
+		void parseDB(const std::string& dataFile);
+		void exchangeBTC(const std::string& inputFile);
 };
 
 #endif
