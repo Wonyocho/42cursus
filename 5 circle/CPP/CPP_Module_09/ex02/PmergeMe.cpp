@@ -1,14 +1,21 @@
 #include "PmergeMe.hpp"
 
-PmergeMe::PmergeMe(int ac, char** av) {
-    for (int i = 1; i < ac; i++) {
+// 받은 인자들을 각 컨테이너에 저장한다.
+PmergeMe::PmergeMe(int ac, char** av)
+{
+    for (int i = 1; i < ac; i++)
+    {
         std::string arg = av[i];
         if (!isNumber(arg))
+        {
             throw std::logic_error("Error: not a number: " + arg);
+        }
 
         long number = std::atol(av[i]);
         if (number > 2147483647 || number < 0)
+        {
             throw std::logic_error("Error: number out of int range: " + arg);
+        }
 
         vec.push_back(static_cast<int>(number));
         deq.push_back(static_cast<int>(number));
@@ -17,21 +24,32 @@ PmergeMe::PmergeMe(int ac, char** av) {
 
 PmergeMe::~PmergeMe() {}
 
-bool PmergeMe::isNumber(const std::string& number) const {
-    for (size_t i = 0; i < number.size(); i++) {
+// 문자열이 숫자로만 이루어져 있는지 검사.
+bool PmergeMe::isNumber(const std::string& number) const
+{
+    for (size_t i = 0; i < number.size(); i++)
+    {
         if (!isdigit(number[i]))
+        {
             return false;
+        }
     }
     return true;
 }
 
-size_t PmergeMe::jacobsthalNum(size_t n) {
+// merge-insertion sort를 사용할 때, Jacobsthal 수열을 이용하여
+size_t PmergeMe::jacobsthalNum(size_t n)
+{
     return ((pow(2, n) - pow(-1, n)) / 3);
 }
 
-void PmergeMe::mergeSortVec(std::vector<int>& container) {
+// merge sort를 사용하여 정렬한다.
+void PmergeMe::mergeSortVec(std::vector<int>& container)
+{
     if (container.size() <= 1)
+    {
         return;
+    }
 
     size_t mid = container.size() / 2;
     std::vector<int> left(container.begin(), container.begin() + mid);
@@ -40,21 +58,35 @@ void PmergeMe::mergeSortVec(std::vector<int>& container) {
     mergeSortVec(left);
     mergeSortVec(right);
 
-    container.clear();
+    container.clear(); // clear()를 사용하여 기존의 데이터를 삭제한다.
     size_t i = 0, j = 0;
-    while (i < left.size() && j < right.size()) {
+    while (i < left.size() && j < right.size())
+    {
         if (left[i] < right[j])
+        {
             container.push_back(left[i++]);
+        }
         else
+        {
             container.push_back(right[j++]);
+        }
     }
-    while (i < left.size()) container.push_back(left[i++]);
-    while (j < right.size()) container.push_back(right[j++]);
+    while (i < left.size())
+    {
+        container.push_back(left[i++]);
+    }
+    while (j < right.size())
+    {
+        container.push_back(right[j++]);
+    }
 }
 
-void PmergeMe::mergeSortDeq(std::deque<int>& container) {
+void PmergeMe::mergeSortDeq(std::deque<int>& container)
+{
     if (container.size() <= 1)
-        return;
+    {
+        return;   
+    }
 
     size_t mid = container.size() / 2;
     std::deque<int> left(container.begin(), container.begin() + mid);
@@ -65,17 +97,29 @@ void PmergeMe::mergeSortDeq(std::deque<int>& container) {
 
     container.clear();
     size_t i = 0, j = 0;
-    while (i < left.size() && j < right.size()) {
+    while (i < left.size() && j < right.size())
+    {
         if (left[i] < right[j])
+        {
             container.push_back(left[i++]);
+        }
         else
+        {
             container.push_back(right[j++]);
+        }
     }
-    while (i < left.size()) container.push_back(left[i++]);
-    while (j < right.size()) container.push_back(right[j++]);
+    while (i < left.size())
+    {
+        container.push_back(left[i++]);
+    }
+    while (j < right.size())
+    {
+        container.push_back(right[j++]);
+    }
 }
 
-void PmergeMe::sortVector() {
+void PmergeMe::sortVector()
+{
     clock_t start = clock();
     mergeSortVec(vec);
     clock_t end = clock();
@@ -85,7 +129,8 @@ void PmergeMe::sortVector() {
               << " us" << std::endl;
 }
 
-void PmergeMe::sortDeque() {
+void PmergeMe::sortDeque()
+{
     clock_t start = clock();
     mergeSortDeq(deq);
     clock_t end = clock();
@@ -95,13 +140,20 @@ void PmergeMe::sortDeque() {
               << " us" << std::endl;
 }
 
-void PmergeMe::printArr(int state) const {
+void PmergeMe::printArr(int state) const
+{
     if (state == BEFORE_SORT)
+    {
         std::cout << "Before: ";
+    }
     else if (state == AFTER_SORT)
+    {
         std::cout << "After: ";
+    }
 
     for (size_t i = 0; i < vec.size(); i++)
+    {
         std::cout << vec[i] << " ";
+    }
     std::cout << std::endl;
 }
