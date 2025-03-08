@@ -1,5 +1,17 @@
 #include "Server.hpp"
 
+std::string requestTypeToString(RequestType type) {
+    switch (type) {
+        case GET: return "GET";
+        case POST: return "POST";
+        case PUT: return "PUT";
+        case PATCH: return "PATCH";
+        case DELETE: return "DELETE";
+        default: return "UNKNOWN";
+    }
+}
+
+
 Server::Server(Socket& serverSocket, ServerConfig& serverConfig, Kqueue& kqueue)
 	: serverSocket_(serverSocket), serverConfig_(serverConfig), kqueue_(kqueue) {
 	std::cout << "Server initialized at " << serverConfig.getServerName() << ":" << serverConfig.getPort() << std::endl;
@@ -16,25 +28,50 @@ int Server::acceptClient() {
 int Server::processClientData(int clientFd, const char* buffer, ssize_t bytesRead) {
 	std::cout << "Received: " << buffer << " from FD: " << clientFd << std::endl;
 
-	if (!this->requests_.isExist(clientFd)) {
-		this->requests_.addRequest(new Request(clientFd));
+	if (!this->connections_.hasConnection(clientFd)) {
+		this->connections_.addConnection(clientFd);
 	}
-	Request* request = this->requests_.getRequest(clientFd);
-	request->appendData(buffer, bytesRead);
 
-	if (request->isComplete()) {
-		const std::string response = 
-			"HTTP/1.1 200 OK\n" 
-			"Content-Type: text/html\n" 
-			"Content-Length: 102\n" 
-			"\n" 
-			"<html>\n" 
-			"<body>\n" 
-				"<h1>Welcome to our website</h1>\n" 
-			"</body>\n" 
-			"</html>";
-		sendResponse(clientFd, response);
-		this->requests_.removeRequest(clientFd);
+	this->connections_.appendRequestData(clientFd, buffer, bytesRead);
+
+	if (this->connections_.hasRequest(clientFd)) {
+		Request request = RequestParser::parseRequestHeader(this->connections_.getRequest(clientFd));
+
+		// 요청 처리 로직
+		std::string requestDetails = 
+			"Method: " + requestTypeToString(request.getRequestType()) + "\n" +
+			"Target: " + request.getTarget() + "\n" +
+			"Version: " + request.getProtocolVersion() + "\n" +
+			"Host: " + request.getHost() + "\n" +
+			"Port: " + std::to_string(request.getPort()) + "\n" +
+			"Connection: " + request.getConnection() + "\n" +
+			"Content-Length: " + std::to_string(request.getContentLength()) + "\n" +
+			"Accept: " + request.getAccept() + "\n" +
+			"Content-Type: " + request.getContentType() + "\n" +
+			"Query: " + request.getQuery() + "\n" +
+			"Filename: " + request.getFilename() + "\n" +
+			"Extension: " + request.getExtension() + "\n" +
+			"Path: " + request.getPath() + "\n" +
+			"Body: " + request.getBody() ;
+
+		Response response = Response::Builder()
+			.setProtocolVersion("HTTP/1.1")
+			.setStatusCode(200)
+			.setReasonPhrase("OK")
+			.setServer("Server")
+			.setContentType("text/html")
+			.setConnection("close")
+			.setBody(
+				"<html>\n" 
+				"<body>\n" 
+					"<h1>Welcome to our website</h1>\n"
+					"<pre>" + requestDetails + "</pre>\n"
+				"</body>\n" 
+				"</html>"
+			)
+			.build();
+		
+		sendResponse(clientFd, response.getResponse());
 		return 0;
 	}
 
@@ -70,4 +107,9 @@ int Server::handleRequest(int clientFd) { // <- 함수 분리 전
 	// kqueue.removeEvent(clientFd, EVFILT_READ); // Kqueue에서 제거
 	close(clientFd); // 소켓 닫기
 	return 1;
+}
+
+void Server::closeConnection(int clientFd) {
+	close(clientFd);
+	this->connections_.removeConnection(clientFd);
 }

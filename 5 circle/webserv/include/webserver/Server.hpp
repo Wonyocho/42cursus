@@ -6,14 +6,16 @@
 # include "Socket.hpp"
 # include "ServerConfig.hpp"
 # include "Kqueue.hpp"
-# include "Requests.hpp"
+# include "Connections.hpp"
+# include "Request.hpp"
+# include "RequestParser.hpp"
 
 class Server {
 private:
 	Socket& serverSocket_;
 	ServerConfig& serverConfig_;
 	Kqueue& kqueue_;
-	Requests requests_;
+	Connections connections_;
 
 	Server(void);
 
@@ -25,6 +27,7 @@ public:
 	int getSocketFd() const;
 	int acceptClient();
 	int handleRequest(int clientFd);
+	void closeConnection(int clientFd);
 };
 
 
