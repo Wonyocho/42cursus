@@ -2,9 +2,21 @@
 
 Connection::Connection(void) {}
 
-Connection::Connection(int fd): fd_(fd) {}
+Connection::~Connection(void) {}
+
+Connection::Connection(int fd): fd_(fd) {
+	(void) fd_;
+}
 
 void Connection::appendRequestData(const char* data, size_t length) {
+	// std::cout << "original request: " << this->originalRequest_ << std::endl;
+	size_t i = 0;
+	while (data[i] != '\0' && i < length) {
+		std::cout << data[i] << " " << int(data[i]) << " " << "i: " << i << std::endl;
+		
+		i++;
+	}
+	std::cout << "---------------------------" << std::endl;
 	this->originalRequest_.append(data, length);
 }
 
@@ -23,7 +35,7 @@ std::string Connection::getRequest(void) {
 	return request;
 }
 
-void Connection::addResponse(const Response& response) {
+void Connection::addResponse(Response& response) {
 	this->responses_.addResponse(response);
 }
 
@@ -31,10 +43,14 @@ bool Connection::hasResponse(void) const {
 	return this->responses_.hasResponse();
 }
 
-Response Connection::getResponse(void) {
+Response* Connection::getResponse(void) {
 	if (!this->hasResponse()) {
 		throw std::runtime_error("No response available");
 	}
 
 	return this->responses_.popResponse();
+}
+
+void Connection::appendCgiBuffer(int pipeFd, const std::string& data, bool isEnd) {
+	this->responses_.appendCgiBuffer(pipeFd, data, isEnd);
 }
