@@ -1,20 +1,18 @@
 #include "RequestHandler.hpp"
 
-RequestHandler::RequestHandler(Kqueue& kqueue) 
-    : cgiHandler_(kqueue) {
-}
-
 RequestHandler::~RequestHandler() {}
 
-void RequestHandler::handleRequest(const Request& request, int clientFd) {
-    std::string handlerType = router_.getHandlerType(request.getPath());
-
-    if (handlerType == "CGI") {
-        cgiHandler_.handleCgiRequest(request, clientFd);
-    } else if (handlerType == "Static") {
-        // Todo: Implement static resource handler
-        // Ex) staticHandler_.serveStaticResource(request.getPath(), clientFd);
-    } else {
-        // Todo: Implement 404 handler
+RequestHandler::RequestHandler(ServerConfig &serverConfig, Request &request, Kqueue& kqueue) 
+    : router_(serverConfig), cgiHandler_(kqueue), request_(request) {
+        std::cout << "\n\n\n\n" << "RequestHandler initialized!\n\n\n\n" << std::endl;
     }
+
+void RequestHandler::handleRequest(const Request& request, int clientFd) { // path가 없는 경우 에러처리는 convertPath에서 처리
+    if (request.getExtension() == ".py") {
+        PathInfo pathInfo = router_.convertPath(request.getPath(), true);
+        cgiHandler_.processCgiRequest(request, clientFd, pathInfo);
+    }
+    // cgi가 아니면 그냥 else문 없이 그냥 바로 정적요청 처리
+    PathInfo pathInfo = router_.convertPath(request.getPath(), false);
+    // ex) staticResourceHandler_.serveStaticResource(request.getPath(), clientFd);
 }

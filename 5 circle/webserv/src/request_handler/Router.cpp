@@ -1,57 +1,46 @@
 #include "Router.hpp"
 
-Router::Router(const std::string& configFile) {
-    loadConfigRoute(configFile);
+Router::Router() {}
+
+Router::Router(ServerConfig& serverConfig) {
+    for (size_t i = 0; i < serverConfig.getLocations().size(); i++) {
+        const LocationConfig& location = serverConfig.getLocations()[i];
+        addRoute(location.getPattern(), location);
+    }
+    sortRoutes();
 }
 
 Router::~Router() {}
 
-void Router::addRoute(const std::string& path, const std::string& root) {
-    routes_[path] = root;
+void Router::addRoute(const std::string& pattern, const LocationConfig& location) {
+    routes_[pattern] = location;
 }
 
-std::string Router::getRootPath(const std::string& path) {
-    std::map<std::string, std::string>::iterator it = routes_.find(path);
-    if (it != routes_.end()) {
-        return it->second;
-    }
-    return "UNKNOWN";
+bool Router::compareRouteLength(const RoutePair& a, const RoutePair& b) {
+    return a.first.length() > b.first.length();
 }
 
-void Router::loadConfigRoute(const std::string& configFile) {
-    std::ifstream file(configFile);
+void Router::sortRoutes() {
+    sortedRoutes_.assign(routes_.begin(), routes_.end());
+    std::sort(sortedRoutes_.begin(), sortedRoutes_.end(), compareRouteLength);
+}
 
-    if (!file.is_open()) {
-        std::cerr << "Error: Unable to open config file: " << configFile << std::endl;
-        return;
+void Router::printRoutes() {
+    std::cout << "\n=== 현재 저장된 라우팅 테이블 ===\n";
+    for (std::vector<RoutePair>::const_iterator it = sortedRoutes_.begin(); it != sortedRoutes_.end(); ++it) {
+        std::cout << "Path: " << it->first << " -> Root: " << it->second.getRoot() << std::endl;
     }
+}
 
-    std::string line;
-    std::string currentLocation;
-    std::string currentRoot;
-
-    while (std::getline(file, line)) {
-        std::istringstream iss(line);
-        std::string key;
-        iss >> key;
-
-        if (key == "location") {
-            if (!currentLocation.empty()) {
-                addRoute(currentLocation, currentRoot);
+PathInfo Router::convertPath(const std::string& path, bool isCgi) {
+    for (std::vector<RoutePair>::const_iterator it = sortedRoutes_.begin(); it != sortedRoutes_.end(); ++it) {
+        if (path.find(it->first) == 0) { // 최장 접두사 매칭
+            std::string scriptPath = it->second.getRoot() + (path.substr(it->first.length()));
+            if (isCgi) {
+                return PathInfo(scriptPath, it->second.getCgiInterpreter());
             }
-            iss >> currentLocation;
-            currentRoot = "";
-        } else if (key == "root") {
-            iss >> currentRoot;
-            if (!currentRoot.empty() && currentRoot[currentRoot.size() - 1] == ';') {
-                currentRoot = currentRoot.substr(0, currentRoot.size() - 1);
-            }
+            return PathInfo(scriptPath, "");
         }
     }
-
-    if (!currentLocation.empty()) {
-        addRoute(currentLocation, currentRoot);
-    }
-
-    file.close();
+    throw std::runtime_error("Error: No route found for path: " + path);
 }

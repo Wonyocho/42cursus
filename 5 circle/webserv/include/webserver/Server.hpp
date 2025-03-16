@@ -11,6 +11,8 @@
 # include "RequestParser.hpp"
 # include "Response.hpp"
 # include "StaticResourceResponse.hpp"
+# include "RequestHandler.hpp"
+# include "Router.hpp"
 
 class Server {
 private:
@@ -18,6 +20,7 @@ private:
 	ServerConfig& serverConfig_;
 	Kqueue& kqueue_;
 	Connections connections_;
+	Router router_;
 
 	Server(void);
 
@@ -29,6 +32,7 @@ public:
 	int getSocketFd() const;
 	int acceptClient();
 	int handleRequest(int clientFd);
+	int handleResponse(int clientFd);
 	void closeConnection(int clientFd);
 };
 

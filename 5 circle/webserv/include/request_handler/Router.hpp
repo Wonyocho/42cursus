@@ -2,26 +2,41 @@
 #define ROUTER_HPP
 
 #include <string>
+#include <vector>
 #include <map>
-#include <fstream>
-#include <sstream>
+#include <algorithm>
 #include <iostream>
+#include "LocationConfig.hpp"
+#include "ServerConfig.hpp"
+
+struct PathInfo {
+    std::string scriptPath;
+    std::string interpreter;
+
+    PathInfo() {}
+
+    PathInfo(const std::string& script, const std::string& interpreter) : scriptPath(script), interpreter(interpreter) {}
+};
+
 
 class Router {
 private:
-    Router() {}
-
-    std::map<std::string, std::string> routes_;
+    typedef std::pair<std::string, LocationConfig> RoutePair;
+    std::map<std::string, LocationConfig> routes_;
+    std::vector<RoutePair> sortedRoutes_;
     
-    void loadConfigRoute(const std::string& configFile);
-    void addRoute(const std::string& path, const std::string& root);
-    std::string getRootPath(const std::string& path);
-    std::string mappedPathJoin(const std::string& root, const std::string& remainingPath);
-    
+    void sortRoutes();
+    void addRoute(const std::string& pattern, const LocationConfig& location);
+    static bool compareRouteLength(const RoutePair& a, const RoutePair& b);
 
 public:
-    Router::Router(const std::string& configFile);
-    ~Router() {}
+    Router();
+    Router(ServerConfig& serverConfig);
+    ~Router();
+
+    PathInfo convertPath(const std::string& path, bool isCgi);
+    void printRoutes();
+    
 };
 
-#endif
+#endif // ROUTER_HPP
