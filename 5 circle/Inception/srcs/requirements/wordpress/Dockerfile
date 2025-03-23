@@ -33,8 +33,8 @@ RUN sed -i "s/listen =.*/listen = 9000/" /etc/php/${PHP_VERSION}/fpm/pool.d/www.
     chown www-data:www-data /run/php
 
 # WordPress 초기화 스크립트 복사 및 실행 권한 부여
-COPY ./tools/InitWordpress.sh /InitWordpress.sh
-RUN chmod +x /InitWordpress.sh
+COPY ./tools/init_wordpress.sh /init_wordpress.sh
+RUN chmod +x /init_wordpress.sh
 
 # WordPress 초기화 스크립트 실행
-ENTRYPOINT [ "/InitWordpress.sh" ]
+ENTRYPOINT [ "/init_wordpress.sh" ]

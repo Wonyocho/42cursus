@@ -1,7 +1,7 @@
 services:
   mariadb:
     build:
-      context: ./mariadb
+      context: ./requirements/mariadb
     image: mariadb
     pull_policy: never
     container_name: mariadb
@@ -16,7 +16,7 @@ services:
 
   wordpress:
     build:
-      context: ./wordpress
+      context: ./requirements/wordpress
     image: wordpress
     pull_policy: never
     container_name: wordpress
@@ -32,7 +32,7 @@ services:
 
   nginx:
     build:
-      context: ./nginx
+      context: ./requirements/nginx
     image: nginx
     pull_policy: never
     container_name: nginx

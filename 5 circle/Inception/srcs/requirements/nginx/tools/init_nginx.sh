@@ -6,13 +6,13 @@ mkdir -p "$SSL_DIR"
 
 # SSL 키와 인증서 생성
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-    -keyout "$SSL_DIR/spark2.key" \
-    -out "$SSL_DIR/spark2.crt" \
-    -subj "/C=KR/ST=Seoul/L=Seoul/O=42Seoul/OU=GAM/CN=spark2.42.fr"
+    -keyout "$SSL_DIR/wonyocho.key" \
+    -out "$SSL_DIR/wonyocho.crt" \
+    -subj "/C=KR/ST=Seoul/L=Seoul/O=42Seoul/OU=GAM/CN=wonyocho.42.fr"
 
 # 키와 인증서 권한 설정
-chmod 600 "$SSL_DIR/spark2.key" "$SSL_DIR/spark2.crt"
-chown www-data:www-data "$SSL_DIR/spark2.key" "$SSL_DIR/spark2.crt"
+chmod 600 "$SSL_DIR/wonyocho.key" "$SSL_DIR/wonyocho.crt"
+chown www-data:www-data "$SSL_DIR/wonyocho.key" "$SSL_DIR/wonyocho.crt"
 
 echo "SSL key and certificate generated successfully."
 

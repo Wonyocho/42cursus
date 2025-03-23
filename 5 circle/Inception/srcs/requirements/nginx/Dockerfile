@@ -8,11 +8,11 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Nginx 설정 파일 복사
-COPY ./conf/Nginx.conf /etc/nginx/Nginx.conf
+COPY ./conf/nginx.conf /etc/nginx/nginx.conf
 
 # Nginx 초기화 스크립트 복사 및 실행 권한 부여
-COPY ./tools/InitNginx.sh /InitNginx.sh
-RUN chmod +x /InitNginx.sh
+COPY ./tools/init_nginx.sh /init_nginx.sh
+RUN chmod +x /init_nginx.sh
 
 # Nginx 초기화 스크립트 실행
-ENTRYPOINT [ "/InitNginx.sh" ]
+ENTRYPOINT [ "/init_nginx.sh" ]
