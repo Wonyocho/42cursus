@@ -1,26 +1,21 @@
-#ifndef REQUESTHANDLER_HPP
-#define REQUESTHANDLER_HPP
+#ifndef REQUEST_HANDLER_HPP
+#define REQUEST_HANDLER_HPP
 
-#include <string>
-#include <iostream>
-
-#include "ServerConfig.hpp"
-#include "Kqueue.hpp"
 #include "Request.hpp"
 #include "Router.hpp"
 #include "CgiHandler.hpp"
+#include "StaticResourceHandler.hpp"
 
 class RequestHandler {
 private:
-    Router router_;
-    CgiHandler cgiHandler_;
-    Request request_;
+    Router& router_;
+    CgiHandler& cgiHandler_;
 
 public:
-    RequestHandler(ServerConfig& serverConfig, Request &request, Kqueue& kqueue);
+	RequestHandler(Router& router, CgiHandler& cgiHandler);
     ~RequestHandler();
-    
-    void handleRequest(const Request& request, int clientFd);
+
+    Response* dispatch(const Request& request, int clientFd);
 };
 
-#endif // REQUESTHANDLER_HPP
+#endif
